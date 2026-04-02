@@ -13,6 +13,8 @@ dist-ssr
 *.local
 .env
 !.env.example
+_zip_extract/
+files.zip
 
 # Editor directories and files
 .vscode/*
