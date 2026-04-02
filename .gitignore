@@ -17,6 +17,7 @@ _zip_extract/
 files.zip
 
 # Editor directories and files
+.cursor
 .vscode/*
 !.vscode/extensions.json
 .idea
