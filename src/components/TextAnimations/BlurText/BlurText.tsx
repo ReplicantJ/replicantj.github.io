@@ -88,7 +88,7 @@ const BlurText: React.FC<BlurTextProps> = ({
   const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
 
   return (
-    <p ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <p ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap' }} aria-label={text}>
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
 
@@ -110,6 +110,7 @@ const BlurText: React.FC<BlurTextProps> = ({
               display: 'inline-block',
               willChange: 'transform, filter, opacity'
             }}
+            aria-hidden="true"
           >
             {segment === ' ' ? '\u00A0' : segment}
             {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}
