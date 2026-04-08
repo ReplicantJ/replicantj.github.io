@@ -1,12 +1,18 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import Grainient from './components/Backgrounds/Grainient/Grainient'
 import BlurText from './components/TextAnimations/BlurText/BlurText'
+import DecryptedText from './components/TextAnimations/DecryptedText/DecryptedText'
+import SpotlightCard from './components/Components/SpotlightCard/SpotlightCard'
+import AnimatedContent from './components/Animations/AnimatedContent/AnimatedContent'
 import './App.css'
+
+/* ===== Data ===== */
 
 type SocialLink = {
   label: string
   href: string
   icon: ReactNode
+  download?: boolean
 }
 
 const SOCIAL_LINKS: SocialLink[] = [
@@ -38,7 +44,68 @@ const SOCIAL_LINKS: SocialLink[] = [
       </svg>
     ),
   },
+  {
+    label: 'Resume',
+    href: '/resume.pdf',
+    download: true,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="22" height="22" aria-hidden>
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
+      </svg>
+    ),
+  },
 ]
+
+const SKILL_GROUPS = [
+  {
+    title: 'Safeguards & Risk Detection',
+    skills: ['Abuse detection', 'Behavioral fingerprinting', 'Entity resolution', 'Graph-based account clustering', 'Risk scoring', 'Payment signal analysis'],
+  },
+  {
+    title: 'Investigation & Threat Analysis',
+    skills: ['Adversarial investigations', 'OSINT', 'Network attribution', 'Vendor signal evaluation', 'Cross-language pattern recognition'],
+  },
+  {
+    title: 'Data & Tooling',
+    skills: ['SQL', 'Python (pandas)', 'Browser automation', 'DOM instrumentation', 'Claude Code', 'Cursor'],
+  },
+  {
+    title: 'Systems & Operations',
+    skills: ['Detection frameworks', 'Enforcement strategy', 'Policy-to-product translation', 'Pre-launch abuse risk assessment'],
+  },
+]
+
+const EXPERIENCE_BULLETS = [
+  'Built safeguards and enforcement capability from zero in a data-constrained environment with no formal mandate',
+  'Reduced detection time for coordinated misuse from ~30 days to under 2 hours through behavioral analysis and custom investigative tooling',
+  'Led disruption of third-party automation and reseller ecosystems responsible for tens of thousands of abusive accounts',
+  'Developed behavioral detection using payment signals, usage patterns, timing correlations, and prompt behavior',
+  'Performed graph-based account clustering and entity resolution across fragmented systems without dedicated graph infrastructure',
+  'Conducted adversarial investigations including OSINT and proactive threat actor research',
+  'Prepared legal briefs supporting enforcement action resulting in arbitration wins',
+  'Contributed to abuse risk assessment for every platform launch since v4, including adversarial red-teaming prior to release',
+]
+
+/* ===== Helpers ===== */
+
+function SectionTitle({ text }: { text: string }) {
+  return (
+    <DecryptedText
+      text={text}
+      animateOn="view"
+      speed={40}
+      sequential
+      revealDirection="start"
+      className="section-title-char"
+      encryptedClassName="section-title-char-encrypted"
+      parentClassName="section-title"
+    />
+  )
+}
+
+/* ===== App ===== */
 
 export default function App() {
   const [showContent, setShowContent] = useState(false)
@@ -50,6 +117,7 @@ export default function App() {
 
   return (
     <div className="app">
+      {/* Background */}
       <div className="background">
         <Grainient
           color1="#000000"
@@ -77,6 +145,7 @@ export default function App() {
         />
       </div>
 
+      {/* Hero */}
       <main className="content">
         {showContent && (
           <>
@@ -95,7 +164,7 @@ export default function App() {
             <div className="divider" />
 
             <nav className="socials" aria-label="Social links">
-              {SOCIAL_LINKS.map(({ label, href, icon }) => {
+              {SOCIAL_LINKS.map(({ label, href, icon, download }) => {
                 const external = href.startsWith('http')
                 return (
                   <a
@@ -104,6 +173,7 @@ export default function App() {
                     {...(external
                       ? { target: '_blank', rel: 'noopener noreferrer' }
                       : {})}
+                    {...(download ? { download: true } : {})}
                     className="social-link"
                     aria-label={label}
                     title={label}
@@ -114,9 +184,127 @@ export default function App() {
                 )
               })}
             </nav>
+
+            {/* Scroll hint */}
+            <div className="scroll-hint" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="24" height="24">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </div>
           </>
         )}
       </main>
+
+      {/* Sections */}
+      <div className="sections-container">
+
+        {/* About */}
+        <section className="section" id="about">
+          <AnimatedContent distance={60} duration={0.7} threshold={0.2}>
+            <SectionTitle text="ABOUT" />
+            <p className="about-text">
+              Safeguards specialist focused on detecting, investigating, and mitigating
+              coordinated misuse across large-scale AI systems. Experienced linking
+              accounts across disparate systems, identifying adversarial behavior patterns,
+              and converting emerging threats into mitigation strategies across product,
+              policy, and enforcement.
+            </p>
+          </AnimatedContent>
+        </section>
+
+        <div className="section-divider" />
+
+        {/* Skills */}
+        <section className="section" id="skills">
+          <AnimatedContent distance={60} duration={0.7} threshold={0.15}>
+            <SectionTitle text="CORE COMPETENCIES" />
+            <div className="skills-grid">
+              {SKILL_GROUPS.map(group => (
+                <SpotlightCard
+                  key={group.title}
+                  spotlightColor="rgba(168, 85, 247, 0.08)"
+                >
+                  <h3 className="skill-group-title">{group.title}</h3>
+                  <div className="skill-tags">
+                    {group.skills.map(skill => (
+                      <span key={skill} className="skill-tag">{skill}</span>
+                    ))}
+                  </div>
+                </SpotlightCard>
+              ))}
+            </div>
+          </AnimatedContent>
+        </section>
+
+        <div className="section-divider" />
+
+        {/* Experience */}
+        <section className="section" id="experience">
+          <AnimatedContent distance={60} duration={0.7} threshold={0.1}>
+            <SectionTitle text="EXPERIENCE" />
+            <SpotlightCard spotlightColor="rgba(168, 85, 247, 0.06)">
+              <div className="exp-header">
+                <span className="exp-company">Midjourney</span>
+                <span className="exp-period">Feb 2023 &ndash; Present</span>
+              </div>
+              <p className="exp-role">Platform Protection & Safeguards &mdash; Founding Contributor</p>
+              <ul className="exp-bullets">
+                {EXPERIENCE_BULLETS.map((bullet, i) => (
+                  <li key={i}>{bullet}</li>
+                ))}
+              </ul>
+            </SpotlightCard>
+          </AnimatedContent>
+        </section>
+
+        <div className="section-divider" />
+
+        {/* Education */}
+        <section className="section" id="education">
+          <AnimatedContent distance={60} duration={0.7} threshold={0.2}>
+            <SectionTitle text="EDUCATION" />
+
+            <div className="edu-entry">
+              <p className="edu-school">Georgia State University, Robinson College of Business</p>
+              <p className="edu-degree">B.B.A., Finance &middot; GPA: 3.5</p>
+            </div>
+
+            <div className="edu-entry">
+              <p className="edu-school">University of Central Florida</p>
+              <p className="edu-degree">
+                A.A., Marketing & Business Management &middot; Additional coursework in Computer Science, SQL, and databases
+              </p>
+            </div>
+          </AnimatedContent>
+        </section>
+      </div>
+
+      {/* Footer */}
+      <footer className="site-footer">
+        <div className="section-divider" style={{ marginBottom: '2rem' }} />
+        <nav className="footer-links" aria-label="Footer links">
+          {SOCIAL_LINKS.map(({ label, href, icon, download }) => {
+            const external = href.startsWith('http')
+            return (
+              <a
+                key={label}
+                href={href}
+                {...(external
+                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                  : {})}
+                {...(download ? { download: true } : {})}
+                className="social-link"
+                aria-label={label}
+                title={label}
+              >
+                {icon}
+                <span className="social-label">{label}</span>
+              </a>
+            )
+          })}
+        </nav>
+        <p className="footer-copy">&copy; {new Date().getFullYear()} Joe Burns</p>
+      </footer>
     </div>
   )
 }
