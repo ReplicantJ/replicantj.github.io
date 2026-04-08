@@ -9,6 +9,9 @@
   --text-primary: #e8e2f0;
   --text-secondary: #9f8fbf;
   --text-muted: #6b5f80;
+  --accent-warm: #a8592e;
+  --accent-warm-bright: #c4703e;
+  --accent-warm-glow: rgba(168, 89, 46, 0.2);
   --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
 }
 
@@ -78,7 +81,7 @@ body {
   color: var(--text-primary);
   text-align: center;
   line-height: 1.1;
-  text-shadow: 0 0 80px rgba(168, 85, 247, 0.2);
+  text-shadow: 0 0 80px rgba(168, 85, 247, 0.2), 0 0 120px rgba(168, 89, 46, 0.08);
 }
 
 /* ===== Tagline ===== */
@@ -103,6 +106,7 @@ body {
     90deg,
     transparent,
     var(--purple-mid),
+    var(--accent-warm),
     transparent
   );
   margin: 1.5rem 0;
@@ -176,7 +180,7 @@ body {
 }
 
 .scroll-hint svg {
-  color: var(--text-muted);
+  color: var(--accent-warm);
   animation: bounce 2s ease-in-out infinite;
 }
 
@@ -202,7 +206,9 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(168, 85, 247, 0.3),
+    rgba(168, 85, 247, 0.25),
+    var(--accent-warm-glow),
+    rgba(168, 85, 247, 0.25),
     transparent
   );
 }
@@ -223,8 +229,8 @@ body {
 }
 
 .section-title-char-encrypted {
-  color: var(--text-muted);
-  opacity: 0.5;
+  color: var(--accent-warm);
+  opacity: 0.4;
 }
 
 /* ===== About ===== */
@@ -379,8 +385,9 @@ body {
 .footer-copy {
   font-size: 0.7rem;
   font-weight: 300;
-  color: var(--text-muted);
+  color: var(--accent-warm);
   letter-spacing: 0.04em;
+  opacity: 0.6;
 }
 
 /* ===== Animations ===== */
