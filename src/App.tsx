@@ -168,7 +168,7 @@ export default function App() {
               />
             </div>
 
-            <p className="tagline">Security Research & Adversarial Intelligence</p>
+            <p className="tagline">Trust &amp; Safety · Safeguards Analyst · Abuse Infrastructure Disruption · Investigative Tooling</p>
 
             <div className="divider" />
 
