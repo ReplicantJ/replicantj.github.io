@@ -78,7 +78,7 @@ const SKILL_GROUPS = [
   },
   {
     title: 'Data & Tooling',
-    skills: ['SQL', 'Python (pandas)', 'Browser automation', 'DOM instrumentation', 'Claude Code', 'Cursor'],
+    skills: ['SQL', 'Python (pandas)', 'JavaScript', 'Vue', 'React', 'Tailwind', 'Browser automation', 'DOM instrumentation', 'Claude Code', 'Cursor'],
   },
   {
     title: 'Systems & Operations',
