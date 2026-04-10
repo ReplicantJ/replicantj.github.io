@@ -89,7 +89,7 @@ const SKILL_GROUPS = [
 const EXPERIENCE_BULLETS = [
   'Built safeguards and enforcement capability from zero in a data-constrained environment with no formal mandate',
   'Reduced detection time for coordinated misuse from ~30 days to under 2 hours through behavioral analysis and custom investigative tooling',
-  'Led disruption of third-party automation and reseller ecosystems responsible for tens of thousands of abusive accounts',
+  'Led disruption of third-party automation and reseller ecosystems responsible for hundreds of thousands of abusive accounts',
   'Developed behavioral detection using payment signals, usage patterns, timing correlations, and prompt behavior',
   'Performed graph-based account clustering and entity resolution across fragmented systems without dedicated graph infrastructure',
   'Conducted adversarial investigations including OSINT and proactive threat actor research',
@@ -275,14 +275,12 @@ export default function App() {
 
             <div className="edu-entry">
               <p className="edu-school">Georgia State University, Robinson College of Business</p>
-              <p className="edu-degree">B.B.A., Finance &middot; GPA: 3.5</p>
+              <p className="edu-degree">B.B.A., Finance &middot; GPA: 3.5 &middot; Additional coursework in Computer Science, SQL, and databases</p>
             </div>
 
             <div className="edu-entry">
               <p className="edu-school">University of Central Florida</p>
-              <p className="edu-degree">
-                A.A., Marketing & Business Management &middot; Additional coursework in Computer Science, SQL, and databases
-              </p>
+              <p className="edu-degree">A.A., Marketing & Business Management</p>
             </div>
           </AnimatedContent>
         </section>
