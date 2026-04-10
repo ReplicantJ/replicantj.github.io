@@ -275,7 +275,7 @@ export default function App() {
 
             <div className="edu-entry">
               <p className="edu-school">Georgia State University, Robinson College of Business</p>
-              <p className="edu-degree">B.B.A., Finance &middot; GPA: 3.5 &middot; Additional coursework in Computer Science, SQL, and databases</p>
+              <p className="edu-degree">B.B.A., Finance &middot; Additional coursework in Computer Science, SQL, and databases</p>
             </div>
 
             <div className="edu-entry">
