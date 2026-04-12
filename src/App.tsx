@@ -105,7 +105,7 @@ const SKILL_GROUPS = [
 
 const EXPERIENCE_BULLETS = [
   'Built safeguards and enforcement capability from zero in a data-constrained environment with no formal mandate',
-  'Reduced detection time for coordinated misuse from ~30 days to under 2 hours through behavioral analysis and custom investigative tooling',
+  'Reduced detection time for coordinated misuse from none → ~30 days → under 2 hours through behavioral analysis and custom investigative dashboard and tooling',
   'Led disruption of third-party automation and reseller ecosystems responsible for hundreds of thousands of abusive accounts',
   'Developed behavioral detection using payment signals, usage patterns, timing correlations, and prompt behavior',
   'Performed graph-based account clustering and entity resolution across fragmented systems without dedicated graph infrastructure',
@@ -269,15 +269,29 @@ export default function App() {
           <AnimatedContent distance={60} duration={0.7} threshold={0.15}>
             <SectionTitle text="CURRENTLY WORKING ON" />
             <p className="about-text">
-              Building a graph-based detection system using real abuse network data from coordinated misuse operations. Applying{' '}
+              Building a graph-based detection system using real abuse network data from coordinated misuse operations. Applying recent research in graph neural networks and anomaly detection to identify behavioral patterns across fragmented account clusters.
+            </p>
+            <p className="about-text">
+              Leveraging curated research repositories and{' '}
+              <a
+                href="https://github.com/jeffpierce/memory-palace"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                local knowledge graph systems
+              </a>{' '}
+              to rapidly reference{' '}
               <a
                 href="https://github.com/safe-graph/graph-fraud-detection-papers"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                recent research
+                200+ papers
               </a>{' '}
-              in graph neural networks and anomaly detection to identify behavioral patterns across fragmented account clusters. Studying ML techniques for abuse detection to close the gap between traditional rule-based systems and adversarial-aware approaches that scale with platform growth.
+              on GNN-based fraud detection during development.
+            </p>
+            <p className="about-text">
+              Studying ML techniques for abuse detection to close the gap between traditional rule-based systems and adversarial-aware approaches that scale with platform growth.
             </p>
           </AnimatedContent>
         </section>
@@ -293,7 +307,7 @@ export default function App() {
                 <span className="exp-company">Midjourney</span>
                 <span className="exp-period">Feb 2023 &ndash; Present</span>
               </div>
-              <p className="exp-role">Platform Protection & Safeguards &mdash; Founding Contributor</p>
+              <p className="exp-role">Platform Protection & Safeguards &mdash; Built from Zero</p>
               <ul className="exp-bullets">
                 {EXPERIENCE_BULLETS.map((bullet, i) => (
                   <li key={i}>{bullet}</li>

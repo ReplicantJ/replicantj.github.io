@@ -247,6 +247,10 @@ body {
   color: var(--text-secondary);
 }
 
+.about-text + .about-text {
+  margin-top: 1.25rem;
+}
+
 .about-text a {
   color: var(--purple-bright);
   text-decoration: underline;
