@@ -11,10 +11,19 @@ import './App.css'
 
 const discordSnowflake =
   import.meta.env.VITE_DISCORD_USER_ID?.trim() || '190942242070855680'
-const discordProfileHref =
-  /^\d{17,20}$/.test(discordSnowflake)
-    ? `https://discord.com/users/${discordSnowflake}`
-    : 'https://discord.com/app'
+
+/** Mobile: https profile (custom protocol is flaky). Desktop: discord:// targets the installed client so it focuses one instance instead of spawning via a new browser tab + https handoff. */
+function discordProfileHrefForClient(snowflake: string): string {
+  if (!/^\d{17,20}$/.test(snowflake)) return 'https://discord.com/app'
+  const httpsProfile = `https://discord.com/users/${snowflake}`
+  if (typeof navigator === 'undefined') return httpsProfile
+  if (/Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    return httpsProfile
+  }
+  return `discord://-/users/${snowflake}`
+}
+
+const discordProfileHref = discordProfileHrefForClient(discordSnowflake)
 
 type SocialLink = {
   label: string
