@@ -12,7 +12,6 @@ type SocialLink = {
   label: string
   href: string
   icon: ReactNode
-  download?: boolean
 }
 
 const SOCIAL_LINKS: SocialLink[] = [
@@ -174,7 +173,7 @@ export default function App() {
             <div className="divider" />
 
             <nav className="socials" aria-label="Social links">
-              {SOCIAL_LINKS.map(({ label, href, icon, download }) => {
+              {SOCIAL_LINKS.map(({ label, href, icon }) => {
                 const external = href.startsWith('http')
                 return (
                   <a
@@ -183,7 +182,6 @@ export default function App() {
                     {...(external
                       ? { target: '_blank', rel: 'noopener noreferrer' }
                       : {})}
-                    {...(download ? { download: true } : {})}
                     className="social-link"
                     aria-label={label}
                     title={label}
@@ -291,7 +289,7 @@ export default function App() {
       <footer className="site-footer">
         <div className="section-divider" style={{ marginBottom: '2rem' }} />
         <nav className="footer-links" aria-label="Footer links">
-          {SOCIAL_LINKS.map(({ label, href, icon, download }) => {
+          {SOCIAL_LINKS.map(({ label, href, icon }) => {
             const external = href.startsWith('http')
             return (
               <a
@@ -300,7 +298,6 @@ export default function App() {
                 {...(external
                   ? { target: '_blank', rel: 'noopener noreferrer' }
                   : {})}
-                {...(download ? { download: true } : {})}
                 className="social-link"
                 aria-label={label}
                 title={label}
