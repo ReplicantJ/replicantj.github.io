@@ -36,6 +36,7 @@ jobs:
         env:
           VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
           VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+          VITE_DISCORD_USER_ID: ${{ vars.VITE_DISCORD_USER_ID }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
