@@ -247,6 +247,25 @@ body {
   color: var(--text-secondary);
 }
 
+.about-text a {
+  color: var(--purple-bright);
+  text-decoration: underline;
+  text-decoration-color: rgba(168, 85, 247, 0.45);
+  text-underline-offset: 0.15em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.about-text a:hover {
+  color: var(--text-primary);
+  text-decoration-color: var(--purple-mid);
+}
+
+.about-text a:focus-visible {
+  outline: 2px solid var(--purple-mid);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 /* ===== Skills ===== */
 
 .skills-grid {

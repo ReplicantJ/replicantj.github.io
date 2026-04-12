@@ -264,6 +264,26 @@ export default function App() {
 
         <div className="section-divider" />
 
+        {/* Currently working on */}
+        <section className="section" id="current-work">
+          <AnimatedContent distance={60} duration={0.7} threshold={0.15}>
+            <SectionTitle text="CURRENTLY WORKING ON" />
+            <p className="about-text">
+              Building a graph-based detection system using real abuse network data from coordinated misuse operations. Applying{' '}
+              <a
+                href="https://github.com/safe-graph/graph-fraud-detection-papers"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                recent research
+              </a>{' '}
+              in graph neural networks and anomaly detection to identify behavioral patterns across fragmented account clusters. Studying ML techniques for abuse detection to close the gap between traditional rule-based systems and adversarial-aware approaches that scale with platform growth.
+            </p>
+          </AnimatedContent>
+        </section>
+
+        <div className="section-divider" />
+
         {/* Experience */}
         <section className="section" id="experience">
           <AnimatedContent distance={60} duration={0.7} threshold={0.1}>
