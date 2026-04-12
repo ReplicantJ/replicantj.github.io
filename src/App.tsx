@@ -104,8 +104,8 @@ function SectionTitle({ text }: { text: string }) {
   return (
     <DecryptedText
       text={text}
-      animateOn="view"
-      speed={40}
+      animateOn="inViewHover"
+      speed={55}
       sequential
       revealDirection="start"
       className="section-title-char"
