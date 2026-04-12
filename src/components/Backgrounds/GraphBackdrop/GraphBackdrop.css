@@ -1,0 +1,14 @@
+.graph-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .4;
+}
+
+.graph-backdrop canvas {
+  display: block;
+  width: 120%;
+  height: 120%;
+  vertical-align: top;
+}

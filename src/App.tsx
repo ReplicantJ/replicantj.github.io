@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import Grainient from './components/Backgrounds/Grainient/Grainient'
+import GraphBackdrop from './components/Backgrounds/GraphBackdrop/GraphBackdrop'
 import BlurText from './components/TextAnimations/BlurText/BlurText'
 import DecryptedText from './components/TextAnimations/DecryptedText/DecryptedText'
 import SpotlightCard from './components/Components/SpotlightCard/SpotlightCard'
@@ -152,6 +153,7 @@ export default function App() {
           centerY={0}
           zoom={0.9}
         />
+        <GraphBackdrop />
       </div>
 
       {/* Hero */}
