@@ -1,4 +1,4 @@
-# Personal site & resume
+# Personal site
 
 **Joe Burns** — Trust & Safety · Safeguards · Abuse Infrastructure Disruption
 
