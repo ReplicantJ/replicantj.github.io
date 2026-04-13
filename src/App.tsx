@@ -105,7 +105,7 @@ const SKILL_GROUPS = [
 
 const EXPERIENCE_BULLETS = [
   'Built safeguards and enforcement capability from zero with a small team in a data-constrained environment with no formal mandate',
-  'Reduced detection time for coordinated misuse from none → ~30 days → under 2 hours through behavioral analysis and custom investigative dashboard and tooling',
+  'Reduced avg detection time for coordinated misuse from none → ~30 days (manual) → under 2 hours through behavioral analysis and custom investigative dashboard and tooling',
   'Led disruption of third-party automation and reseller ecosystems responsible for hundreds of thousands of abusive accounts',
   'Developed behavioral detection using payment signals, usage patterns, timing correlations, and prompt behavior',
   'Performed graph-based account clustering and entity resolution across fragmented systems without dedicated graph infrastructure',
