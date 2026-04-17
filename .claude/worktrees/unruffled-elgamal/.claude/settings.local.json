@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(where node:*)",
+      "Bash(where npm:*)",
+      "Bash(where npm.cmd)",
+      "Read(//c/Program Files/nodejs/**)",
+      "Read(//c/Code/Web Dev/.claude/worktrees/unruffled-elgamal/$LOCALAPPDATA/Programs/nodejs/**)",
+      "Read(//c/Code/Web Dev/.claude/worktrees/unruffled-elgamal/$HOME/.nvm/*/**)",
+      "Read(//c/Program Files/**)",
+      "Bash(\"/c/Users/analo/AppData/Local/Programs/cursor/resources/app/resources/helpers/node.exe\" --version)",
+      "Bash(ls \"/c/Users/analo/AppData/Local/Programs/cursor/resources/app/resources/helpers/\"npx*)",
+      "Bash(export PATH=\"/c/Program Files/nodejs:$PATH\")",
+      "Read(//c/Code/Web Dev/**)",
+      "Bash(npx vite:*)",
+      "Bash(cmd //c 'dir /x C:\\\\Program Files ')",
+      "Bash(cmd //c 'dir /x C:\"\"')"
+    ]
+  }
+}
