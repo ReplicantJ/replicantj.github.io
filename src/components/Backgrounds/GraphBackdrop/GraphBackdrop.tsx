@@ -35,6 +35,13 @@ const CLUSTER_MIN_SIZE = 3
 const CLUSTER_MAX_SIZE = 6
 /** Outermost cluster member is (1 - CLUSTER_FALLOFF) as bright as the seed. */
 const CLUSTER_FALLOFF = 0.4
+/** Top structural scores used as precomputed rotation candidates. */
+const CANDIDATE_POOL_SIZE = 10
+/** Jittered interval between rotating which candidate cluster is active. */
+const CLUSTER_ROTATE_MIN_MS = 14000
+const CLUSTER_ROTATE_MAX_MS = 32000
+const CANDIDATE_WEIGHT_EPS = 1e-6
+const CANDIDATE_WEIGHT_EXP = 2
 const PULSE_PERIOD_MIN_MS = 3200
 const PULSE_PERIOD_MAX_MS = 5200
 /** Constant pulse factor used when prefers-reduced-motion is active. */
@@ -49,6 +56,69 @@ type GraphNode = {
   ampY: number
   pulsePhase: number
   pulsePeriodMs: number
+}
+
+function randomRotateIntervalMs(): number {
+  return (
+    CLUSTER_ROTATE_MIN_MS +
+    Math.random() * (CLUSTER_ROTATE_MAX_MS - CLUSTER_ROTATE_MIN_MS)
+  )
+}
+
+/** Picks an index ≠ currentIdx with probability ∝ weights[i] among the rest. */
+function pickWeightedDifferent(
+  weights: number[],
+  currentIdx: number
+): number {
+  const n = weights.length
+  if (n <= 1) return 0
+  let sum = 0
+  for (let i = 0; i < n; i++) {
+    if (i !== currentIdx) sum += weights[i]
+  }
+  if (sum <= 0) {
+    const others: number[] = []
+    for (let i = 0; i < n; i++) {
+      if (i !== currentIdx) others.push(i)
+    }
+    return others[Math.floor(Math.random() * others.length)]!
+  }
+  let r = Math.random() * sum
+  for (let i = 0; i < n; i++) {
+    if (i === currentIdx) continue
+    r -= weights[i]
+    if (r <= 0) return i
+  }
+  for (let i = n - 1; i >= 0; i--) {
+    if (i !== currentIdx) return i
+  }
+  return 0
+}
+
+function importanceForSeed(
+  nodes: GraphNode[],
+  seedIdx: number,
+  K: number
+): number[] {
+  const importance = new Array<number>(nodes.length).fill(0)
+  const seed = nodes[seedIdx]
+  const ranked: { i: number; d2: number }[] = []
+  for (let i = 0; i < nodes.length; i++) {
+    if (i === seedIdx) continue
+    const dx = nodes[i].ox - seed.ox
+    const dy = nodes[i].oy - seed.oy
+    ranked.push({ i, d2: dx * dx + dy * dy })
+  }
+  ranked.sort((a, b) => a.d2 - b.d2)
+
+  importance[seedIdx] = 1.0
+  const memberCount = Math.min(K - 1, ranked.length)
+  const denom = Math.max(1, K - 1)
+  for (let r = 0; r < memberCount; r++) {
+    const t = (r + 1) / denom
+    importance[ranked[r].i] = 1.0 - CLUSTER_FALLOFF * t
+  }
+  return importance
 }
 
 function buildNodesAndLinks(width: number, height: number) {
@@ -95,9 +165,8 @@ function buildNodesAndLinks(width: number, height: number) {
     }
   }
 
-  const importance = new Array<number>(nodes.length).fill(0)
   if (nodes.length === 0) {
-    return { nodes, links, importance }
+    return { nodes, links, clusterCandidates: [], clusterWeights: [] }
   }
 
   let maxDegree = 0
@@ -109,41 +178,41 @@ function buildNodesAndLinks(width: number, height: number) {
   const degDenom = maxDegree || 1
   const denDenom = maxDensity || 1
 
-  let seedIdx = 0
-  let seedScore = -Infinity
+  const scores = new Array<number>(nodes.length)
   for (let i = 0; i < nodes.length; i++) {
     const dN = degree[i] / degDenom
     const pN = density[i] / denDenom
-    const s = DEGREE_WEIGHT * dN + DENSITY_WEIGHT * pN
-    if (s > seedScore) {
-      seedScore = s
-      seedIdx = i
-    }
+    scores[i] = DEGREE_WEIGHT * dN + DENSITY_WEIGHT * pN
   }
+
+  const sortedIdx = Array.from({ length: nodes.length }, (_, i) => i)
+  sortedIdx.sort((a, b) => scores[b] - scores[a])
+
+  const pool = Math.min(CANDIDATE_POOL_SIZE, nodes.length)
+  const candidateSeeds = sortedIdx.slice(0, pool)
 
   const K =
     CLUSTER_MIN_SIZE +
     Math.floor(Math.random() * (CLUSTER_MAX_SIZE - CLUSTER_MIN_SIZE + 1))
 
-  const seed = nodes[seedIdx]
-  const ranked: { i: number; d2: number }[] = []
-  for (let i = 0; i < nodes.length; i++) {
-    if (i === seedIdx) continue
-    const dx = nodes[i].ox - seed.ox
-    const dy = nodes[i].oy - seed.oy
-    ranked.push({ i, d2: dx * dx + dy * dy })
-  }
-  ranked.sort((a, b) => a.d2 - b.d2)
-
-  importance[seedIdx] = 1.0
-  const memberCount = Math.min(K - 1, ranked.length)
-  const denom = Math.max(1, K - 1)
-  for (let r = 0; r < memberCount; r++) {
-    const t = (r + 1) / denom
-    importance[ranked[r].i] = 1.0 - CLUSTER_FALLOFF * t
+  const clusterCandidates: number[][] = []
+  for (const seedIdx of candidateSeeds) {
+    clusterCandidates.push(importanceForSeed(nodes, seedIdx, K))
   }
 
-  return { nodes, links, importance }
+  const clusterWeights: number[] = []
+  let wSum = 0
+  for (const seedIdx of candidateSeeds) {
+    const raw = Math.max(scores[seedIdx], CANDIDATE_WEIGHT_EPS)
+    const w = Math.pow(raw, CANDIDATE_WEIGHT_EXP)
+    clusterWeights.push(w)
+    wSum += w
+  }
+  for (let c = 0; c < clusterWeights.length; c++) {
+    clusterWeights[c] /= wSum
+  }
+
+  return { nodes, links, clusterCandidates, clusterWeights }
 }
 
 function positionAt(
@@ -183,6 +252,10 @@ export default function GraphBackdrop() {
     let links: [number, number][] = []
     let importance: number[] = []
     let glow: number[] = []
+    let clusterCandidates: number[][] = []
+    let clusterWeights: number[] = []
+    let activeCluster = 0
+    let nextClusterSwitchAt = 0
     let dpr = 1
     let cssW = 0
     let cssH = 0
@@ -283,11 +356,28 @@ export default function GraphBackdrop() {
       const built = buildNodesAndLinks(cssW, cssH)
       nodes = built.nodes
       links = built.links
-      importance = built.importance
+      clusterCandidates = built.clusterCandidates
+      clusterWeights = built.clusterWeights
+      activeCluster = 0
+      if (clusterCandidates.length === 0) {
+        importance = []
+      } else {
+        importance = clusterCandidates[0]
+      }
       glow = new Array<number>(nodes.length).fill(0)
+      nextClusterSwitchAt = performance.now() + randomRotateIntervalMs()
     }
 
     const loop = (now: number) => {
+      if (
+        !reducedMotion &&
+        clusterCandidates.length > 1 &&
+        now >= nextClusterSwitchAt
+      ) {
+        activeCluster = pickWeightedDifferent(clusterWeights, activeCluster)
+        importance = clusterCandidates[activeCluster]
+        nextClusterSwitchAt = now + randomRotateIntervalMs()
+      }
       drawFrame(now)
       raf = requestAnimationFrame(loop)
     }
@@ -297,8 +387,13 @@ export default function GraphBackdrop() {
       cancelAnimationFrame(raf)
       raf = 0
       if (reducedMotion) {
+        if (clusterCandidates.length > 0) {
+          activeCluster = 0
+          importance = clusterCandidates[0]
+        }
         drawFrame(0)
       } else {
+        nextClusterSwitchAt = performance.now() + randomRotateIntervalMs()
         raf = requestAnimationFrame(loop)
       }
     }
