@@ -1,7 +1,12 @@
 import { useEffect, useRef } from 'react'
 import './GraphBackdrop.css'
 
-const NODE_COUNT = 220
+/** Default node count on tablet/desktop viewports. */
+const NODE_COUNT_DEFAULT = 220
+/** Halved node count on narrow viewports (phones); reduces edge-pair work and improves cluster legibility. */
+const NODE_COUNT_NARROW = 110
+/** CSS-pixel width below which NODE_COUNT_NARROW is used. Sits just above the 480px breakpoint in src/App.css with a small buffer for tablets in portrait. */
+const NARROW_VIEWPORT_PX = 600
 /** Max distance (fraction of min viewport side) to create a link */
 const LINK_DIST_FR = 0.175
 const LINE_RGB = '255,255,255'
@@ -22,11 +27,14 @@ const GLOW_MAX_RADIUS_CSS = 22
 const EDGE_BOOST_ALPHA = 0.22
 /** Density radius as a multiple of the link radius (wider, so density isn't just degree restated). */
 const DENSITY_RADIUS_FR = LINK_DIST_FR * 1.6
-/** Blend weights between degree and density when computing each node's score. */
+/** Blend weights between degree and density when scoring nodes for cluster seed selection. */
 const DEGREE_WEIGHT = 0.6
 const DENSITY_WEIGHT = 0.4
-/** Soft curve on the normalized score so only real hubs pop. */
-const IMPORTANCE_EXP = 1.6
+/** Anomaly cluster size, randomized per build for visual variety. */
+const CLUSTER_MIN_SIZE = 3
+const CLUSTER_MAX_SIZE = 6
+/** Outermost cluster member is (1 - CLUSTER_FALLOFF) as bright as the seed. */
+const CLUSTER_FALLOFF = 0.4
 const PULSE_PERIOD_MIN_MS = 3200
 const PULSE_PERIOD_MAX_MS = 5200
 /** Constant pulse factor used when prefers-reduced-motion is active. */
@@ -50,7 +58,10 @@ function buildNodesAndLinks(width: number, height: number) {
   const densityR = minSide * DENSITY_RADIUS_FR
   const densityR2 = densityR * densityR
 
-  const nodes: GraphNode[] = Array.from({ length: NODE_COUNT }, () => ({
+  const nodeCount =
+    width < NARROW_VIEWPORT_PX ? NODE_COUNT_NARROW : NODE_COUNT_DEFAULT
+
+  const nodes: GraphNode[] = Array.from({ length: nodeCount }, () => ({
     ox: Math.random() * width,
     oy: Math.random() * height,
     phaseX: Math.random() * Math.PI * 2,
@@ -63,8 +74,8 @@ function buildNodesAndLinks(width: number, height: number) {
       Math.random() * (PULSE_PERIOD_MAX_MS - PULSE_PERIOD_MIN_MS),
   }))
 
-  const degree = new Array<number>(nodes.length).fill(0)
-  const density = new Array<number>(nodes.length).fill(0)
+  const degree = new Array<number>(nodeCount).fill(0)
+  const density = new Array<number>(nodeCount).fill(0)
   const links: [number, number][] = []
 
   for (let i = 0; i < nodes.length; i++) {
@@ -84,6 +95,11 @@ function buildNodesAndLinks(width: number, height: number) {
     }
   }
 
+  const importance = new Array<number>(nodes.length).fill(0)
+  if (nodes.length === 0) {
+    return { nodes, links, importance }
+  }
+
   let maxDegree = 0
   let maxDensity = 0
   for (let i = 0; i < nodes.length; i++) {
@@ -93,15 +109,38 @@ function buildNodesAndLinks(width: number, height: number) {
   const degDenom = maxDegree || 1
   const denDenom = maxDensity || 1
 
-  const importance = new Array<number>(nodes.length)
+  let seedIdx = 0
+  let seedScore = -Infinity
   for (let i = 0; i < nodes.length; i++) {
     const dN = degree[i] / degDenom
     const pN = density[i] / denDenom
-    const score = Math.min(
-      1,
-      Math.max(0, DEGREE_WEIGHT * dN + DENSITY_WEIGHT * pN)
-    )
-    importance[i] = Math.pow(score, IMPORTANCE_EXP)
+    const s = DEGREE_WEIGHT * dN + DENSITY_WEIGHT * pN
+    if (s > seedScore) {
+      seedScore = s
+      seedIdx = i
+    }
+  }
+
+  const K =
+    CLUSTER_MIN_SIZE +
+    Math.floor(Math.random() * (CLUSTER_MAX_SIZE - CLUSTER_MIN_SIZE + 1))
+
+  const seed = nodes[seedIdx]
+  const ranked: { i: number; d2: number }[] = []
+  for (let i = 0; i < nodes.length; i++) {
+    if (i === seedIdx) continue
+    const dx = nodes[i].ox - seed.ox
+    const dy = nodes[i].oy - seed.oy
+    ranked.push({ i, d2: dx * dx + dy * dy })
+  }
+  ranked.sort((a, b) => a.d2 - b.d2)
+
+  importance[seedIdx] = 1.0
+  const memberCount = Math.min(K - 1, ranked.length)
+  const denom = Math.max(1, K - 1)
+  for (let r = 0; r < memberCount; r++) {
+    const t = (r + 1) / denom
+    importance[ranked[r].i] = 1.0 - CLUSTER_FALLOFF * t
   }
 
   return { nodes, links, importance }
