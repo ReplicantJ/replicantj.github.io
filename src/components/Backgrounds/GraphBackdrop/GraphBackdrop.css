@@ -3,11 +3,11 @@
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 html[data-theme='light'] .graph-backdrop {
-  opacity: 0.28;
+  opacity: 0.38;
 }
 
 .graph-backdrop canvas {
