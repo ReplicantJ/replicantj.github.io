@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 
+/* ----- Dark (default) ----- */
 :root {
   --bg-deep: #050508;
   --purple-dim: #6b21a8;
@@ -13,6 +14,51 @@
   --accent-warm-bright: #c4703e;
   --accent-warm-glow: rgba(168, 89, 46, 0.2);
   --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+
+  --primary-border-soft: rgba(168, 85, 247, 0.2);
+  --primary-bg-soft: rgba(168, 85, 247, 0.06);
+  --section-veil-bg: rgba(5, 5, 8, 0.88);
+  --name-text-glow:
+    0 0 80px rgba(168, 85, 247, 0.2),
+    0 0 120px rgba(168, 89, 46, 0.08);
+  --divider-edge-primary: rgba(168, 85, 247, 0.25);
+  --skill-tag-border: rgba(107, 95, 128, 0.25);
+  --skill-tag-hover-border: rgba(168, 85, 247, 0.3);
+  --skill-tag-hover-bg: rgba(168, 85, 247, 0.06);
+  --link-underline: rgba(168, 85, 247, 0.45);
+  --card-border: rgba(107, 33, 168, 0.2);
+  --card-surface: rgba(5, 5, 8, 0.6);
+  --spotlight-hover: rgba(168, 85, 247, 0.08);
+}
+
+/* ----- Light (Verdigris / parchment) — purple-* kept as semantic primary ----- */
+html[data-theme='light'] {
+  --bg-deep: #f4ede0;
+  --purple-dim: #2f7a68;
+  --purple-mid: #4a9d87;
+  --purple-bright: #6cc0a8;
+  --purple-glow: rgba(74, 157, 135, 0.28);
+  --text-primary: #1a160f;
+  --text-secondary: #3d342a;
+  --text-muted: #6b5d48;
+  --accent-warm: #9c6d3e;
+  --accent-warm-bright: #c08c5a;
+  --accent-warm-glow: rgba(156, 109, 62, 0.26);
+
+  --primary-border-soft: rgba(47, 122, 104, 0.25);
+  --primary-bg-soft: rgba(74, 157, 135, 0.1);
+  --section-veil-bg: rgba(244, 237, 224, 0.92);
+  --name-text-glow:
+    0 0 48px rgba(74, 157, 135, 0.22),
+    0 0 96px rgba(156, 109, 62, 0.08);
+  --divider-edge-primary: rgba(47, 122, 104, 0.28);
+  --skill-tag-border: rgba(107, 93, 72, 0.22);
+  --skill-tag-hover-border: rgba(74, 157, 135, 0.38);
+  --skill-tag-hover-bg: rgba(74, 157, 135, 0.08);
+  --link-underline: rgba(74, 157, 135, 0.45);
+  --card-border: rgba(47, 122, 104, 0.22);
+  --card-surface: rgba(255, 250, 240, 0.72);
+  --spotlight-hover: rgba(74, 157, 135, 0.12);
 }
 
 *,
@@ -29,7 +75,8 @@ html {
   font-size: 115%;
 }
 
-body, #root {
+body,
+#root {
   min-height: 100%;
   width: 100%;
 }
@@ -86,7 +133,7 @@ body {
   color: var(--text-primary);
   text-align: center;
   line-height: 1.1;
-  text-shadow: 0 0 80px rgba(168, 85, 247, 0.2), 0 0 120px rgba(168, 89, 46, 0.08);
+  text-shadow: var(--name-text-glow);
 }
 
 /* ===== Tagline ===== */
@@ -147,8 +194,8 @@ body {
 
 .social-link:hover {
   color: var(--purple-bright);
-  border-color: rgba(168, 85, 247, 0.2);
-  background: rgba(168, 85, 247, 0.06);
+  border-color: var(--primary-border-soft);
+  background: var(--primary-bg-soft);
   box-shadow: 0 0 20px var(--purple-glow);
   transform: translateY(-1px);
 }
@@ -161,8 +208,8 @@ body {
   outline: 2px solid var(--purple-mid);
   outline-offset: 2px;
   color: var(--purple-bright);
-  border-color: rgba(168, 85, 247, 0.2);
-  background: rgba(168, 85, 247, 0.06);
+  border-color: var(--primary-border-soft);
+  background: var(--primary-bg-soft);
 }
 
 .social-link svg {
@@ -185,7 +232,7 @@ body {
 }
 
 .scroll-hint svg {
-  color: var(--accent-warm);
+  color: var(--accent-warm-bright);
   animation: bounce 2s ease-in-out infinite;
 }
 
@@ -194,7 +241,7 @@ body {
 .sections-container {
   position: relative;
   z-index: 1;
-  background: rgba(5, 5, 8, 0.88);
+  background: var(--section-veil-bg);
 }
 
 .section {
@@ -211,9 +258,9 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(168, 85, 247, 0.25),
+    var(--divider-edge-primary),
     var(--accent-warm-glow),
-    rgba(168, 85, 247, 0.25),
+    var(--divider-edge-primary),
     transparent
   );
 }
@@ -254,9 +301,11 @@ body {
 .about-text a {
   color: var(--purple-bright);
   text-decoration: underline;
-  text-decoration-color: rgba(168, 85, 247, 0.45);
+  text-decoration-color: var(--link-underline);
   text-underline-offset: 0.15em;
-  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
 }
 
 .about-text a:hover {
@@ -298,15 +347,15 @@ body {
   letter-spacing: 0.02em;
   color: var(--text-muted);
   padding: 0.3rem 0.6rem;
-  border: 1px solid rgba(107, 95, 128, 0.25);
+  border: 1px solid var(--skill-tag-border);
   border-radius: 4px;
   transition: all 0.3s ease;
 }
 
 .skill-tag:hover {
   color: var(--purple-bright);
-  border-color: rgba(168, 85, 247, 0.3);
-  background: rgba(168, 85, 247, 0.06);
+  border-color: var(--skill-tag-hover-border);
+  background: var(--skill-tag-hover-bg);
 }
 
 /* ===== Experience ===== */
@@ -397,7 +446,7 @@ body {
 .site-footer {
   position: relative;
   z-index: 1;
-  background: rgba(5, 5, 8, 0.88);
+  background: var(--section-veil-bg);
   padding: 3rem 2rem;
   text-align: center;
 }
@@ -432,18 +481,33 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes drawIn {
-  from { opacity: 0; transform: scaleX(0); }
-  to   { opacity: 1; transform: scaleX(1); }
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
 }
 
 /* ===== Responsive ===== */
@@ -488,8 +552,12 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   @keyframes fadeSlideUp {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   .name span {

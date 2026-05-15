@@ -1,10 +1,12 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import Grainient from './components/Backgrounds/Grainient/Grainient'
 import GraphBackdrop from './components/Backgrounds/GraphBackdrop/GraphBackdrop'
 import BlurText from './components/TextAnimations/BlurText/BlurText'
 import DecryptedText from './components/TextAnimations/DecryptedText/DecryptedText'
 import SpotlightCard from './components/Components/SpotlightCard/SpotlightCard'
 import AnimatedContent from './components/Animations/AnimatedContent/AnimatedContent'
+import ThemeToggle from './components/ThemeToggle/ThemeToggle'
+import { useTheme } from './context/ThemeContext'
 import './App.css'
 
 /* ===== Data ===== */
@@ -135,6 +137,29 @@ function SectionTitle({ text }: { text: string }) {
 
 export default function App() {
   const [showContent, setShowContent] = useState(false)
+  const { effectiveTheme } = useTheme()
+
+  const grainientThemeProps = useMemo(
+    () =>
+      effectiveTheme === 'light'
+        ? {
+            color1: '#f4ede0',
+            color2: '#d5e8df',
+            color3: '#aed6c5',
+            grainAmount: 0.06,
+            contrast: 0.52,
+            saturation: 1.08,
+          }
+        : {
+            color1: '#000000',
+            color2: '#16001f',
+            color3: '#33002f',
+            grainAmount: 0.1,
+            contrast: 0.7,
+            saturation: 1.45,
+          },
+    [effectiveTheme]
+  )
 
   useEffect(() => {
     const timer = setTimeout(() => setShowContent(true), 200)
@@ -143,12 +168,12 @@ export default function App() {
 
   return (
     <div className="app">
+      <ThemeToggle />
+
       {/* Background */}
       <div className="background">
         <Grainient
-          color1="#000000"
-          color2="#16001f"
-          color3="#33002f"
+          {...grainientThemeProps}
           timeSpeed={1.2}
           colorBalance={0}
           warpStrength={1}
@@ -159,17 +184,14 @@ export default function App() {
           blendSoftness={0.38}
           rotationAmount={500}
           noiseScale={2}
-          grainAmount={0.1}
           grainScale={2}
           grainAnimated={false}
-          contrast={0.7}
           gamma={1}
-          saturation={1.45}
           centerX={0}
           centerY={0}
           zoom={0.9}
         />
-        <GraphBackdrop />
+        <GraphBackdrop theme={effectiveTheme} />
       </div>
 
       {/* Hero */}
@@ -246,10 +268,7 @@ export default function App() {
             <SectionTitle text="CORE COMPETENCIES" />
             <div className="skills-grid">
               {SKILL_GROUPS.map(group => (
-                <SpotlightCard
-                  key={group.title}
-                  spotlightColor="rgba(168, 85, 247, 0.08)"
-                >
+                <SpotlightCard key={group.title}>
                   <h3 className="skill-group-title">{group.title}</h3>
                   <div className="skill-tags">
                     {group.skills.map(skill => (
@@ -302,7 +321,7 @@ export default function App() {
         <section className="section" id="experience">
           <AnimatedContent distance={60} duration={0.7} threshold={0.1}>
             <SectionTitle text="EXPERIENCE" />
-            <SpotlightCard spotlightColor="rgba(168, 85, 247, 0.06)">
+            <SpotlightCard>
               <div className="exp-header">
                 <span className="exp-company">Midjourney</span>
                 <span className="exp-period">Feb 2023 &ndash; Present</span>

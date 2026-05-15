@@ -9,16 +9,11 @@ const NODE_COUNT_NARROW = 110
 const NARROW_VIEWPORT_PX = 600
 /** Max distance (fraction of min viewport side) to create a link */
 const LINK_DIST_FR = 0.175
-const LINE_RGB = '255,255,255'
-const LINE_ALPHA = 0.16
-const NODE_ALPHA = 0.22
 const LINE_WIDTH_CSS = 1.15
 const NODE_RADIUS_CSS = 2.35
 /** Slow oscillation for organic drift */
 const TIME_SCALE = 0.00022
 
-/** Orange glow tuned to match --accent-warm-bright (#c4703e = 196,112,62). */
-const GLOW_RGB = '196,112,62'
 /** Nodes below this normalized glow value are skipped entirely (both halo and edge boost). */
 const GLOW_THRESHOLD = 0.08
 /** Halo radius for the single brightest hub; scales down with importance. */
@@ -46,6 +41,29 @@ const PULSE_PERIOD_MIN_MS = 3200
 const PULSE_PERIOD_MAX_MS = 5200
 /** Constant pulse factor used when prefers-reduced-motion is active. */
 const REDUCED_MOTION_PULSE = 0.6
+
+type GraphPalette = {
+  lineRgb: string
+  lineAlpha: number
+  nodeAlpha: number
+  glowRgb: string
+}
+
+const PALETTE_DARK: GraphPalette = {
+  lineRgb: '255,255,255',
+  lineAlpha: 0.16,
+  nodeAlpha: 0.22,
+  /** Orange glow tuned to match dark --accent-warm-bright (#c4703e). */
+  glowRgb: '196,112,62',
+}
+
+const PALETTE_LIGHT: GraphPalette = {
+  lineRgb: '107,93,72',
+  lineAlpha: 0.09,
+  nodeAlpha: 0.14,
+  /** Verdigris (--purple-mid #4a9d87). */
+  glowRgb: '74,157,135',
+}
 
 type GraphNode = {
   ox: number
@@ -230,12 +248,25 @@ function positionAt(
   return { x, y }
 }
 
-export default function GraphBackdrop() {
+export type GraphBackdropTheme = 'dark' | 'light'
+
+export default function GraphBackdrop({
+  theme = 'dark',
+}: {
+  theme?: GraphBackdropTheme
+}) {
   const wrapRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const wrap = wrapRef.current
     if (!wrap) return
+
+    const {
+      lineRgb: LINE_RGB,
+      lineAlpha: LINE_ALPHA,
+      nodeAlpha: NODE_ALPHA,
+      glowRgb: GLOW_RGB,
+    } = theme === 'light' ? PALETTE_LIGHT : PALETTE_DARK
 
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
 
@@ -421,7 +452,7 @@ export default function GraphBackdrop() {
       ro.disconnect()
       canvas.remove()
     }
-  }, [])
+  }, [theme])
 
   return <div ref={wrapRef} className="graph-backdrop" />
 }
