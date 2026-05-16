@@ -50,19 +50,21 @@ type GraphPalette = {
 }
 
 const PALETTE_DARK: GraphPalette = {
-  lineRgb: '255,255,255',
-  lineAlpha: 0.16,
-  nodeAlpha: 0.22,
+  /** Muted lilac-grey (between --text-muted and --text-secondary), not stark white on #050508. */
+  lineRgb: '152,140,178',
+  lineAlpha: 0.17,
+  nodeAlpha: 0.24,
   /** Orange glow tuned to match dark --accent-warm-bright (#c4703e). */
   glowRgb: '196,112,62',
 }
 
 const PALETTE_LIGHT: GraphPalette = {
-  lineRgb: '107,93,72',
-  lineAlpha: 0.09,
-  nodeAlpha: 0.14,
-  /** Verdigris (--purple-mid #4a9d87). */
-  glowRgb: '74,157,135',
+  /** Verdigris (--purple-mid #4a9d87): base edges and nodes. */
+  lineRgb: '74,157,135',
+  lineAlpha: 0.14,
+  nodeAlpha: 0.28,
+  /** Bronze (--accent-warm-bright #c08c5a): cluster highlights / glow pulses. */
+  glowRgb: '192,140,90',
 }
 
 type GraphNode = {
