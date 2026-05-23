@@ -27,3 +27,6 @@ files.zip
 *.njsproj
 *.sln
 *.sw?
+
+# Local-only archives (patches, exports); never committed
+/archive/
