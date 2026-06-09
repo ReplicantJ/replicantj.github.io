@@ -297,6 +297,9 @@ export default function App() {
           <AnimatedContent distance={60} duration={0.7} threshold={0.15}>
             <SectionTitle text="CURRENTLY WORKING ON" />
             <p className="about-text">
+              Architecting a greenfield desktop application that automates an end-to-end abuse-enforcement workflow: ingesting moderation signals from platform APIs into a local datastore, surfacing coordinated behavior through a pattern engine and classifier, and routing verdicts into automated enforcement and human review queues. Designed to eliminate repetitive triage while keeping analysts in the loop on every action.
+            </p>
+            <p className="about-text">
               Building a graph-based detection system using real abuse network data from coordinated misuse operations. Applying recent research in graph neural networks and anomaly detection to identify behavioral patterns across fragmented account clusters.
             </p>
             <p className="about-text">
