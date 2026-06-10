@@ -106,7 +106,7 @@ const SKILL_GROUPS = [
   },
   {
     title: 'Software Engineering',
-    skills: ['TypeScript', 'JavaScript', 'Python (pandas)', 'Node.js', 'Electron', 'React', 'Vue', 'Tailwind', 'SQL', 'SQLite', 'Data pipelines', 'Claude Code', 'Cursor'],
+    skills: ['Python (pandas)', 'SQL', 'SQLite', 'TypeScript', 'JavaScript', 'Node.js', 'Electron', 'React', 'Vue', 'Tailwind', 'Data pipelines', 'Claude Code', 'Cursor'],
   },
   {
     title: 'Systems & Operations',
