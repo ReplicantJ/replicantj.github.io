@@ -303,6 +303,9 @@ export default function App() {
               Building a graph-based detection system using real abuse network data from coordinated misuse operations. Applying recent research in graph neural networks and anomaly detection to identify behavioral patterns across fragmented account clusters.
             </p>
             <p className="about-text">
+              Benchmarking candidate detection models — including SliceNDice, BWGNN, TGN, and others — against real abuse network data to determine the best fit for the detection pipeline.
+            </p>
+            <p className="about-text">
               Leveraging curated research repositories and{' '}
               <a
                 href="https://github.com/jeffpierce/memory-palace"
