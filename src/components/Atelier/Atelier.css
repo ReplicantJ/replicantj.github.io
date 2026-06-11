@@ -1,0 +1,86 @@
+/* Atelier ornament primitives — consume tokens from styles/atelier-tokens.css */
+
+.at-rule {
+  height: 1px;
+  background: var(--at-line);
+  border: 0;
+}
+
+.at-rule--double {
+  height: 5px;
+  background: transparent;
+  border-top: 1px solid var(--at-line-strong);
+  border-bottom: 1px solid var(--at-line);
+}
+
+.at-rule--soft {
+  background: var(--at-line-soft);
+}
+
+/* Chamfered plate frame: 1px line layer behind a clipped inner panel */
+.at-plate {
+  position: relative;
+  background: var(--at-line);
+  clip-path: polygon(
+    14px 0, calc(100% - 14px) 0, 100% 14px,
+    100% calc(100% - 14px), calc(100% - 14px) 100%,
+    14px 100%, 0 calc(100% - 14px), 0 14px
+  );
+  padding: 1px;
+}
+
+.at-plate__inner {
+  height: 100%;
+  background: var(--at-ground);
+  clip-path: polygon(
+    13.5px 0, calc(100% - 13.5px) 0, 100% 13.5px,
+    100% calc(100% - 13.5px), calc(100% - 13.5px) 100%,
+    13.5px 100%, 0 calc(100% - 13.5px), 0 13.5px
+  );
+  padding: 2.2rem 2.4rem;
+}
+
+.at-plate--surface .at-plate__inner {
+  background: var(--at-surface);
+}
+
+.at-regmark {
+  width: 18px;
+  height: 18px;
+  color: var(--at-brass);
+  flex-shrink: 0;
+}
+
+.at-plate-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.at-plate-header__text {
+  font-family: var(--at-font-data);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: var(--at-ink-2);
+  white-space: nowrap;
+}
+
+.at-plate-header__rule {
+  flex: 1;
+}
+
+.at-monogram {
+  display: inline-block;
+}
+
+@media (max-width: 760px) {
+  .at-plate__inner {
+    padding: 1.6rem 1.3rem;
+  }
+
+  .at-plate-header__text {
+    letter-spacing: 0.18em;
+    white-space: normal;
+  }
+}

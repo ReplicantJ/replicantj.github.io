@@ -2,17 +2,22 @@ import { apiUrl } from './api'
 
 export type SiteConfig = {
   darkModeAllowed: boolean
+  /** Dark-launch flag for the personal /about page. Defaults to false (hidden). */
+  aboutEnabled: boolean
 }
 
 const DEFAULT_CONFIG: SiteConfig = {
   darkModeAllowed: true,
+  aboutEnabled: false,
 }
 
 function normalizeConfig(raw: unknown): SiteConfig {
   if (!raw || typeof raw !== 'object') return DEFAULT_CONFIG
   const o = raw as Record<string, unknown>
-  if (o.darkModeAllowed === false) return { darkModeAllowed: false }
-  return DEFAULT_CONFIG
+  return {
+    darkModeAllowed: o.darkModeAllowed !== false,
+    aboutEnabled: o.aboutEnabled === true,
+  }
 }
 
 function staticSiteConfigPath(): string {

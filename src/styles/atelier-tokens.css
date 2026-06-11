@@ -32,9 +32,9 @@
   --at-sf-tile-bottom: #211d15;
   --at-sf-seam: rgba(0, 0, 0, 0.55);
 
-  /* Type roles — display family swapped per pairing on the specimen page */
-  --at-font-display: 'Marcellus', serif;
-  --at-font-body: 'Jost', sans-serif;
+  /* Type roles — locked at Phase 1 checkpoint: Pairing B "Salon" */
+  --at-font-display: 'Italiana', serif;
+  --at-font-body: 'Hanken Grotesk', sans-serif;
   --at-font-data: 'JetBrains Mono', monospace;
 }
 

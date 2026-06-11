@@ -1,0 +1,64 @@
+/* Atelier route pages (case-study stubs, about, 404) */
+
+.at-page {
+  min-height: 100vh;
+  background: var(--at-ground);
+  color: var(--at-ink);
+  font-family: var(--at-font-body);
+  padding: 7rem 2rem 5rem;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+.at-page__sheet {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.at-page__title {
+  font-family: var(--at-font-display);
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 400;
+  line-height: 1.08;
+  margin: 2.4rem 0 0.8rem;
+}
+
+.at-page__status {
+  font-family: var(--at-font-data);
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  color: var(--at-brass);
+  margin-bottom: 2.2rem;
+}
+
+.at-page__abstract {
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--at-ink-2);
+  max-width: 62ch;
+}
+
+.at-page__back {
+  display: inline-block;
+  margin-top: 3rem;
+  font-family: var(--at-font-data);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  color: var(--at-jade);
+  text-decoration: none;
+  border-bottom: 1px solid var(--at-line);
+  padding-bottom: 0.2rem;
+}
+
+.at-page__back:hover {
+  color: var(--at-ink);
+  border-color: var(--at-line-strong);
+}
+
+.at-page__numeral {
+  font-family: var(--at-font-display);
+  font-size: clamp(6rem, 18vw, 11rem);
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--at-brass);
+}
