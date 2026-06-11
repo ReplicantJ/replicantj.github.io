@@ -2,7 +2,7 @@
 
 **Joe Burns** — Trust & Safety · Safeguards · Abuse Infrastructure Disruption
 
-Public source for [replicantsecurity.com](https://replicantsecurity.com): a single-page resume and portfolio built as a static React app (hero, about, skills, experience, education, and social links). Easy to deploy on GitHub Pages or any static host.
+Public source for [joeburns.ai](https://joeburns.ai): a single-page resume and portfolio built as a static React app (hero, about, skills, experience, education, and social links). Easy to deploy on GitHub Pages or any static host.
 
 ## Stack
 
@@ -54,7 +54,7 @@ Pushes to `main` run [`.github/workflows/deploy-pages.yml`](.github/workflows/de
 - `VITE_DISCORD_USER_ID` — optional; falls back to the ID in source if unset
 - `VITE_API_BASE_URL` — optional remote config API
 
-Custom domain: [`CNAME`](CNAME) points at `replicantsecurity.com`. For other hosts, set `VITE_BASE_PATH` to match where the built `dist/` is served.
+Custom domain: [`CNAME`](CNAME) points at `joeburns.ai`. For other hosts, set `VITE_BASE_PATH` to match where the built `dist/` is served.
 
 ## Third-party code
 
