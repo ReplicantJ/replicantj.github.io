@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap');
+@import './atelier-tokens.css';
+
+/* ===== Global reset & base (Atelier) ===== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  font-size: 107%;
+  scroll-behavior: smooth;
+}
+
+body,
+#root {
+  min-height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: var(--at-font-body);
+  font-weight: 300;
+  background: var(--at-ground);
+  color: var(--at-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+::selection {
+  background: var(--at-brass);
+  color: var(--at-ground);
+}
+
+/* Split-flap default treatment — surface tiles (Phase 1 checkpoint) */
+:root {
+  --sf-text: var(--at-jade);
+  --sf-tile-top: var(--at-surface);
+  --sf-tile-bottom: var(--at-surface-high);
+  --sf-seam: var(--at-line-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

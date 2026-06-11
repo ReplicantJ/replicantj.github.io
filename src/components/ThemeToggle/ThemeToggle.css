@@ -1,41 +1,33 @@
 .theme-toggle {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 10;
   display: grid;
   place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.1rem;
+  height: 2.1rem;
   padding: 0;
-  border: 1px solid var(--primary-border-soft);
-  border-radius: 6px;
-  background: var(--primary-bg-soft);
-  color: var(--text-muted);
+  border: 1px solid var(--at-line);
+  background: transparent;
+  color: var(--at-brass);
   cursor: pointer;
-  opacity: 0.55;
   transition:
-    opacity 0.25s ease,
     color 0.25s ease,
     border-color 0.25s ease,
     background 0.25s ease;
 }
 
 .theme-toggle:hover {
-  opacity: 0.95;
-  color: var(--purple-mid);
-  border-color: var(--skill-tag-hover-border);
+  color: var(--at-ink);
+  border-color: var(--at-line-strong);
+  background: var(--at-surface);
 }
 
 .theme-toggle:focus-visible {
-  outline: 2px solid var(--purple-mid);
+  outline: 2px solid var(--at-jade);
   outline-offset: 2px;
-  opacity: 1;
 }
 
 .theme-toggle__icon {
-  width: 1.05rem;
-  height: 1.05rem;
+  width: 1rem;
+  height: 1rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
