@@ -1,0 +1,475 @@
+@import '../styles/atelier-tokens.css';
+
+/* ============ Specimen sheet chrome ============ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 105%;
+}
+
+body {
+  background: var(--at-ground);
+  color: var(--at-ink);
+  font-family: var(--at-font-body);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+.sheet {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 4rem 2rem 6rem;
+}
+
+/* ============ Masthead ============ */
+
+.masthead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.masthead-eyebrow {
+  font-family: var(--at-font-data);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  color: var(--at-brass);
+  margin-bottom: 0.9rem;
+}
+
+.masthead h1 {
+  font-family: var(--at-font-display);
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.theme-btn {
+  font-family: var(--at-font-data);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--at-brass);
+  background: transparent;
+  border: 1px solid var(--at-line);
+  padding: 0.6rem 1.1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.theme-btn:hover {
+  color: var(--at-ink);
+  border-color: var(--at-line-strong);
+  background: var(--at-surface);
+}
+
+/* ============ Rules & section scaffolding ============ */
+
+.rule {
+  height: 1px;
+  background: var(--at-line);
+  border: 0;
+}
+
+.rule--double {
+  height: 5px;
+  background: transparent;
+  border-top: 1px solid var(--at-line-strong);
+  border-bottom: 1px solid var(--at-line);
+}
+
+.rule--soft {
+  background: var(--at-line-soft);
+}
+
+.masthead-rule {
+  margin: 2rem 0 0;
+}
+
+.spec-section {
+  padding: 4.5rem 0 0;
+}
+
+.spec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1.4rem;
+  margin-bottom: 2.4rem;
+}
+
+.spec-num {
+  font-family: var(--at-font-display);
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--at-brass);
+}
+
+.spec-title {
+  font-family: var(--at-font-data);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: var(--at-ink-2);
+}
+
+.spec-note {
+  font-size: 0.95rem;
+  color: var(--at-ink-3);
+  max-width: 56ch;
+  margin: -1.6rem 0 2.2rem;
+  line-height: 1.65;
+}
+
+/* ============ 01 · Palette ============ */
+
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+.palette-col-label {
+  font-family: var(--at-font-data);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  color: var(--at-ink-3);
+  margin-bottom: 1rem;
+}
+
+.swatch-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem;
+}
+
+.swatch {
+  border: 1px solid var(--at-line-soft);
+}
+
+.swatch-chip {
+  height: 64px;
+}
+
+.swatch-meta {
+  padding: 0.5rem 0.6rem;
+  background: var(--at-surface);
+}
+
+.swatch-name {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--at-ink-2);
+  display: block;
+}
+
+.swatch-hex {
+  font-family: var(--at-font-data);
+  font-size: 0.62rem;
+  color: var(--at-ink-3);
+  letter-spacing: 0.06em;
+}
+
+/* ============ Plates (chamfered frames) ============ */
+
+.plate {
+  position: relative;
+  background: var(--at-line);
+  clip-path: polygon(
+    14px 0, calc(100% - 14px) 0, 100% 14px,
+    100% calc(100% - 14px), calc(100% - 14px) 100%,
+    14px 100%, 0 calc(100% - 14px), 0 14px
+  );
+  padding: 1px;
+}
+
+.plate-inner {
+  height: 100%;
+  background: var(--at-ground);
+  clip-path: polygon(
+    13.5px 0, calc(100% - 13.5px) 0, 100% 13.5px,
+    100% calc(100% - 13.5px), calc(100% - 13.5px) 100%,
+    13.5px 100%, 0 calc(100% - 13.5px), 0 13.5px
+  );
+  padding: 2.2rem 2.4rem;
+}
+
+/* ============ 02 · Type pairings ============ */
+
+.pairing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+}
+
+.pair-eyebrow {
+  font-family: var(--at-font-data);
+  font-size: 0.66rem;
+  letter-spacing: 0.26em;
+  color: var(--at-brass);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.6rem;
+}
+
+.pair-fonts {
+  color: var(--at-ink-3);
+}
+
+.pair-name {
+  font-family: var(--pair-display);
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--at-ink);
+}
+
+.pair-caps {
+  font-family: var(--pair-display);
+  font-size: clamp(1rem, 2.4vw, 1.4rem);
+  letter-spacing: 0.22em;
+  color: var(--at-jade);
+  margin-top: 0.9rem;
+}
+
+.pair-body {
+  font-family: var(--pair-body);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--at-ink-2);
+  max-width: 62ch;
+  margin-top: 1.3rem;
+}
+
+.pair-data {
+  font-family: var(--at-font-data);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--at-ink-3);
+  margin-top: 1.5rem;
+}
+
+.pair-numerals {
+  font-family: var(--pair-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--at-brass);
+  letter-spacing: 0.12em;
+  margin-top: 1.1rem;
+}
+
+/* ============ 03 · Stat callout ============ */
+
+.stat-callout {
+  text-align: center;
+  padding: 3.4rem 2rem;
+}
+
+.stat-eyebrow {
+  font-family: var(--at-font-data);
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  color: var(--at-ink-3);
+  margin-bottom: 1.6rem;
+}
+
+.stat-line {
+  font-family: var(--at-font-display);
+  font-size: clamp(2.2rem, 7vw, 4.6rem);
+  line-height: 1.1;
+  color: var(--at-ink);
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6em;
+}
+
+.stat-line .arrow {
+  color: var(--at-brass);
+  font-size: 0.6em;
+}
+
+.stat-line .hot {
+  color: var(--at-jade);
+}
+
+.stat-foot {
+  font-family: var(--at-font-data);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  color: var(--at-ink-3);
+  margin-top: 1.7rem;
+}
+
+/* ============ 04 · Monograms ============ */
+
+.mono-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+
+.mono-card .plate-inner {
+  padding: 1.6rem;
+  text-align: center;
+}
+
+.mono-label {
+  font-family: var(--at-font-data);
+  font-size: 0.64rem;
+  letter-spacing: 0.24em;
+  color: var(--at-brass);
+  margin-bottom: 1.4rem;
+}
+
+.mono-pair {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.mono-chip {
+  width: 116px;
+  height: 116px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mono-chip svg {
+  width: 92px;
+  height: 92px;
+}
+
+.mono-chip--ink {
+  color: var(--at-ink);
+}
+
+.mono-chip--brass {
+  background: #1f1b14;
+  color: #c2a14e;
+}
+
+.mono-desc {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--at-ink-3);
+  margin-top: 1.2rem;
+}
+
+/* ============ 05 · Ornament ============ */
+
+.ornament-stack {
+  display: grid;
+  gap: 2.6rem;
+}
+
+.orn-label {
+  font-family: var(--at-font-data);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: var(--at-ink-3);
+  margin-bottom: 0.8rem;
+}
+
+.plate-header-demo {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.reg-mark {
+  width: 18px;
+  height: 18px;
+  color: var(--at-brass);
+  flex-shrink: 0;
+}
+
+.plate-header-text {
+  font-family: var(--at-font-data);
+  font-size: 0.74rem;
+  letter-spacing: 0.3em;
+  color: var(--at-ink-2);
+  white-space: nowrap;
+}
+
+.plate-header-rule {
+  flex: 1;
+}
+
+.big-numeral {
+  font-family: var(--at-font-display);
+  font-size: clamp(5rem, 14vw, 9rem);
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--at-brass);
+}
+
+/* ============ 06 · Split-flap ============ */
+
+.board-row {
+  display: grid;
+  gap: 2.4rem;
+}
+
+.board-demo {
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+}
+
+.board--dark {
+  --sf-text: var(--at-sf-text);
+  --sf-tile-top: var(--at-sf-tile-top);
+  --sf-tile-bottom: var(--at-sf-tile-bottom);
+  --sf-seam: var(--at-sf-seam);
+}
+
+.board--surface {
+  --sf-text: var(--at-jade);
+  --sf-tile-top: var(--at-surface);
+  --sf-tile-bottom: var(--at-surface-high);
+  --sf-seam: var(--at-line-soft);
+}
+
+.board-demo .sf-board {
+  font-family: var(--at-font-data);
+  font-weight: 500;
+}
+
+/* ============ Footer ============ */
+
+.sheet-foot {
+  margin-top: 5rem;
+  font-family: var(--at-font-data);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: var(--at-ink-3);
+  text-align: center;
+}
+
+/* ============ Responsive ============ */
+
+@media (max-width: 760px) {
+  .palette-grid,
+  .mono-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .swatch-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .plate-inner {
+    padding: 1.6rem 1.3rem;
+  }
+}

@@ -1,0 +1,63 @@
+/* ============================================================
+   ATELIER — design tokens
+   Light = "Daylight study" (default) · Dark = "Evening study"
+   Bauhaus structure · Deco linework · a trace of jade
+   ============================================================ */
+
+:root {
+  /* Ground */
+  --at-ground: #f4f0e6;
+  --at-surface: #ece6d7;
+  --at-surface-high: #e4dcc9;
+
+  /* Ink */
+  --at-ink: #211d15;
+  --at-ink-2: #4d4738;
+  --at-ink-3: #7d7560;
+
+  /* Metals & accent */
+  --at-brass: #96762f;
+  --at-brass-bright: #b8933f;
+  --at-jade: #20695a;
+  --at-jade-bright: #2e8a73;
+
+  /* Lines */
+  --at-line: rgba(150, 118, 47, 0.55);
+  --at-line-strong: rgba(150, 118, 47, 0.85);
+  --at-line-soft: rgba(33, 29, 21, 0.16);
+
+  /* Split-flap tiles (dark tiles on light ground, like a real board) */
+  --at-sf-text: #ece5d3;
+  --at-sf-tile-top: #2c2820;
+  --at-sf-tile-bottom: #211d15;
+  --at-sf-seam: rgba(0, 0, 0, 0.55);
+
+  /* Type roles — display family swapped per pairing on the specimen page */
+  --at-font-display: 'Marcellus', serif;
+  --at-font-body: 'Jost', sans-serif;
+  --at-font-data: 'JetBrains Mono', monospace;
+}
+
+[data-theme='dark'] {
+  --at-ground: #171410;
+  --at-surface: #1f1b14;
+  --at-surface-high: #292419;
+
+  --at-ink: #ece5d3;
+  --at-ink-2: #c6bda5;
+  --at-ink-3: #93896e;
+
+  --at-brass: #c2a14e;
+  --at-brass-bright: #dcbf72;
+  --at-jade: #3fa384;
+  --at-jade-bright: #5cc4a3;
+
+  --at-line: rgba(194, 161, 78, 0.5);
+  --at-line-strong: rgba(194, 161, 78, 0.8);
+  --at-line-soft: rgba(236, 229, 211, 0.13);
+
+  --at-sf-text: #e6dfc9;
+  --at-sf-tile-top: #2c2820;
+  --at-sf-tile-bottom: #221e16;
+  --at-sf-seam: rgba(0, 0, 0, 0.65);
+}
