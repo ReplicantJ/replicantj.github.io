@@ -1,4 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#0a0a0f"/>
-  <text x="16" y="22" text-anchor="middle" font-family="monospace" font-size="18" font-weight="bold" fill="#a855f7">></text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Atelier plate-stamp monogram: chamfered frame, inner hairline, geometric JB -->
+  <path d="M14 2 H86 L98 14 V86 L86 98 H14 L2 86 V14 Z" fill="#171410" />
+  <path d="M15 5.5 H84.5 L94.5 15.5 V84.5 L84.5 94.5 H15.5 L5.5 84.5 V15.5 Z" fill="none" stroke="#c2a14e" stroke-width="2.4" />
+  <g stroke="#c2a14e" fill="none" stroke-width="5.5">
+    <path d="M27 32 H47" />
+    <path d="M42 32 V61 A10.5 10.5 0 0 1 21 61" />
+    <path d="M58 30 V70" />
+    <path d="M58 31 h9.5 a9 9 0 0 1 0 18 H58" />
+    <path d="M58 49 h11.5 a10.5 10.5 0 0 1 0 21 H58" />
+  </g>
 </svg>
