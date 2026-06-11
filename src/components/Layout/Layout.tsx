@@ -54,7 +54,7 @@ export default function Layout() {
             )
           })}
         </nav>
-        <p className="atelier-footer__copy">© {new Date().getFullYear()} JOE BURNS · REPLICANTSECURITY.COM</p>
+        <p className="atelier-footer__copy">© {new Date().getFullYear()} JOE BURNS · JOEBURNS.AI</p>
       </footer>
 
       <ScrollRestoration />

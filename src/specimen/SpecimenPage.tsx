@@ -163,7 +163,7 @@ export default function SpecimenPage() {
     <div className="sheet">
       <header className="masthead">
         <div>
-          <p className="masthead-eyebrow">SPECIMEN SHEET 01 · REPLICANTSECURITY.COM</p>
+          <p className="masthead-eyebrow">SPECIMEN SHEET 01 · JOEBURNS.AI</p>
           <h1>ATELIER</h1>
         </div>
         <button
