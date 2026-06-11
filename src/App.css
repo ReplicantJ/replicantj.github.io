@@ -29,6 +29,11 @@
   --card-border: rgba(107, 33, 168, 0.2);
   --card-surface: rgba(5, 5, 8, 0.6);
   --spotlight-hover: rgba(168, 85, 247, 0.08);
+
+  --sf-text: var(--purple-bright);
+  --sf-tile-top: #1d1726;
+  --sf-tile-bottom: #140f1c;
+  --sf-seam: rgba(5, 5, 8, 0.85);
 }
 
 /* ----- Light (Verdigris / parchment) — purple-* kept as semantic primary ----- */
@@ -59,6 +64,11 @@ html[data-theme='light'] {
   --card-border: rgba(47, 122, 104, 0.22);
   --card-surface: rgba(255, 250, 240, 0.72);
   --spotlight-hover: rgba(74, 157, 135, 0.12);
+
+  --sf-text: var(--purple-dim);
+  --sf-tile-top: #eae1ce;
+  --sf-tile-bottom: #e0d4bc;
+  --sf-seam: rgba(107, 93, 72, 0.35);
 }
 
 *,
@@ -268,7 +278,8 @@ body {
 /* ===== Section Titles (DecryptedText) ===== */
 
 .section-title {
-  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+  display: block;
+  font-size: clamp(0.95rem, 2.2vw, 1.25rem);
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;

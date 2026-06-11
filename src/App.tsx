@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import Grainient from './components/Backgrounds/Grainient/Grainient'
 import GraphBackdrop from './components/Backgrounds/GraphBackdrop/GraphBackdrop'
 import BlurText from './components/TextAnimations/BlurText/BlurText'
-import DecryptedText from './components/TextAnimations/DecryptedText/DecryptedText'
+import SplitFlapText from './components/TextAnimations/SplitFlapText/SplitFlapText'
 import SpotlightCard from './components/Components/SpotlightCard/SpotlightCard'
 import AnimatedContent from './components/Animations/AnimatedContent/AnimatedContent'
 import ThemeToggle from './components/ThemeToggle/ThemeToggle'
@@ -129,14 +129,9 @@ const EXPERIENCE_BULLETS = [
 
 function SectionTitle({ text }: { text: string }) {
   return (
-    <DecryptedText
+    <SplitFlapText
       text={text}
       animateOn="inViewHover"
-      speed={55}
-      sequential
-      revealDirection="start"
-      className="section-title-char"
-      encryptedClassName="section-title-char-encrypted"
       parentClassName="section-title"
     />
   )
