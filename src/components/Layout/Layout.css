@@ -31,7 +31,7 @@
 
 .site-nav__wordmark {
   font-family: var(--at-font-display);
-  font-size: 1.05rem;
+  font-size: 1.12rem;
   letter-spacing: 0.22em;
 }
 
@@ -43,7 +43,7 @@
 
 .site-nav__link {
   font-family: var(--at-font-data);
-  font-size: 0.64rem;
+  font-size: 0.74rem;
   font-weight: 500;
   letter-spacing: 0.22em;
   color: var(--at-ink-2);
@@ -97,7 +97,7 @@
   align-items: center;
   gap: 0.5rem;
   font-family: var(--at-font-data);
-  font-size: 0.66rem;
+  font-size: 0.74rem;
   letter-spacing: 0.1em;
   color: var(--at-ink-3);
   text-decoration: none;
@@ -118,7 +118,7 @@
 
 .atelier-footer__copy {
   font-family: var(--at-font-data);
-  font-size: 0.62rem;
+  font-size: 0.7rem;
   letter-spacing: 0.18em;
   color: var(--at-ink-3);
 }

@@ -14,7 +14,7 @@
 html {
   height: 100%;
   width: 100%;
-  font-size: 107%;
+  font-size: 112.5%;
   scroll-behavior: smooth;
 }
 
@@ -26,7 +26,7 @@ body,
 
 body {
   font-family: var(--at-font-body);
-  font-weight: 300;
+  font-weight: 400;
   background: var(--at-ground);
   color: var(--at-ink);
   -webkit-font-smoothing: antialiased;
