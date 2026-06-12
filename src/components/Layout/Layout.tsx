@@ -1,5 +1,5 @@
 import { Link, Outlet, ScrollRestoration } from 'react-router-dom'
-import { Monogram } from '../Atelier/Atelier'
+import { Monogram, OrigamiUnicorn } from '../Atelier/Atelier'
 import ThemeToggle from '../ThemeToggle/ThemeToggle'
 import { SOCIAL_LINKS } from '../../lib/socialLinks'
 import { useSiteFlags } from '../../lib/useSiteFlags'
@@ -11,10 +11,20 @@ export default function Layout() {
   return (
     <>
       <nav className="site-nav" aria-label="Primary">
-        <Link to="/" className="site-nav__brand" aria-label="Home">
-          <Monogram size={30} />
-          <span className="site-nav__wordmark">JOE BURNS</span>
-        </Link>
+        <div className="site-nav__brand">
+          <button
+            type="button"
+            className="site-nav__sigil"
+            aria-label="Summon the star-chart relics"
+            onClick={() => window.dispatchEvent(new Event('atelier:unicorn'))}
+          >
+            <Monogram size={30} />
+            <OrigamiUnicorn size={30} />
+          </button>
+          <Link to="/" className="site-nav__homelink" aria-label="Home">
+            <span className="site-nav__wordmark">JOE BURNS</span>
+          </Link>
+        </div>
         <div className="site-nav__links">
           <Link to="/#work" className="site-nav__link">
             WORK

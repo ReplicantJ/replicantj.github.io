@@ -79,7 +79,16 @@ type Relic = {
   born: number
 }
 
-function buildRelics(w: number, h: number): Relic[] {
+/* Drift pace: heavy celestial bodies barely creep; powered craft cruise at node pace. */
+function relicSpeed(kind: RelicKind): number {
+  return DIRECTIONAL.has(kind) ? 0.04 + Math.random() * 0.045 : 0.008 + Math.random() * 0.012
+}
+
+function buildRelics(
+  w: number,
+  h: number,
+  opts?: { all?: boolean; bornBase?: number }
+): Relic[] {
   /* ?relics=all lays the whole catalog out for inspection — itself an easter egg. */
   if (typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('relics')) {
     return RELIC_KINDS.map((kind, i) => ({
@@ -93,8 +102,11 @@ function buildRelics(w: number, h: number): Relic[] {
       born: i * 160,
     }))
   }
-  const picks = [...RELIC_KINDS].sort(() => Math.random() - 0.5).slice(0, w > 880 ? 4 : 3)
-  return picks.map((kind, i) => {
+  const kinds = opts?.all
+    ? [...RELIC_KINDS]
+    : [...RELIC_KINDS].sort(() => Math.random() - 0.5).slice(0, w > 880 ? 4 : 3)
+  const bornBase = opts?.bornBase ?? DRAW_IN_MS
+  return kinds.map((kind, i) => {
     let x = w * 0.5
     let y = h * 0.5
     /* keep clear of the hero name in the center */
@@ -104,7 +116,7 @@ function buildRelics(w: number, h: number): Relic[] {
       if (Math.abs(x - w / 2) > w * 0.3 || Math.abs(y - h / 2) > h * 0.26) break
     }
     const heading = Math.random() * TAU
-    const speed = 0.02 + Math.random() * 0.04
+    const speed = relicSpeed(kind)
     const vx = Math.cos(heading) * speed
     const vy = Math.sin(heading) * speed
     return {
@@ -115,7 +127,7 @@ function buildRelics(w: number, h: number): Relic[] {
       vy,
       rot: DIRECTIONAL.has(kind) ? Math.atan2(vy, vx) : (Math.random() - 0.5) * 0.35,
       scale: 0.6 + Math.random() * 0.3,
-      born: DRAW_IN_MS + 400 + i * 450,
+      born: bornBase + 400 + i * (opts?.all ? 260 : 450),
     }
   })
 }
@@ -382,6 +394,7 @@ export default function Constellation() {
 
     let nodes: Node[] = []
     let relics: Relic[] = []
+    let summoned = false
     let raf = 0
     let running = false
     let start = performance.now()
@@ -401,7 +414,7 @@ export default function Constellation() {
       canvas!.style.height = `${h}px`
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
       nodes = buildNodes(w, h)
-      relics = buildRelics(w, h)
+      relics = buildRelics(w, h, { all: summoned })
       start = performance.now()
       if (reduced) drawFrame(start + DRAW_IN_MS * 2)
     }
@@ -516,6 +529,15 @@ export default function Constellation() {
       cancelAnimationFrame(raf)
     }
 
+    /* The nav's origami unicorn summons the full relic fleet (and dismisses it again). */
+    const onUnicorn = () => {
+      summoned = !summoned
+      const tNow = reduced ? DRAW_IN_MS : performance.now() - start
+      relics = buildRelics(w, h, { all: summoned, bornBase: tNow })
+      if (reduced) drawFrame(performance.now())
+    }
+    window.addEventListener('atelier:unicorn', onUnicorn)
+
     resize()
     if (!reduced) play()
 
@@ -537,6 +559,7 @@ export default function Constellation() {
       pause()
       ro.disconnect()
       io.disconnect()
+      window.removeEventListener('atelier:unicorn', onUnicorn)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

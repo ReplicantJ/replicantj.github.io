@@ -21,12 +21,49 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.site-nav__homelink {
   color: var(--at-ink);
   text-decoration: none;
 }
 
-.site-nav__brand .at-monogram {
+/* Monogram doubles as the relic sigil: hover flips the plate to an origami unicorn. */
+.site-nav__sigil {
+  position: relative;
+  display: inline-flex;
+  padding: 0;
+  background: none;
+  border: none;
   color: var(--at-brass);
+  cursor: pointer;
+}
+
+.site-nav__sigil .at-monogram,
+.site-nav__sigil .at-unicorn {
+  display: block;
+  transition: opacity 0.25s ease;
+}
+
+.site-nav__sigil .at-unicorn {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.site-nav__sigil:hover .at-monogram,
+.site-nav__sigil:focus-visible .at-monogram {
+  opacity: 0;
+}
+
+.site-nav__sigil:hover .at-unicorn,
+.site-nav__sigil:focus-visible .at-unicorn {
+  opacity: 1;
+}
+
+.site-nav__sigil:focus-visible {
+  outline: 2px solid var(--at-jade);
+  outline-offset: 2px;
 }
 
 .site-nav__wordmark {
