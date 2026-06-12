@@ -1,0 +1,94 @@
+.study-fig {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.fig-edge path {
+  stroke: var(--at-ink-3);
+  stroke-width: 0.7;
+  opacity: 0.55;
+}
+
+.fig-edge--hub path {
+  stroke: var(--at-brass);
+  stroke-width: 1;
+  stroke-dasharray: 5 4;
+  opacity: 0.8;
+}
+
+.fig-node circle {
+  fill: var(--at-ink-3);
+  opacity: 0.8;
+}
+
+.fig-node--hub circle {
+  fill: var(--at-brass);
+  opacity: 1;
+}
+
+.fig-label,
+g.fig-label text {
+  font-family: var(--at-font-data);
+  font-size: 12.5px;
+  letter-spacing: 0.18em;
+  fill: var(--at-ink-3);
+}
+
+.fig-label--dim {
+  opacity: 0.65;
+  letter-spacing: 0.12em;
+}
+
+g.fig-label text {
+  text-anchor: middle;
+}
+
+.fig-box {
+  fill: transparent;
+  stroke: var(--at-jade);
+  stroke-width: 1.1;
+}
+
+.fig-box--dashed {
+  stroke: var(--at-brass);
+  stroke-dasharray: 6 4;
+}
+
+.fig-box-label {
+  font-family: var(--at-font-data);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  fill: var(--at-ink-2);
+}
+
+.fig-arrow {
+  fill: none;
+  stroke: var(--at-ink-3);
+  stroke-width: 1;
+}
+
+.fig-arrow--return {
+  stroke: var(--at-brass);
+  stroke-dasharray: 4 4;
+}
+
+.fig-arrowhead {
+  fill: var(--at-ink-3);
+}
+
+.fig-bar {
+  stroke: var(--at-line);
+  stroke-width: 1;
+}
+
+.fig-hatch-line {
+  stroke: var(--at-brass);
+  stroke-width: 1.4;
+  opacity: 0.6;
+}
+
+.fig-axis {
+  stroke: var(--at-line-strong);
+  stroke-width: 1;
+}

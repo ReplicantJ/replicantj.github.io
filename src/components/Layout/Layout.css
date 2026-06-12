@@ -1,0 +1,167 @@
+/* Site chrome: sticky nav + footer, styled on Atelier tokens */
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 1.4rem;
+  background: color-mix(in srgb, var(--at-ground) 26%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid color-mix(in srgb, var(--at-line-soft) 50%, transparent);
+}
+
+.site-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.site-nav__homelink {
+  color: var(--at-ink);
+  text-decoration: none;
+}
+
+/* Monogram doubles as the relic sigil: hover flips the plate to a brass spyglass. */
+.site-nav__sigil {
+  position: relative;
+  display: inline-flex;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--at-brass);
+  cursor: pointer;
+}
+
+.site-nav__sigil .at-monogram,
+.site-nav__sigil .at-spyglass {
+  display: block;
+  transition: opacity 0.25s ease;
+}
+
+.site-nav__sigil .at-spyglass {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.site-nav__sigil:hover .at-monogram,
+.site-nav__sigil:focus-visible .at-monogram {
+  opacity: 0;
+}
+
+.site-nav__sigil:hover .at-spyglass,
+.site-nav__sigil:focus-visible .at-spyglass {
+  opacity: 1;
+}
+
+.site-nav__sigil:focus-visible {
+  outline: 2px solid var(--at-jade);
+  outline-offset: 2px;
+}
+
+.site-nav__wordmark {
+  font-family: var(--at-font-display);
+  font-size: 1.12rem;
+  letter-spacing: 0.22em;
+}
+
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.site-nav__link {
+  font-family: var(--at-font-data);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--at-ink-2);
+  text-decoration: none;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.site-nav__link:hover {
+  color: var(--at-brass);
+  border-color: var(--at-line);
+}
+
+.site-nav__link:focus-visible {
+  outline: 2px solid var(--at-jade);
+  outline-offset: 2px;
+}
+
+/* Theme toggle docks into the nav instead of floating */
+.site-nav .theme-toggle {
+  position: static;
+}
+
+.layout-outlet {
+  min-height: 100vh;
+}
+
+/* Footer */
+
+.atelier-footer {
+  position: relative;
+  z-index: 1;
+  background: var(--at-ground);
+  border-top: 1px solid var(--at-line-soft);
+  padding: 3rem 2rem 2.4rem;
+  text-align: center;
+}
+
+.atelier-footer__links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.6rem;
+}
+
+.atelier-footer__link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--at-font-data);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  color: var(--at-ink-3);
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.atelier-footer__link:hover {
+  color: var(--at-jade);
+  border-color: var(--at-line);
+}
+
+.atelier-footer__link svg {
+  width: 16px;
+  height: 16px;
+}
+
+.atelier-footer__copy {
+  font-family: var(--at-font-data);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--at-ink-3);
+}
+
+@media (max-width: 540px) {
+  .site-nav__wordmark {
+    display: none;
+  }
+}
