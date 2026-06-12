@@ -30,7 +30,7 @@
 .fig-label,
 g.fig-label text {
   font-family: var(--at-font-data);
-  font-size: 11px;
+  font-size: 12.5px;
   letter-spacing: 0.18em;
   fill: var(--at-ink-3);
 }
@@ -57,7 +57,7 @@ g.fig-label text {
 
 .fig-box-label {
   font-family: var(--at-font-data);
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   fill: var(--at-ink-2);
 }
