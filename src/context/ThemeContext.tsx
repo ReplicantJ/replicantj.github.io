@@ -28,11 +28,11 @@ const ThemeContext = createContext<ThemeContextValue | null>(null)
 function systemTheme(): ThemeName {
   if (
     typeof window !== 'undefined' &&
-    window.matchMedia?.('(prefers-color-scheme: dark)').matches
+    window.matchMedia?.('(prefers-color-scheme: light)').matches
   ) {
-    return 'dark'
+    return 'light'
   }
-  return 'light'
+  return 'dark'
 }
 
 function readStoredTheme(): ThemeName {

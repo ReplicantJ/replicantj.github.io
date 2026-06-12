@@ -15,6 +15,7 @@ export type Study = {
   title: string
   status: string
   abstract: string
+  metricsLabel?: string
   metrics: StudyMetric[]
   sections: StudySection[]
   figure?: 'cluster' | 'pipeline' | 'benchmark'
@@ -28,38 +29,38 @@ export const STUDIES: Study[] = [
     title: 'Reseller Ecosystem Disruption',
     status: 'CASE STUDY',
     abstract:
-      'Disruption of third-party automation and reseller ecosystems responsible for hundreds of thousands of abusive accounts — behavioral fingerprinting, payment-signal analysis, and graph-based account clustering across fragmented systems.',
+      'Disruption of third-party automation and reseller ecosystems behind hundreds of thousands of abusive accounts: behavioral fingerprinting, payment-signal analysis, and graph-based account clustering across fragmented identity systems, carried through to legal enforcement.',
     metrics: [
       { value: '100,000s', label: 'ABUSIVE ACCOUNTS IN SCOPE' },
-      { value: '<2 HRS', label: 'DETECTION, FROM ~30 DAYS' },
-      { value: 'WON', label: 'ARBITRATION OUTCOMES' },
+      { value: '<2 HRS', label: 'COORDINATED-NETWORK DETECTION' },
+      { value: 'ATTRIBUTED', label: 'INFRASTRUCTURE TO REAL-WORLD OPERATORS' },
     ],
     sections: [
       {
         label: 'I',
         heading: 'Problem',
         paragraphs: [
-          'Third-party automation and reseller operations industrialized platform abuse: coordinated account farms created and resold access at scale, hiding behind fragmented identity signals spread across billing, usage, and authentication systems. No detection capability existed — coordinated misuse surfaced only when damage was already visible.',
+          'Third-party automation and reseller operations industrialized platform abuse: coordinated account farms created and resold access at scale, hiding behind fragmented identity signals spread across billing, usage, and authentication systems. No detection capability existed. Coordinated abuse surfaced only when damage was already visible.',
         ],
       },
       {
         label: 'II',
         heading: 'Approach',
         paragraphs: [
-          'Built behavioral detection from zero in a data-constrained environment: payment signals, usage patterns, timing correlations, and prompt behavior combined into behavioral fingerprints that survive surface-level evasion.',
-          'Performed graph-based account clustering and entity resolution across fragmented systems (no dedicated graph infrastructure) to resolve farms, resellers, and their customers into navigable networks. Adversarial investigation, including OSINT and proactive threat-actor research, attributed infrastructure and informed enforcement strategy.',
+          'Built behavioral detection in a data-constrained environment: payment signals, usage patterns, timing correlations, and prompt behavior combined into behavioral fingerprints that survive surface-level evasion.',
+          'Performed graph-based account clustering and entity resolution across fragmented systems, without dedicated graph infrastructure, to resolve farms, resellers, and their customers into navigable networks. Adversarial investigation, including OSINT and proactive threat-actor research, attributed infrastructure to real operators and informed enforcement strategy.',
         ],
       },
       {
         label: 'III',
         heading: 'Outcome',
         paragraphs: [
-          'Average detection time for coordinated misuse fell from none, to ~30 days of manual work, to under two hours through a custom investigative dashboard and tooling. Enforcement disrupted ecosystems responsible for hundreds of thousands of abusive accounts, and legal briefs prepared from investigation artifacts supported enforcement action resulting in arbitration wins.',
+          'Average detection time for coordinated abuse fell from none, to roughly 30 days of manual work, to under two hours through custom investigative tooling. Sustained enforcement disrupted ecosystems responsible for hundreds of thousands of abusive accounts, adversarial investigation attributed operating infrastructure to real-world entities, and evidence packets built from those investigations supported outside counsel on enforcement matters.',
         ],
       },
     ],
     figure: 'cluster',
-    figureCaption: 'FIG. 01 · ACCOUNT CLUSTER TOPOLOGY — SYNTHETIC RENDERING, REAL-SHAPED DATA PENDING',
+    figureCaption: 'FIG. 01 · ACCOUNT CLUSTER TOPOLOGY · SYNTHETIC RENDERING',
   },
   {
     slug: 'enforcement-app',
@@ -67,11 +68,12 @@ export const STUDIES: Study[] = [
     title: 'Enforcement Workflow Application',
     status: 'IN DEVELOPMENT · BLUEPRINT',
     abstract:
-      'Greenfield desktop application automating an end-to-end abuse-enforcement workflow: moderation-signal ingestion, a pattern engine surfacing coordinated behavior, and verdict routing into automated enforcement with analysts in the loop on every action.',
+      'Greenfield desktop application automating an end-to-end abuse-enforcement workflow: moderation-signal ingestion, a pattern engine surfacing coordinated behavior, and verdict routing into automated enforcement with a human decision on every consequential action.',
+    metricsLabel: 'SPECIFICATIONS',
     metrics: [
       { value: 'E2E', label: 'SIGNAL → VERDICT → ACTION' },
-      { value: 'LOCAL', label: 'DATASTORE, ANALYST-OWNED' },
-      { value: 'HITL', label: 'HUMAN IN THE LOOP, ALWAYS' },
+      { value: 'LOCAL', label: 'ANALYST-OWNED DATASTORE' },
+      { value: 'HITL', label: 'EVERY CONSEQUENTIAL ACTION' },
     ],
     sections: [
       {
@@ -85,7 +87,7 @@ export const STUDIES: Study[] = [
         label: 'II',
         heading: 'Architecture',
         paragraphs: [
-          'Moderation signals ingest from platform APIs into a local datastore. A pattern engine and classifier surface coordinated behavior and propose verdicts. Verdicts route into automated enforcement for clear-cut cases and human review queues for everything else — the analyst stays in the loop on every action.',
+          'Moderation signals ingest from platform APIs into a local datastore. A pattern engine and classifier surface coordinated behavior and propose verdicts. Verdicts route to automated enforcement only where confidence is absolute and the action is reversible; everything else lands in a human review queue. The analyst owns every consequential decision.',
         ],
       },
       {
@@ -97,7 +99,7 @@ export const STUDIES: Study[] = [
       },
     ],
     figure: 'pipeline',
-    figureCaption: 'FIG. 02 · ENFORCEMENT PIPELINE — BLUEPRINT SCHEMATIC',
+    figureCaption: 'FIG. 02 · ENFORCEMENT PIPELINE · BLUEPRINT SCHEMATIC',
   },
   {
     slug: 'gnn-detection',
@@ -105,37 +107,37 @@ export const STUDIES: Study[] = [
     title: 'Graph-Based Detection Research',
     status: 'RESEARCH · IN PROGRESS',
     abstract:
-      'Benchmarking graph-neural-network detection models against real abuse-network data to test whether structure-aware approaches outperform rule-based detection as adversaries adapt.',
+      'Benchmarking graph-neural-network detection models against production-shaped abuse topologies to test whether structure-aware approaches outperform rule-based detection as adversaries adapt.',
     metrics: [
-      { value: '200+', label: 'PAPERS IN RESEARCH BASE' },
-      { value: '3+', label: 'CANDIDATE MODELS UNDER TEST' },
-      { value: 'REAL', label: 'ABUSE-NETWORK DATA' },
+      { value: '200+ → 3', label: 'PAPERS NARROWED TO CANDIDATES' },
+      { value: 'UNDER TEST', label: 'SLICENDICE · BWGNN · TGN' },
+      { value: 'PROD-SHAPED', label: 'SYNTHETIC TOPOLOGIES' },
     ],
     sections: [
       {
         label: 'I',
         heading: 'Question',
         paragraphs: [
-          'Rule-based detection degrades as adversaries adapt; every rule teaches the next evasion. Can graph-neural-network approaches, which read structure instead of surface features, hold up against real coordinated-abuse topologies at platform scale?',
+          'Rule-based detection degrades as adversaries adapt; every rule teaches the next evasion. Can graph-neural-network approaches, which read structure instead of surface features, hold up against real-world coordinated-abuse topologies at platform scale?',
         ],
       },
       {
         label: 'II',
         heading: 'Method',
         paragraphs: [
-          'SliceNDice, BWGNN, TGN, and others are benchmarked against real abuse-network data drawn from coordinated misuse operations. A curated research base of 200+ papers on GNN-based fraud detection, indexed in a local knowledge-graph system, backs model selection and experiment design.',
+          'SliceNDice, BWGNN, and TGN are benchmarked against production-shaped synthetic topologies modeled on coordinated-abuse structures observed in the field. A research base of 200+ papers on graph-based fraud detection, indexed in a local knowledge-graph system, was narrowed to this candidate shortlist by match against real abuse graph shapes.',
         ],
       },
       {
         label: 'III',
         heading: 'Status',
         paragraphs: [
-          'Benchmarking in progress. Results land on this plate as they harden — the figure below is a placeholder for the comparison that decides the detection pipeline.',
+          'Benchmarking in progress. Results land on this plate as they harden; the figure below is a placeholder for the comparison.',
         ],
       },
     ],
     figure: 'benchmark',
-    figureCaption: 'FIG. 03 · MODEL COMPARISON — PLACEHOLDER, RESULTS PENDING',
+    figureCaption: 'FIG. 03 · MODEL COMPARISON · PLACEHOLDER, RESULTS PENDING',
   },
 ]
 
