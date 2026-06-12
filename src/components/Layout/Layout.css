@@ -11,10 +11,10 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 0.7rem 1.4rem;
-  background: color-mix(in srgb, var(--at-ground) 78%, transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--at-line-soft);
+  background: color-mix(in srgb, var(--at-ground) 26%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid color-mix(in srgb, var(--at-line-soft) 50%, transparent);
 }
 
 .site-nav__brand {
