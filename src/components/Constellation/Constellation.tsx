@@ -55,6 +55,307 @@ function buildNodes(w: number, h: number): Node[] {
   return nodes
 }
 
+const TAU = Math.PI * 2
+
+/* ===== Easter-egg relics — steampunk chart marginalia ===== */
+
+type RelicKind =
+  | 'rocket' | 'dyson' | 'blackhole' | 'supernova' | 'planet' | 'comet' | 'airship'
+
+const RELIC_KINDS: RelicKind[] = [
+  'rocket', 'dyson', 'blackhole', 'supernova', 'planet', 'comet', 'airship',
+]
+
+const DIRECTIONAL = new Set<RelicKind>(['rocket', 'comet', 'airship'])
+
+type Relic = {
+  kind: RelicKind
+  x: number
+  y: number
+  vx: number
+  vy: number
+  rot: number
+  scale: number
+  born: number
+}
+
+function buildRelics(w: number, h: number): Relic[] {
+  /* ?relics=all lays the whole catalog out for inspection — itself an easter egg. */
+  if (typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('relics')) {
+    return RELIC_KINDS.map((kind, i) => ({
+      kind,
+      x: ((i + 0.5) / RELIC_KINDS.length) * w,
+      y: h * 0.5,
+      vx: 0,
+      vy: 0,
+      rot: DIRECTIONAL.has(kind) ? -0.35 : 0,
+      scale: 1.15,
+      born: i * 160,
+    }))
+  }
+  const picks = [...RELIC_KINDS].sort(() => Math.random() - 0.5).slice(0, w > 880 ? 4 : 3)
+  return picks.map((kind, i) => {
+    let x = w * 0.5
+    let y = h * 0.5
+    /* keep clear of the hero name in the center */
+    for (let tries = 0; tries < 24; tries++) {
+      x = 40 + Math.random() * (w - 80)
+      y = 40 + Math.random() * (h - 80)
+      if (Math.abs(x - w / 2) > w * 0.3 || Math.abs(y - h / 2) > h * 0.26) break
+    }
+    const heading = Math.random() * TAU
+    const speed = 0.02 + Math.random() * 0.04
+    const vx = Math.cos(heading) * speed
+    const vy = Math.sin(heading) * speed
+    return {
+      kind,
+      x,
+      y,
+      vx,
+      vy,
+      rot: DIRECTIONAL.has(kind) ? Math.atan2(vy, vx) : (Math.random() - 0.5) * 0.35,
+      scale: 0.6 + Math.random() * 0.3,
+      born: DRAW_IN_MS + 400 + i * 450,
+    }
+  })
+}
+
+type Ctx = CanvasRenderingContext2D
+
+function drawRocket(ctx: Ctx, pal: Palette, a: number, lw: number, hl: number) {
+  ctx.strokeStyle = pal.ink
+  ctx.globalAlpha = 0.42 * a
+  ctx.lineWidth = lw
+  ctx.beginPath()
+  ctx.moveTo(26, 0)
+  ctx.quadraticCurveTo(8, -10, -16, -8)
+  ctx.lineTo(-16, 8)
+  ctx.quadraticCurveTo(8, 10, 26, 0)
+  ctx.moveTo(-10, -8.5)
+  ctx.lineTo(-22, -15)
+  ctx.lineTo(-16, -6)
+  ctx.moveTo(-10, 8.5)
+  ctx.lineTo(-22, 15)
+  ctx.lineTo(-16, 6)
+  ctx.stroke()
+  ctx.strokeStyle = pal.brass
+  ctx.globalAlpha = 0.6 * a
+  ctx.beginPath()
+  ctx.arc(6, 0, 4, 0, TAU)
+  ctx.stroke()
+  ctx.lineWidth = hl
+  ctx.setLineDash([3, 3])
+  ctx.beginPath()
+  ctx.moveTo(-20, 0)
+  ctx.lineTo(-33, 0)
+  ctx.moveTo(-19, -4)
+  ctx.lineTo(-28, -6.5)
+  ctx.moveTo(-19, 4)
+  ctx.lineTo(-28, 6.5)
+  ctx.stroke()
+  ctx.setLineDash([])
+}
+
+function drawDyson(ctx: Ctx, pal: Palette, a: number, lw: number, hl: number) {
+  ctx.strokeStyle = pal.ink
+  ctx.globalAlpha = 0.42 * a
+  ctx.lineWidth = lw
+  ctx.beginPath()
+  ctx.arc(0, 0, 22, 0, TAU)
+  ctx.stroke()
+  ctx.lineWidth = hl
+  ctx.beginPath()
+  ctx.ellipse(0, 0, 22, 8, 0, 0, TAU)
+  ctx.stroke()
+  ctx.beginPath()
+  ctx.ellipse(0, 0, 22, 8, Math.PI / 3, 0, TAU)
+  ctx.stroke()
+  ctx.beginPath()
+  ctx.moveTo(0, -27)
+  ctx.lineTo(0, 27)
+  ctx.stroke()
+  ctx.fillStyle = pal.brass
+  ctx.strokeStyle = pal.brass
+  ctx.globalAlpha = 0.6 * a
+  ctx.beginPath()
+  ctx.arc(0, 0, 4, 0, TAU)
+  ctx.fill()
+  ctx.lineWidth = lw
+  ctx.beginPath()
+  for (let k = 0; k < 4; k++) {
+    const ang = Math.PI / 4 + (k * Math.PI) / 2
+    ctx.moveTo(Math.cos(ang) * 7, Math.sin(ang) * 7)
+    ctx.lineTo(Math.cos(ang) * 11, Math.sin(ang) * 11)
+  }
+  ctx.stroke()
+}
+
+function drawBlackHole(ctx: Ctx, pal: Palette, a: number, lw: number, hl: number) {
+  ctx.fillStyle = pal.ink
+  ctx.globalAlpha = 0.6 * a
+  ctx.beginPath()
+  ctx.arc(0, 0, 6, 0, TAU)
+  ctx.fill()
+  ctx.strokeStyle = pal.brass
+  ctx.globalAlpha = 0.55 * a
+  ctx.lineWidth = lw
+  ctx.setLineDash([4, 3])
+  ctx.beginPath()
+  ctx.ellipse(0, 0, 19, 6, 0, 0, TAU)
+  ctx.stroke()
+  ctx.setLineDash([])
+  ctx.beginPath()
+  ctx.ellipse(0, 0, 19, 6, 0, 0, Math.PI) /* solid front half */
+  ctx.stroke()
+  ctx.strokeStyle = pal.ink
+  ctx.globalAlpha = 0.35 * a
+  ctx.lineWidth = hl
+  ctx.beginPath()
+  ctx.arc(0, 0, 11, Math.PI * 1.15, Math.PI * 1.85) /* lensing arc above */
+  ctx.stroke()
+}
+
+function drawSupernova(ctx: Ctx, pal: Palette, a: number, lw: number, hl: number) {
+  ctx.fillStyle = pal.jade
+  ctx.globalAlpha = 0.6 * a
+  ctx.beginPath()
+  ctx.arc(0, 0, 3, 0, TAU)
+  ctx.fill()
+  ctx.strokeStyle = pal.brass
+  ctx.lineWidth = lw
+  ctx.beginPath()
+  for (let k = 0; k < 8; k++) {
+    const ang = (k * Math.PI) / 4
+    ctx.moveTo(Math.cos(ang) * 8, Math.sin(ang) * 8)
+    ctx.lineTo(Math.cos(ang) * 21, Math.sin(ang) * 21)
+  }
+  ctx.stroke()
+  ctx.strokeStyle = pal.ink
+  ctx.globalAlpha = 0.4 * a
+  ctx.lineWidth = hl
+  ctx.beginPath()
+  for (let k = 0; k < 8; k++) {
+    const ang = Math.PI / 8 + (k * Math.PI) / 4
+    ctx.moveTo(Math.cos(ang) * 8, Math.sin(ang) * 8)
+    ctx.lineTo(Math.cos(ang) * 13.5, Math.sin(ang) * 13.5)
+  }
+  ctx.stroke()
+  ctx.globalAlpha = 0.25 * a
+  ctx.setLineDash([3, 4])
+  ctx.beginPath()
+  ctx.arc(0, 0, 25, 0, TAU)
+  ctx.stroke()
+  ctx.setLineDash([])
+}
+
+function drawPlanet(ctx: Ctx, pal: Palette, a: number, lw: number, hl: number) {
+  ctx.strokeStyle = pal.ink
+  ctx.globalAlpha = 0.42 * a
+  ctx.lineWidth = lw
+  ctx.beginPath()
+  ctx.arc(0, 0, 10.5, 0, TAU)
+  ctx.stroke()
+  ctx.globalAlpha = 0.3 * a
+  ctx.lineWidth = hl
+  ctx.beginPath()
+  ctx.arc(-3.5, 0, 8.2, -1.25, 1.25) /* terminator shading hint */
+  ctx.stroke()
+  ctx.strokeStyle = pal.brass
+  ctx.globalAlpha = 0.55 * a
+  ctx.lineWidth = lw
+  ctx.setLineDash([4, 3])
+  ctx.beginPath()
+  ctx.ellipse(0, 0, 20, 6.5, -0.28, 0, TAU)
+  ctx.stroke()
+  ctx.setLineDash([])
+  ctx.beginPath()
+  ctx.ellipse(0, 0, 20, 6.5, -0.28, 0, Math.PI) /* solid front of ring */
+  ctx.stroke()
+}
+
+function drawComet(ctx: Ctx, pal: Palette, a: number, lw: number, hl: number) {
+  ctx.fillStyle = pal.brass
+  ctx.globalAlpha = 0.6 * a
+  ctx.beginPath()
+  ctx.arc(0, 0, 3, 0, TAU)
+  ctx.fill()
+  ctx.strokeStyle = pal.brass
+  ctx.globalAlpha = 0.45 * a
+  ctx.lineWidth = hl
+  ctx.beginPath()
+  ctx.arc(0, 0, 4.8, 0, TAU) /* coma */
+  ctx.stroke()
+  ctx.strokeStyle = pal.ink
+  ctx.globalAlpha = 0.38 * a
+  ctx.lineWidth = lw
+  ctx.setLineDash([4, 3])
+  ctx.beginPath()
+  ctx.moveTo(-6, 0)
+  ctx.lineTo(-32, 0)
+  ctx.moveTo(-5, -2.6)
+  ctx.lineTo(-25, -6)
+  ctx.moveTo(-5, 2.6)
+  ctx.lineTo(-25, 6)
+  ctx.stroke()
+  ctx.setLineDash([])
+}
+
+function drawAirship(ctx: Ctx, pal: Palette, a: number, lw: number, hl: number) {
+  ctx.strokeStyle = pal.ink
+  ctx.globalAlpha = 0.42 * a
+  ctx.lineWidth = lw
+  ctx.beginPath()
+  ctx.ellipse(0, 0, 22, 7.5, 0, 0, TAU)
+  ctx.stroke()
+  ctx.lineWidth = hl
+  ctx.beginPath()
+  ctx.moveTo(-7, -7.1)
+  ctx.lineTo(-7, 7.1)
+  ctx.moveTo(5, -7.3)
+  ctx.lineTo(5, 7.3)
+  ctx.stroke()
+  ctx.lineWidth = lw
+  ctx.beginPath()
+  ctx.moveTo(-20, -4.5)
+  ctx.lineTo(-28, -9)
+  ctx.lineTo(-28, 9)
+  ctx.lineTo(-20, 4.5)
+  ctx.stroke()
+  ctx.strokeRect(-5, 9.5, 11, 3.8)
+  ctx.lineWidth = hl
+  ctx.beginPath()
+  ctx.moveTo(-3, 7.5)
+  ctx.lineTo(-3, 9.5)
+  ctx.moveTo(4, 7.4)
+  ctx.lineTo(4, 9.5)
+  ctx.stroke()
+  ctx.fillStyle = pal.brass
+  ctx.globalAlpha = 0.6 * a
+  ctx.beginPath()
+  ctx.arc(-2, 11.4, 0.8, 0, TAU)
+  ctx.arc(2, 11.4, 0.8, 0, TAU)
+  ctx.fill()
+}
+
+function drawRelic(ctx: Ctx, r: Relic, pal: Palette, appear: number) {
+  const lw = 1.1 / r.scale
+  const hl = 0.7 / r.scale
+  ctx.save()
+  ctx.translate(r.x, r.y)
+  ctx.rotate(r.rot)
+  ctx.scale(r.scale, r.scale)
+  switch (r.kind) {
+    case 'rocket': drawRocket(ctx, pal, appear, lw, hl); break
+    case 'dyson': drawDyson(ctx, pal, appear, lw, hl); break
+    case 'blackhole': drawBlackHole(ctx, pal, appear, lw, hl); break
+    case 'supernova': drawSupernova(ctx, pal, appear, lw, hl); break
+    case 'planet': drawPlanet(ctx, pal, appear, lw, hl); break
+    case 'comet': drawComet(ctx, pal, appear, lw, hl); break
+    case 'airship': drawAirship(ctx, pal, appear, lw, hl); break
+  }
+  ctx.restore()
+}
+
 export default function Constellation() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { effectiveTheme } = useTheme()
@@ -80,6 +381,7 @@ export default function Constellation() {
     if (!ctx) return
 
     let nodes: Node[] = []
+    let relics: Relic[] = []
     let raf = 0
     let running = false
     let start = performance.now()
@@ -99,6 +401,7 @@ export default function Constellation() {
       canvas!.style.height = `${h}px`
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
       nodes = buildNodes(w, h)
+      relics = buildRelics(w, h)
       start = performance.now()
       if (reduced) drawFrame(start + DRAW_IN_MS * 2)
     }
@@ -165,6 +468,15 @@ export default function Constellation() {
           ctx!.stroke()
         }
       }
+
+      for (const r of relics) {
+        let appear = 1
+        if (!reduced) {
+          appear = Math.min(1, Math.max(0, (t - r.born) / 700))
+          if (appear <= 0) continue
+        }
+        drawRelic(ctx!, r, pal, appear)
+      }
       ctx!.globalAlpha = 1
     }
 
@@ -179,6 +491,14 @@ export default function Constellation() {
           if (n.x > w + 8) n.x = -8
           if (n.y < -8) n.y = h + 8
           if (n.y > h + 8) n.y = -8
+        }
+        for (const r of relics) {
+          r.x += r.vx
+          r.y += r.vy
+          if (r.x < -40) r.x = w + 40
+          if (r.x > w + 40) r.x = -40
+          if (r.y < -40) r.y = h + 40
+          if (r.y > h + 40) r.y = -40
         }
       }
       drawFrame(now)
