@@ -72,12 +72,12 @@ export function Monogram({ size = 28 }: { size?: number }) {
   )
 }
 
-/** Origami unicorn in the monogram's frame — the nav sigil's hover face.
- *  Filled paper silhouette with creases knocked out in the ground color. */
-export function OrigamiUnicorn({ size = 28 }: { size?: number }) {
+/** Two-draw brass spyglass aimed at a star — the nav sigil's hover face.
+ *  The instrument that reveals hidden objects on a chart is the button that summons them. */
+export function Spyglass({ size = 28 }: { size?: number }) {
   return (
     <svg
-      className="at-unicorn"
+      className="at-spyglass"
       viewBox="0 0 100 100"
       width={size}
       height={size}
@@ -87,17 +87,19 @@ export function OrigamiUnicorn({ size = 28 }: { size?: number }) {
     >
       <path d="M14 4 H86 L96 14 V86 L86 96 H14 L4 86 V14 Z" strokeWidth="2.4" />
       <path d="M16.5 8.5 H83.5 L91.5 16.5 V83.5 L83.5 91.5 H16.5 L8.5 83.5 V16.5 Z" strokeWidth="0.8" />
-      <path
-        d="M62 11 L65.5 28.5 L71 22.5 L71.5 32 L75 51 L79 54 L89 70 L68 63 L67 89 L59 64 L50 63 L46 89 L41 63 L13 72 L41 55 L53 51 L55 39 L48 33 L57.5 27.5 Z"
-        fill="currentColor"
-        strokeWidth="1"
-        strokeLinejoin="round"
-      />
-      <g stroke="var(--at-ground, #fff)" strokeWidth="1.4" strokeLinecap="round">
-        {/* horn bands */}
-        <path d="M60.6 16 L63.4 16 M59.6 20.5 L64.3 20.5 M58.6 25 L65 25" />
-        {/* paper creases: jaw, neck, body facets, shoulder */}
-        <path d="M57.5 27.5 L55 39 M56 38.5 L72 49 M53 51 L50 63 M53 51 L59 64 M75 51 L68 63 M41 55 L41 63" />
+      <g transform="rotate(-45 50 50)" strokeLinejoin="round" strokeLinecap="round">
+        {/* tapering two-draw tube: eyepiece left, objective right */}
+        <path
+          d="M22 47.6 L36 46.8 L36 45.8 L52 45 L52 44.2 L76 42.6 L76 57.4 L52 55.8 L52 55 L36 54.2 L36 53.2 L22 52.4 Z"
+          strokeWidth="2.2"
+        />
+        {/* eyepiece cap */}
+        <path d="M19.6 48.4 L22 48.4 M19.6 51.6 L22 51.6 M19.6 48.4 L19.6 51.6" strokeWidth="1.6" />
+        {/* draw rings + objective housing */}
+        <path d="M36 45.8 L36 54.2 M52 44.2 L52 55.8 M72.5 42.8 L72.5 57.2" strokeWidth="1.2" />
+        {/* dashed sight-line to a small star */}
+        <path d="M79 50 L84 50" strokeWidth="1.5" strokeDasharray="3 2.5" />
+        <path d="M88.5 45.5 L88.5 54.5 M84 50 L93 50" strokeWidth="1.8" />
       </g>
     </svg>
   )

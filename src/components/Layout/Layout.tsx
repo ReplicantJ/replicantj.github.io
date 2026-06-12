@@ -1,5 +1,5 @@
 import { Link, Outlet, ScrollRestoration, useLocation, useNavigate } from 'react-router-dom'
-import { Monogram, OrigamiUnicorn } from '../Atelier/Atelier'
+import { Monogram, Spyglass } from '../Atelier/Atelier'
 import ThemeToggle from '../ThemeToggle/ThemeToggle'
 import { SOCIAL_LINKS } from '../../lib/socialLinks'
 import { useSiteFlags } from '../../lib/useSiteFlags'
@@ -11,7 +11,7 @@ export default function Layout() {
   const navigate = useNavigate()
 
   /* The monogram stays the home button; only at the top of the home page does it
-     moonlight as the unicorn sigil and summon the chart relics. */
+     moonlight as the spyglass sigil and summon the chart relics. */
   const onSigilClick = () => {
     if (location.pathname !== '/') {
       navigate('/')
@@ -21,7 +21,7 @@ export default function Layout() {
       window.scrollTo({ top: 0, behavior: 'smooth' })
       return
     }
-    window.dispatchEvent(new Event('atelier:unicorn'))
+    window.dispatchEvent(new Event('atelier:spyglass'))
   }
 
   return (
@@ -35,7 +35,7 @@ export default function Layout() {
             onClick={onSigilClick}
           >
             <Monogram size={30} />
-            <OrigamiUnicorn size={30} />
+            <Spyglass size={30} />
           </button>
           <Link to="/" className="site-nav__homelink" aria-label="Home">
             <span className="site-nav__wordmark">JOE BURNS</span>

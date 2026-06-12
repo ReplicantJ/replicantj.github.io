@@ -28,7 +28,7 @@
   text-decoration: none;
 }
 
-/* Monogram doubles as the relic sigil: hover flips the plate to an origami unicorn. */
+/* Monogram doubles as the relic sigil: hover flips the plate to a brass spyglass. */
 .site-nav__sigil {
   position: relative;
   display: inline-flex;
@@ -40,12 +40,12 @@
 }
 
 .site-nav__sigil .at-monogram,
-.site-nav__sigil .at-unicorn {
+.site-nav__sigil .at-spyglass {
   display: block;
   transition: opacity 0.25s ease;
 }
 
-.site-nav__sigil .at-unicorn {
+.site-nav__sigil .at-spyglass {
   position: absolute;
   inset: 0;
   opacity: 0;
@@ -56,8 +56,8 @@
   opacity: 0;
 }
 
-.site-nav__sigil:hover .at-unicorn,
-.site-nav__sigil:focus-visible .at-unicorn {
+.site-nav__sigil:hover .at-spyglass,
+.site-nav__sigil:focus-visible .at-spyglass {
   opacity: 1;
 }
 

@@ -525,14 +525,14 @@ export default function Constellation() {
       cancelAnimationFrame(raf)
     }
 
-    /* The nav's origami unicorn summons the full relic fleet (and dismisses it again). */
-    const onUnicorn = () => {
+    /* The nav's spyglass sigil summons the full relic fleet (and dismisses it again). */
+    const onSpyglass = () => {
       summoned = !summoned
       const tNow = reduced ? DRAW_IN_MS : performance.now() - start
       relics = summoned ? buildRelics(w, h, tNow) : []
       if (reduced) drawFrame(performance.now())
     }
-    window.addEventListener('atelier:unicorn', onUnicorn)
+    window.addEventListener('atelier:spyglass', onSpyglass)
 
     resize()
     if (!reduced) play()
@@ -555,7 +555,7 @@ export default function Constellation() {
       pause()
       ro.disconnect()
       io.disconnect()
-      window.removeEventListener('atelier:unicorn', onUnicorn)
+      window.removeEventListener('atelier:spyglass', onSpyglass)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
