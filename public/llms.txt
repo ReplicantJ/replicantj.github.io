@@ -1,0 +1,28 @@
+# Joe Burns
+
+Joe Burns is a Trust & Safety / Platform Safeguards specialist. He builds
+detection capability, not just runs it: behavioral detection systems,
+graph-based network attribution, and enforcement strategy that turns findings
+into action across product, policy, and legal.
+
+At Midjourney, he co-built the platform protection function from zero. Average
+detection time for coordinated abuse networks fell from none, to roughly 30
+days of manual work, to under 2 hours, through behavioral analysis and custom
+investigative tooling. Enforcement disrupted third-party automation and
+reseller ecosystems responsible for hundreds of thousands of abusive accounts,
+with adversarial investigation attributing infrastructure to real-world
+operators and supporting outside counsel on enforcement matters.
+
+Current work: a desktop enforcement workflow application (human decision on
+every consequential action) and a graph-detection research program
+benchmarking GNN models against production-shaped abuse topologies.
+
+## Pages
+- https://joeburns.ai/ : profile, capabilities, experience
+- https://joeburns.ai/work/reseller-disruption : case study, reseller ecosystem disruption
+- https://joeburns.ai/work/enforcement-app : blueprint, enforcement workflow application
+- https://joeburns.ai/work/gnn-detection : research, graph-based detection
+
+## Contact
+- Email: joe@joeburns.ai (resume available on request)
+- LinkedIn and GitHub: linked from https://joeburns.ai
