@@ -60,13 +60,13 @@ const TAU = Math.PI * 2
 /* ===== Easter-egg relics — steampunk chart marginalia ===== */
 
 type RelicKind =
-  | 'rocket' | 'dyson' | 'blackhole' | 'supernova' | 'planet' | 'comet' | 'airship' | 'spinner'
+  | 'rocket' | 'dyson' | 'blackhole' | 'supernova' | 'planet' | 'comet' | 'airship' | 'blimp'
 
 const RELIC_KINDS: RelicKind[] = [
-  'rocket', 'dyson', 'blackhole', 'supernova', 'planet', 'comet', 'airship', 'spinner',
+  'rocket', 'dyson', 'blackhole', 'supernova', 'planet', 'comet', 'airship', 'blimp',
 ]
 
-const DIRECTIONAL = new Set<RelicKind>(['rocket', 'comet', 'airship', 'spinner'])
+const DIRECTIONAL = new Set<RelicKind>(['rocket', 'comet', 'airship'])
 
 type Relic = {
   kind: RelicKind
@@ -345,69 +345,61 @@ function drawAirship(ctx: Ctx, pal: Palette, a: number, lw: number, hl: number) 
   ctx.fill()
 }
 
-function drawSpinner(ctx: Ctx, pal: Palette, a: number, lw: number, hl: number) {
-  /* Officer K's 2049 Peugeot Spinner — low wide wedge, bubble cab, forked lifter prongs. */
+function drawBlimp(ctx: Ctx, pal: Palette, a: number, lw: number, hl: number) {
+  /* The Blade Runner OFF-WORLD ad blimp — fat hull, antenna masts, searchlights. */
   ctx.strokeStyle = pal.ink
   ctx.globalAlpha = 0.42 * a
   ctx.lineWidth = lw
   ctx.beginPath()
-  ctx.moveTo(-24, -3.5)
-  ctx.lineTo(-7, -4.8) /* rear deck rising to the canopy base */
-  ctx.moveTo(7, -4.2)
-  ctx.lineTo(15, -2.2) /* short wedge nose ahead of the cab */
-  ctx.moveTo(-24, -3.5)
-  ctx.lineTo(-24, 3.8) /* blunt tail */
-  ctx.lineTo(-2, 4.8)
-  ctx.lineTo(14, 3.2) /* belly tapering into the fork */
+  ctx.ellipse(0, 0, 24, 9, 0, 0, TAU)
   ctx.stroke()
-  /* split prongs / lifter nacelles forking ahead of the nose; far prong hairline */
+  /* cruciform tail fins */
   ctx.beginPath()
-  ctx.moveTo(12, -2.6)
-  ctx.lineTo(28, -4.2)
-  ctx.lineTo(28, -1.8)
-  ctx.lineTo(13, -0.4)
-  ctx.closePath()
+  ctx.moveTo(-21, -4.5)
+  ctx.lineTo(-29, -8.5)
+  ctx.lineTo(-29, -2.5)
+  ctx.moveTo(-21, 4.5)
+  ctx.lineTo(-29, 8.5)
+  ctx.lineTo(-29, 2.5)
   ctx.stroke()
+  /* antenna masts topside */
   ctx.lineWidth = hl
   ctx.beginPath()
-  ctx.moveTo(12, 1.2)
-  ctx.lineTo(27, 2.4)
-  ctx.lineTo(27, 4.6)
-  ctx.lineTo(13, 3.4)
-  ctx.closePath()
+  ctx.moveTo(-7, -8.6)
+  ctx.lineTo(-7, -14)
+  ctx.moveTo(3, -8.8)
+  ctx.lineTo(3, -13)
   ctx.stroke()
-  /* cab canopy bubble with a frame strut */
+  /* gondola slung under the hull */
+  ctx.lineWidth = lw
+  ctx.strokeRect(-4, 10.5, 9, 3.2)
+  ctx.lineWidth = hl
   ctx.beginPath()
-  ctx.moveTo(-7, -4.8)
-  ctx.quadraticCurveTo(-1, -9.6, 7, -4.2)
-  ctx.moveTo(-0.5, -7.1)
-  ctx.lineTo(-0.5, -4.6)
+  ctx.moveTo(-2, 8.9)
+  ctx.lineTo(-2, 10.5)
+  ctx.moveTo(3, 8.9)
+  ctx.lineTo(3, 10.5)
   ctx.stroke()
-  /* tail vents */
-  ctx.beginPath()
-  ctx.moveTo(-22.5, -1.4)
-  ctx.lineTo(-19, -1.6)
-  ctx.moveTo(-22.5, 0.6)
-  ctx.lineTo(-19, 0.5)
-  ctx.moveTo(-22.5, 2.6)
-  ctx.lineTo(-19, 2.6)
-  ctx.stroke()
-  /* dashed thrust lines below the lifters to suggest hover */
+  /* searchlight beams raking below */
   ctx.globalAlpha = 0.38 * a
   ctx.setLineDash([2.5, 2.5])
   ctx.beginPath()
-  ctx.moveTo(20, 6.5)
-  ctx.lineTo(20, 13.5)
-  ctx.moveTo(-16, 7)
-  ctx.lineTo(-16, 14)
+  ctx.moveTo(-11, 8)
+  ctx.lineTo(-17, 20)
+  ctx.moveTo(9, 8.4)
+  ctx.lineTo(14, 19)
   ctx.stroke()
   ctx.setLineDash([])
-  /* brass nav lights on the prong tips */
+  /* the billboard pitch, plus beacon lights on the masts */
   ctx.fillStyle = pal.brass
   ctx.globalAlpha = 0.6 * a
+  ctx.font = '600 4.5px "Courier New", monospace'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.fillText('OFFWORLD', 0, 0.2)
   ctx.beginPath()
-  ctx.arc(28, -3, 0.8, 0, TAU)
-  ctx.arc(27, 3.5, 0.8, 0, TAU)
+  ctx.arc(-7, -14.6, 0.8, 0, TAU)
+  ctx.arc(3, -13.6, 0.8, 0, TAU)
   ctx.fill()
 }
 
@@ -426,7 +418,7 @@ function drawRelic(ctx: Ctx, r: Relic, pal: Palette, appear: number) {
     case 'planet': drawPlanet(ctx, pal, appear, lw, hl); break
     case 'comet': drawComet(ctx, pal, appear, lw, hl); break
     case 'airship': drawAirship(ctx, pal, appear, lw, hl); break
-    case 'spinner': drawSpinner(ctx, pal, appear, lw, hl); break
+    case 'blimp': drawBlimp(ctx, pal, appear, lw, hl); break
   }
   ctx.restore()
 }
