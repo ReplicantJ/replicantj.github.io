@@ -25,7 +25,7 @@ const SKILL_GROUPS = [
   },
   {
     title: 'Systems & Operations',
-    skills: ['Detection frameworks', 'Enforcement strategy', 'Policy-to-product translation', 'Pre-launch abuse risk assessment'],
+    skills: ['Detection frameworks', 'Enforcement strategy', 'Policy-to-product translation', 'Pre-launch abuse risk assessment', 'Cross-functional communication (Engineering, Legal, Executive)'],
   },
 ]
 
@@ -121,11 +121,10 @@ export default function Home() {
           <SectionHead num="01" title="ABOUT" />
           <div className="sec-body">
             <p className="lede">
-              Safeguards specialist focused on detecting, investigating, and mitigating
-              coordinated misuse across large-scale AI systems. Experienced linking accounts
-              across disparate systems, identifying adversarial behavior patterns, and
-              converting emerging threats into mitigation strategies across product, policy,
-              and enforcement.
+              Safeguards specialist with experience detecting and disrupting coordinated
+              misuse across large-scale AI systems — linking accounts across fragmented
+              signals, attributing adversarial behavior, and turning findings into
+              enforcement action across product, policy, and legal teams.
             </p>
           </div>
         </AnimatedContent>
@@ -229,21 +228,20 @@ export default function Home() {
           <SectionHead num="06" title="NOW" />
           <div className="sec-body">
             <p className="body-text">
-              Building the enforcement application and detection research above — see plates
-              02 and 03. Leveraging curated research repositories and{' '}
+              Both projects are running in parallel. A{' '}
               <a href="https://github.com/jeffpierce/memory-palace" target="_blank" rel="noopener noreferrer">
-                local knowledge graph systems
+                local knowledge-graph system
               </a>{' '}
-              to rapidly reference{' '}
+              indexes{' '}
               <a href="https://github.com/safe-graph/graph-fraud-detection-papers" target="_blank" rel="noopener noreferrer">
                 200+ papers
               </a>{' '}
-              on GNN-based fraud detection during development.
+              on GNN-based fraud detection — the research base driving model selection in Plate 03.
             </p>
             <p className="body-text">
-              Studying ML techniques for abuse detection to close the gap between traditional
-              rule-based systems and adversarial-aware approaches that scale with platform
-              growth.
+              The question in Plate 03: whether structure-aware detection holds against real
+              abuse topologies as adversaries adapt, or whether rule-based systems degrade
+              faster than they can be maintained.
             </p>
           </div>
         </AnimatedContent>

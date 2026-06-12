@@ -47,7 +47,7 @@ export const STUDIES: Study[] = [
         heading: 'Approach',
         paragraphs: [
           'Built behavioral detection from zero in a data-constrained environment: payment signals, usage patterns, timing correlations, and prompt behavior combined into behavioral fingerprints that survive surface-level evasion.',
-          'Performed graph-based account clustering and entity resolution across fragmented systems — without dedicated graph infrastructure — to resolve farms, resellers, and their customers into navigable networks. Adversarial investigation, including OSINT and proactive threat-actor research, attributed infrastructure and informed enforcement strategy.',
+          'Performed graph-based account clustering and entity resolution across fragmented systems (no dedicated graph infrastructure) to resolve farms, resellers, and their customers into navigable networks. Adversarial investigation, including OSINT and proactive threat-actor research, attributed infrastructure and informed enforcement strategy.',
         ],
       },
       {
@@ -105,7 +105,7 @@ export const STUDIES: Study[] = [
     title: 'Graph-Based Detection Research',
     status: 'RESEARCH · IN PROGRESS',
     abstract:
-      'Benchmarking graph-neural-network detection models — SliceNDice, BWGNN, TGN — against real abuse-network data to close the gap between rule-based systems and adversarial-aware approaches that scale.',
+      'Benchmarking graph-neural-network detection models against real abuse-network data to test whether structure-aware approaches outperform rule-based detection as adversaries adapt.',
     metrics: [
       { value: '200+', label: 'PAPERS IN RESEARCH BASE' },
       { value: '3+', label: 'CANDIDATE MODELS UNDER TEST' },
@@ -116,14 +116,14 @@ export const STUDIES: Study[] = [
         label: 'I',
         heading: 'Question',
         paragraphs: [
-          'Rule-based detection degrades as adversaries adapt; every rule teaches the next evasion. Can graph-neural-network approaches — which read structure instead of surface features — hold up against real coordinated-abuse topologies at platform scale?',
+          'Rule-based detection degrades as adversaries adapt; every rule teaches the next evasion. Can graph-neural-network approaches, which read structure instead of surface features, hold up against real coordinated-abuse topologies at platform scale?',
         ],
       },
       {
         label: 'II',
         heading: 'Method',
         paragraphs: [
-          'Candidate models — SliceNDice, BWGNN, TGN, among others — are benchmarked against real abuse-network data drawn from coordinated misuse operations. A curated research base of 200+ papers on GNN-based fraud detection, indexed in a local knowledge-graph system, backs model selection and experiment design.',
+          'SliceNDice, BWGNN, TGN, and others are benchmarked against real abuse-network data drawn from coordinated misuse operations. A curated research base of 200+ papers on GNN-based fraud detection, indexed in a local knowledge-graph system, backs model selection and experiment design.',
         ],
       },
       {
