@@ -39,9 +39,9 @@
 }
 
 [data-theme='dark'] {
-  --at-ground: #11160e;
-  --at-surface: #181f13;
-  --at-surface-high: #212b1a;
+  --at-ground: #050806;
+  --at-surface: #0a110c;
+  --at-surface-high: #101810;
 
   --at-ink: #ece5d3;
   --at-ink-2: #c6bda5;
