@@ -60,13 +60,13 @@ const TAU = Math.PI * 2
 /* ===== Easter-egg relics — steampunk chart marginalia ===== */
 
 type RelicKind =
-  | 'rocket' | 'dyson' | 'blackhole' | 'supernova' | 'planet' | 'comet' | 'airship'
+  | 'rocket' | 'dyson' | 'blackhole' | 'supernova' | 'planet' | 'comet' | 'airship' | 'spinner'
 
 const RELIC_KINDS: RelicKind[] = [
-  'rocket', 'dyson', 'blackhole', 'supernova', 'planet', 'comet', 'airship',
+  'rocket', 'dyson', 'blackhole', 'supernova', 'planet', 'comet', 'airship', 'spinner',
 ]
 
-const DIRECTIONAL = new Set<RelicKind>(['rocket', 'comet', 'airship'])
+const DIRECTIONAL = new Set<RelicKind>(['rocket', 'comet', 'airship', 'spinner'])
 
 type Relic = {
   kind: RelicKind
@@ -345,6 +345,72 @@ function drawAirship(ctx: Ctx, pal: Palette, a: number, lw: number, hl: number) 
   ctx.fill()
 }
 
+function drawSpinner(ctx: Ctx, pal: Palette, a: number, lw: number, hl: number) {
+  /* Officer K's 2049 Peugeot Spinner — low wide wedge, bubble cab, forked lifter prongs. */
+  ctx.strokeStyle = pal.ink
+  ctx.globalAlpha = 0.42 * a
+  ctx.lineWidth = lw
+  ctx.beginPath()
+  ctx.moveTo(-24, -3.5)
+  ctx.lineTo(-7, -4.8) /* rear deck rising to the canopy base */
+  ctx.moveTo(7, -4.2)
+  ctx.lineTo(15, -2.2) /* short wedge nose ahead of the cab */
+  ctx.moveTo(-24, -3.5)
+  ctx.lineTo(-24, 3.8) /* blunt tail */
+  ctx.lineTo(-2, 4.8)
+  ctx.lineTo(14, 3.2) /* belly tapering into the fork */
+  ctx.stroke()
+  /* split prongs / lifter nacelles forking ahead of the nose; far prong hairline */
+  ctx.beginPath()
+  ctx.moveTo(12, -2.6)
+  ctx.lineTo(28, -4.2)
+  ctx.lineTo(28, -1.8)
+  ctx.lineTo(13, -0.4)
+  ctx.closePath()
+  ctx.stroke()
+  ctx.lineWidth = hl
+  ctx.beginPath()
+  ctx.moveTo(12, 1.2)
+  ctx.lineTo(27, 2.4)
+  ctx.lineTo(27, 4.6)
+  ctx.lineTo(13, 3.4)
+  ctx.closePath()
+  ctx.stroke()
+  /* cab canopy bubble with a frame strut */
+  ctx.beginPath()
+  ctx.moveTo(-7, -4.8)
+  ctx.quadraticCurveTo(-1, -9.6, 7, -4.2)
+  ctx.moveTo(-0.5, -7.1)
+  ctx.lineTo(-0.5, -4.6)
+  ctx.stroke()
+  /* tail vents */
+  ctx.beginPath()
+  ctx.moveTo(-22.5, -1.4)
+  ctx.lineTo(-19, -1.6)
+  ctx.moveTo(-22.5, 0.6)
+  ctx.lineTo(-19, 0.5)
+  ctx.moveTo(-22.5, 2.6)
+  ctx.lineTo(-19, 2.6)
+  ctx.stroke()
+  /* dashed thrust lines below the lifters to suggest hover */
+  ctx.globalAlpha = 0.38 * a
+  ctx.setLineDash([2.5, 2.5])
+  ctx.beginPath()
+  ctx.moveTo(20, 6.5)
+  ctx.lineTo(20, 13.5)
+  ctx.moveTo(-16, 7)
+  ctx.lineTo(-16, 14)
+  ctx.stroke()
+  ctx.setLineDash([])
+  /* brass nav lights on the prong tips */
+  ctx.fillStyle = pal.brass
+  ctx.globalAlpha = 0.6 * a
+  ctx.beginPath()
+  ctx.arc(28, -3, 0.8, 0, TAU)
+  ctx.arc(27, 3.5, 0.8, 0, TAU)
+  ctx.fill()
+}
+
 function drawRelic(ctx: Ctx, r: Relic, pal: Palette, appear: number) {
   const lw = 1.1 / r.scale
   const hl = 0.7 / r.scale
@@ -360,6 +426,7 @@ function drawRelic(ctx: Ctx, r: Relic, pal: Palette, appear: number) {
     case 'planet': drawPlanet(ctx, pal, appear, lw, hl); break
     case 'comet': drawComet(ctx, pal, appear, lw, hl); break
     case 'airship': drawAirship(ctx, pal, appear, lw, hl); break
+    case 'spinner': drawSpinner(ctx, pal, appear, lw, hl); break
   }
   ctx.restore()
 }
