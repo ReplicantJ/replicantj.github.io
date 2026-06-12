@@ -34,34 +34,36 @@ body {
   transition: background 0.35s ease, color 0.35s ease;
 }
 
-/* Evening study — limewash over dark moss: cloudy mottle, faint
-   diagonal brush passes, fine chalky grain */
+/* Evening study — limewash over dark verdigris: cloudy mottle, faint
+   diagonal brush passes (one verdigris, one bronze), fine chalky grain */
 [data-theme='dark'] body {
   background-color: var(--at-ground);
   background-image:
     /* chalky grain */
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.85 0 0 0 0 0.88 0 0 0 0 0.74 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
-    /* large cloudy lime mottle */
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1100' height='1100'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0035' numOctaves='5' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 0.72 0 0 0 0 0.78 0 0 0 0 0.58 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.78 0 0 0 0 0.9 0 0 0 0 0.84 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+    /* large cloudy verdigris mottle */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1100' height='1100'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0035' numOctaves='5' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.75 0 0 0 0 0.64 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"),
+    /* warm bronze under-mottle, very faint */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1300' height='1300'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0032' numOctaves='4' seed='53'/%3E%3CfeColorMatrix values='0 0 0 0 0.76 0 0 0 0 0.62 0 0 0 0 0.31 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E"),
     /* darker counter-mottle for depth */
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1400' height='1400'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0028' numOctaves='4' seed='29'/%3E%3CfeColorMatrix values='0 0 0 0 0.02 0 0 0 0 0.05 0 0 0 0 0.02 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E"),
-    /* broad diagonal brush passes */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1400' height='1400'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0028' numOctaves='4' seed='29'/%3E%3CfeColorMatrix values='0 0 0 0 0.01 0 0 0 0 0.05 0 0 0 0 0.04 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E"),
+    /* broad diagonal brush passes — verdigris pass, then bronze pass */
     linear-gradient(
       112deg,
-      rgba(214, 224, 188, 0.035) 0%,
-      rgba(214, 224, 188, 0) 22%,
-      rgba(10, 14, 8, 0.16) 41%,
-      rgba(214, 224, 188, 0.028) 58%,
-      rgba(10, 14, 8, 0.12) 79%,
-      rgba(214, 224, 188, 0.04) 100%
+      rgba(146, 198, 178, 0.04) 0%,
+      rgba(146, 198, 178, 0) 22%,
+      rgba(6, 12, 10, 0.16) 41%,
+      rgba(146, 198, 178, 0.03) 58%,
+      rgba(6, 12, 10, 0.12) 79%,
+      rgba(146, 198, 178, 0.045) 100%
     ),
     linear-gradient(
       252deg,
-      rgba(196, 210, 170, 0.03) 0%,
-      rgba(12, 16, 9, 0.1) 33%,
-      rgba(196, 210, 170, 0.025) 52%,
-      rgba(12, 16, 9, 0.14) 86%,
-      rgba(196, 210, 170, 0.03) 100%
+      rgba(199, 166, 105, 0.028) 0%,
+      rgba(9, 13, 11, 0.1) 33%,
+      rgba(199, 166, 105, 0.022) 52%,
+      rgba(9, 13, 11, 0.14) 86%,
+      rgba(199, 166, 105, 0.028) 100%
     );
   background-attachment: fixed;
 }
