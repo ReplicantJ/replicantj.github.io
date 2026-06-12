@@ -65,6 +65,18 @@
 
 /* ===== Case-study plates ===== */
 
+.study-metrics-label {
+  font-family: var(--at-font-data);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: var(--at-ink-3);
+  margin-top: 2.8rem;
+}
+
+.study-metrics-label + .study-metrics {
+  margin-top: 0.6rem;
+}
+
 .study-metrics {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));

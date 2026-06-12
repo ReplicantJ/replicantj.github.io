@@ -191,6 +191,52 @@
   margin-top: 1.2rem;
 }
 
+.lede + .body-text {
+  margin-top: 1.4rem;
+}
+
+/* About card: heading-level Italiana statement, first-person body prose, and a
+   precision coda below the hairline — strongest ink at the top, muted at the note. */
+.about-headline {
+  font-family: var(--at-font-display);
+  font-size: 1rem;
+  line-height: 1.24;
+  letter-spacing: 0.01em;
+  color: var(--at-ink);
+}
+
+/* Body + note step down from the headline so the Italiana statement still leads,
+   even though the clause break caps the headline at the card's column width. */
+.about-body {
+  max-width: none;
+  margin-top: 1.2rem;
+  font-size: 0.94rem;
+}
+
+.about-rule {
+  margin: 1.9rem 0;
+}
+
+.about-note {
+  max-width: none;
+  font-size: 0.86rem;
+  line-height: 1.75;
+  color: var(--at-ink-3);
+}
+
+.about-note__em {
+  font-weight: 600;
+  color: var(--at-ink-2);
+}
+
+/* Desktop forces the clause break ("…capability," / "not just runs it"); below the
+   mobile breakpoint the headline wraps naturally so it doesn't orphan a single word. */
+@media (max-width: 760px) {
+  .about-headline__break {
+    display: none;
+  }
+}
+
 .body-text a {
   color: var(--at-jade);
   text-decoration: underline;
@@ -238,6 +284,25 @@
 
 .stat-now {
   color: var(--at-jade);
+}
+
+/* Three-stage arc: each stage on its own centered line, ink climbing from the
+   muted "nothing" through plain ink to the jade outcome. */
+.stat-line--arc {
+  flex-direction: column;
+  align-items: center;
+  gap: 0.22em;
+  font-size: clamp(1.6rem, 5.2vw, 2.6rem);
+}
+
+.stat-zero {
+  color: var(--at-ink-3);
+}
+
+@media (max-width: 760px) {
+  .stat-line--arc {
+    font-size: clamp(0.95rem, 5.6vw, 1.6rem);
+  }
 }
 
 .stat-foot {
@@ -383,6 +448,14 @@
   font-family: var(--at-font-display);
   font-size: clamp(1.5rem, 3.4vw, 2rem);
   color: var(--at-ink);
+}
+
+/* animated dhow beside the company name; waterline rides the text baseline */
+.exp-boat {
+  height: 1.12em;
+  width: auto;
+  margin-left: 0.45em;
+  vertical-align: -0.09em;
 }
 
 .exp-period {
