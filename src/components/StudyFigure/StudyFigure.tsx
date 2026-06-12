@@ -35,7 +35,12 @@ function ClusterFigure() {
     }
   })
   return (
-    <svg viewBox="0 0 720 340" className="study-fig" role="img" aria-label="Synthetic account cluster diagram">
+    <svg
+      viewBox="0 0 720 340"
+      className="study-fig"
+      role="img"
+      aria-label="Synthetic account cluster topology: two reseller networks, Reseller A and Reseller B, connected through a central broker node"
+    >
       {/* inter-hub edges */}
       <g className="fig-edge fig-edge--hub">
         <path d={`M${hubs[0].x} ${hubs[0].y} L${hubs[1].x} ${hubs[1].y}`} />
@@ -59,10 +64,12 @@ function ClusterFigure() {
           <circle key={i} cx={h.x} cy={h.y} r="7" />
         ))}
       </g>
+      {/* Trailing spaces keep adjacent labels separated in DOM text extraction;
+          SVG strips them at render time (default xml:space). */}
       <g className="fig-label">
-        <text x="150" y="294">RESELLER A</text>
-        <text x="380" y="56">BROKER</text>
-        <text x="560" y="312">RESELLER B</text>
+        <text x="150" y="294">RESELLER A </text>
+        <text x="380" y="56">BROKER </text>
+        <text x="560" y="312">RESELLER B </text>
       </g>
     </svg>
   )
@@ -75,7 +82,8 @@ function Box({ x, y, w, h, label, dashed = false }: { x: number; y: number; w: n
     <g>
       <rect x={x} y={y} width={w} height={h} className={dashed ? 'fig-box fig-box--dashed' : 'fig-box'} />
       <text x={x + w / 2} y={y + h / 2 + 4} className="fig-box-label" textAnchor="middle">
-        {label}
+        {/* trailing space separates labels in text extraction; stripped at render */}
+        {label + ' '}
       </text>
     </g>
   )
@@ -87,7 +95,12 @@ function Arrow({ d }: { d: string }) {
 
 function PipelineFigure() {
   return (
-    <svg viewBox="0 0 720 340" className="study-fig" role="img" aria-label="Enforcement pipeline blueprint schematic">
+    <svg
+      viewBox="0 0 720 340"
+      className="study-fig"
+      role="img"
+      aria-label="Enforcement pipeline blueprint: platform APIs feed signal ingest and a local datastore; a pattern engine and classifier route to a verdict that branches to automated enforcement or an analyst review queue"
+    >
       <defs>
         <marker id="fig-arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
           <path d="M0 0 L7 3.5 L0 7 Z" className="fig-arrowhead" />
@@ -110,7 +123,7 @@ function PipelineFigure() {
       <Arrow d="M560 150 L600 88" />
       <Arrow d="M560 194 L600 252" />
       <path d="M640 256 C640 210 460 130 404 146" className="fig-arrow fig-arrow--return" markerEnd="url(#fig-arrowhead)" />
-      <text x="520" y="120" className="fig-label">ANALYST IN THE LOOP</text>
+      <text x="520" y="120" className="fig-label">ANALYST IN THE LOOP </text>
     </svg>
   )
 }
@@ -125,7 +138,12 @@ function BenchmarkFigure() {
     { name: 'RULES BASELINE', w: 210 },
   ]
   return (
-    <svg viewBox="0 0 720 300" className="study-fig" role="img" aria-label="Model benchmark placeholder chart">
+    <svg
+      viewBox="0 0 720 300"
+      className="study-fig"
+      role="img"
+      aria-label="Placeholder benchmark chart comparing SLICENDICE, BWGNN, TGN, and a rules baseline; results pending"
+    >
       <defs>
         <pattern id="fig-hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
           <line x1="0" y1="0" x2="0" y2="7" className="fig-hatch-line" />
@@ -135,9 +153,9 @@ function BenchmarkFigure() {
         const y = 36 + i * 62
         return (
           <g key={r.name}>
-            <text x="20" y={y + 17} className="fig-label">{r.name}</text>
+            <text x="20" y={y + 17} className="fig-label">{r.name + ' '}</text>
             <rect x="180" y={y} width={r.w} height="26" fill="url(#fig-hatch)" className="fig-bar" />
-            <text x={188 + r.w} y={y + 17} className="fig-label fig-label--dim">PENDING</text>
+            <text x={188 + r.w} y={y + 17} className="fig-label fig-label--dim">PENDING </text>
           </g>
         )
       })}
