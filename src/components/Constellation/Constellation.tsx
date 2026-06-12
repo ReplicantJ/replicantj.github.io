@@ -16,6 +16,8 @@ type Node = {
   r: number
   kind: 'ink' | 'brass' | 'jade'
   born: number // draw-in delay (ms)
+  anomaly: boolean // glowing outlier — reads as something wrong in the chart
+  phase: number // pulse offset so anomalies don't throb in unison
 }
 
 type Palette = {
@@ -37,7 +39,7 @@ function readPalette(): Palette {
 }
 
 function buildNodes(w: number, h: number): Node[] {
-  const count = Math.max(54, Math.min(120, Math.round((w * h) / 12500)))
+  const count = Math.max(80, Math.min(180, Math.round((w * h) / 8500)))
   const nodes: Node[] = []
   for (let i = 0; i < count; i++) {
     const roll = Math.random()
@@ -50,7 +52,20 @@ function buildNodes(w: number, h: number): Node[] {
       r: kind === 'ink' ? 1.1 + Math.random() * 0.9 : 1.8 + Math.random() * 1.1,
       kind,
       born: Math.random() * (DRAW_IN_MS * 0.55),
+      anomaly: false,
+      phase: Math.random() * TAU,
     })
+  }
+  /* Promote a few accent nodes to anomalies — bright, pulsing, unmistakably off. */
+  const accents = nodes.filter(n => n.kind !== 'ink')
+  const anomalyCount = Math.max(3, Math.round(count / 38))
+  for (let i = accents.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[accents[i], accents[j]] = [accents[j], accents[i]]
+  }
+  for (const n of accents.slice(0, anomalyCount)) {
+    n.anomaly = true
+    n.r += 0.4
   }
   return nodes
 }
@@ -520,8 +535,32 @@ export default function Constellation() {
           if (appear <= 0) continue
         }
         const color = n.kind === 'brass' ? pal.brass : n.kind === 'jade' ? pal.jade : pal.ink
+
+        if (n.anomaly) {
+          /* Anomaly: throbbing halo + survey ring — the point you can't not look at. */
+          const pulse = reduced ? 0.7 : 0.55 + 0.45 * Math.sin(now / 650 + n.phase)
+          const haloR = (n.r + 4.5 + pulse * 3.5) * appear
+          const halo = ctx!.createRadialGradient(n.x, n.y, 0, n.x, n.y, haloR)
+          const haloEdge = /^#[0-9a-f]{6}$/i.test(color) ? `${color}00` : 'transparent'
+          halo.addColorStop(0, color)
+          halo.addColorStop(0.35, color)
+          halo.addColorStop(1, haloEdge)
+          ctx!.fillStyle = halo
+          ctx!.globalAlpha = (0.28 + 0.3 * pulse) * appear
+          ctx!.beginPath()
+          ctx!.arc(n.x, n.y, haloR, 0, Math.PI * 2)
+          ctx!.fill()
+
+          ctx!.strokeStyle = color
+          ctx!.globalAlpha = (0.25 + 0.45 * pulse) * appear
+          ctx!.lineWidth = 0.9
+          ctx!.beginPath()
+          ctx!.arc(n.x, n.y, haloR + 1.25, 0, Math.PI * 2)
+          ctx!.stroke()
+        }
+
         ctx!.fillStyle = color
-        ctx!.globalAlpha = (n.kind === 'ink' ? 0.55 : 0.85) * appear
+        ctx!.globalAlpha = (n.kind === 'ink' ? 0.55 : n.anomaly ? 1 : 0.85) * appear
         ctx!.beginPath()
         ctx!.arc(n.x, n.y, n.r * appear, 0, Math.PI * 2)
         ctx!.fill()
