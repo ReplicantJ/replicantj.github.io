@@ -162,6 +162,13 @@
   flex-shrink: 0;
 }
 
+/* Semantic heading wrapper; the visual style lives on .sec-title inside. */
+.sec-heading {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
 .sec-title {
   display: block;
   font-size: clamp(1.18rem, 2.6vw, 1.55rem);

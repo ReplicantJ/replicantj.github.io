@@ -47,7 +47,9 @@ function SectionHead({ num, title }: { num: string; title: string }) {
       <span className="sec-num" aria-hidden="true">
         {num}
       </span>
-      <SplitFlapText text={title} animateOn="inViewHover" parentClassName="sec-title" />
+      <h2 className="sec-heading" aria-label={title}>
+        <SplitFlapText text={title} animateOn="inViewHover" parentClassName="sec-title" />
+      </h2>
     </div>
   )
 }
