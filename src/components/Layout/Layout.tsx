@@ -1,4 +1,4 @@
-import { Link, Outlet, ScrollRestoration } from 'react-router-dom'
+import { Link, Outlet, ScrollRestoration, useLocation, useNavigate } from 'react-router-dom'
 import { Monogram, OrigamiUnicorn } from '../Atelier/Atelier'
 import ThemeToggle from '../ThemeToggle/ThemeToggle'
 import { SOCIAL_LINKS } from '../../lib/socialLinks'
@@ -7,6 +7,22 @@ import './Layout.css'
 
 export default function Layout() {
   const { aboutEnabled } = useSiteFlags()
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  /* The monogram stays the home button; only at the top of the home page does it
+     moonlight as the unicorn sigil and summon the chart relics. */
+  const onSigilClick = () => {
+    if (location.pathname !== '/') {
+      navigate('/')
+      return
+    }
+    if (window.scrollY > 120) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
+    window.dispatchEvent(new Event('atelier:unicorn'))
+  }
 
   return (
     <>
@@ -15,8 +31,8 @@ export default function Layout() {
           <button
             type="button"
             className="site-nav__sigil"
-            aria-label="Summon the star-chart relics"
-            onClick={() => window.dispatchEvent(new Event('atelier:unicorn'))}
+            aria-label="Home"
+            onClick={onSigilClick}
           >
             <Monogram size={30} />
             <OrigamiUnicorn size={30} />

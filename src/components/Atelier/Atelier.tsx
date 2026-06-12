@@ -72,7 +72,8 @@ export function Monogram({ size = 28 }: { size?: number }) {
   )
 }
 
-/** Origami unicorn in the monogram's frame — the nav sigil's hover face. */
+/** Origami unicorn in the monogram's frame — the nav sigil's hover face.
+ *  Filled paper silhouette with creases knocked out in the ground color. */
 export function OrigamiUnicorn({ size = 28 }: { size?: number }) {
   return (
     <svg
@@ -86,22 +87,18 @@ export function OrigamiUnicorn({ size = 28 }: { size?: number }) {
     >
       <path d="M14 4 H86 L96 14 V86 L86 96 H14 L4 86 V14 Z" strokeWidth="2.4" />
       <path d="M16.5 8.5 H83.5 L91.5 16.5 V83.5 L83.5 91.5 H16.5 L8.5 83.5 V16.5 Z" strokeWidth="0.8" />
-      <g strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        {/* horn */}
-        <path d="M33 23 L13 10" />
-        {/* face top, ear, neck crest, back, tail */}
-        <path d="M22 30 L33 23 L38 23 L41 15 L45 25 L56 44 L74 42 L88 26 L84 48 L76 50" />
-        {/* muzzle, jaw, throat, chest */}
-        <path d="M22 30 L26 36 L36 34 L48 58" />
-        {/* belly */}
-        <path d="M48 58 L70 54" />
-        {/* forelegs */}
-        <path d="M48 58 L44 72 L46 86 M53 59 L56 86" />
-        {/* hind legs */}
-        <path d="M76 50 L79 64 L75 86 M70 54 L71 86" />
+      <path
+        d="M62 11 L65.5 28.5 L71 22.5 L71.5 32 L75 51 L79 54 L89 70 L68 63 L67 89 L59 64 L50 63 L46 89 L41 63 L13 72 L41 55 L53 51 L55 39 L48 33 L57.5 27.5 Z"
+        fill="currentColor"
+        strokeWidth="1"
+        strokeLinejoin="round"
+      />
+      <g stroke="var(--at-ground, #fff)" strokeWidth="1.4" strokeLinecap="round">
+        {/* horn bands */}
+        <path d="M60.6 16 L63.4 16 M59.6 20.5 L64.3 20.5 M58.6 25 L65 25" />
+        {/* paper creases: jaw, neck, body facets, shoulder */}
+        <path d="M57.5 27.5 L55 39 M56 38.5 L72 49 M53 51 L50 63 M53 51 L59 64 M75 51 L68 63 M41 55 L41 63" />
       </g>
-      {/* fold lines */}
-      <path d="M33 23 L36 34 M56 44 L48 58 M74 42 L70 54" strokeWidth="0.8" />
     </svg>
   )
 }

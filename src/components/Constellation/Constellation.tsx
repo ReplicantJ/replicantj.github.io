@@ -81,16 +81,16 @@ type Relic = {
 
 /* Drift pace: heavy celestial bodies barely creep; powered craft cruise at node pace. */
 function relicSpeed(kind: RelicKind): number {
-  return DIRECTIONAL.has(kind) ? 0.04 + Math.random() * 0.045 : 0.008 + Math.random() * 0.012
+  return DIRECTIONAL.has(kind) ? 0.04 + Math.random() * 0.045 : 0.006 + Math.random() * 0.01
 }
 
-function buildRelics(
-  w: number,
-  h: number,
-  opts?: { all?: boolean; bornBase?: number }
-): Relic[] {
+function relicsRequested(): boolean {
+  return typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('relics')
+}
+
+function buildRelics(w: number, h: number, bornBase = DRAW_IN_MS): Relic[] {
   /* ?relics=all lays the whole catalog out for inspection — itself an easter egg. */
-  if (typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('relics')) {
+  if (relicsRequested()) {
     return RELIC_KINDS.map((kind, i) => ({
       kind,
       x: ((i + 0.5) / RELIC_KINDS.length) * w,
@@ -102,11 +102,7 @@ function buildRelics(
       born: i * 160,
     }))
   }
-  const kinds = opts?.all
-    ? [...RELIC_KINDS]
-    : [...RELIC_KINDS].sort(() => Math.random() - 0.5).slice(0, w > 880 ? 4 : 3)
-  const bornBase = opts?.bornBase ?? DRAW_IN_MS
-  return kinds.map((kind, i) => {
+  return RELIC_KINDS.map((kind, i) => {
     let x = w * 0.5
     let y = h * 0.5
     /* keep clear of the hero name in the center */
@@ -127,7 +123,7 @@ function buildRelics(
       vy,
       rot: DIRECTIONAL.has(kind) ? Math.atan2(vy, vx) : (Math.random() - 0.5) * 0.35,
       scale: 0.6 + Math.random() * 0.3,
-      born: bornBase + 400 + i * (opts?.all ? 260 : 450),
+      born: bornBase + 400 + i * 260,
     }
   })
 }
@@ -394,7 +390,7 @@ export default function Constellation() {
 
     let nodes: Node[] = []
     let relics: Relic[] = []
-    let summoned = false
+    let summoned = relicsRequested() /* relics stay hidden until the sigil summons them */
     let raf = 0
     let running = false
     let start = performance.now()
@@ -414,7 +410,7 @@ export default function Constellation() {
       canvas!.style.height = `${h}px`
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
       nodes = buildNodes(w, h)
-      relics = buildRelics(w, h, { all: summoned })
+      relics = summoned ? buildRelics(w, h) : []
       start = performance.now()
       if (reduced) drawFrame(start + DRAW_IN_MS * 2)
     }
@@ -533,7 +529,7 @@ export default function Constellation() {
     const onUnicorn = () => {
       summoned = !summoned
       const tNow = reduced ? DRAW_IN_MS : performance.now() - start
-      relics = buildRelics(w, h, { all: summoned, bornBase: tNow })
+      relics = summoned ? buildRelics(w, h, tNow) : []
       if (reduced) drawFrame(performance.now())
     }
     window.addEventListener('atelier:unicorn', onUnicorn)
