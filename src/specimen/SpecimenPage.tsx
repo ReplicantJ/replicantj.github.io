@@ -50,8 +50,8 @@ const LIGHT_SWATCHES = [
 ]
 
 const DARK_SWATCHES = [
-  { name: 'Ground', hex: '#171410' },
-  { name: 'Surface', hex: '#1f1b14' },
+  { name: 'Ground', hex: '#050806' },
+  { name: 'Surface', hex: '#0a110c' },
   { name: 'Ink', hex: '#ece5d3' },
   { name: 'Ink 2', hex: '#c6bda5' },
   { name: 'Brass', hex: '#c2a14e' },
