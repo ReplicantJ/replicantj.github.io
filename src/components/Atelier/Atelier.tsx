@@ -87,19 +87,24 @@ export function Spyglass({ size = 28 }: { size?: number }) {
     >
       <path d="M14 4 H86 L96 14 V86 L86 96 H14 L4 86 V14 Z" strokeWidth="2.4" />
       <path d="M16.5 8.5 H83.5 L91.5 16.5 V83.5 L83.5 91.5 H16.5 L8.5 83.5 V16.5 Z" strokeWidth="0.8" />
-      <g transform="rotate(-45 50 50)" strokeLinejoin="round" strokeLinecap="round">
-        {/* tapering two-draw tube: eyepiece left, objective right */}
+      <g transform="rotate(-45 50 50)">
+        {/* deco telescope: solid stepped draws, eyepiece left, objective right */}
         <path
-          d="M22 47.6 L36 46.8 L36 45.8 L52 45 L52 44.2 L76 42.6 L76 57.4 L52 55.8 L52 55 L36 54.2 L36 53.2 L22 52.4 Z"
-          strokeWidth="2.2"
+          d="M18 47.6 H22 V52.4 H18 Z
+             M22 47 L38 46.4 L38 53.6 L22 53 Z
+             M41 45.4 L57 44.8 L57 55.2 L41 54.6 Z
+             M60 43.8 L78 43 L78 57 L60 56.2 Z"
+          fill="currentColor"
+          stroke="none"
         />
-        {/* eyepiece cap */}
-        <path d="M19.6 48.4 L22 48.4 M19.6 51.6 L22 51.6 M19.6 48.4 L19.6 51.6" strokeWidth="1.6" />
-        {/* draw rings + objective housing */}
-        <path d="M36 45.8 L36 54.2 M52 44.2 L52 55.8 M72.5 42.8 L72.5 57.2" strokeWidth="1.2" />
-        {/* dashed sight-line to a small star */}
-        <path d="M79 50 L84 50" strokeWidth="1.5" strokeDasharray="3 2.5" />
-        <path d="M88.5 45.5 L88.5 54.5 M84 50 L93 50" strokeWidth="1.8" />
+        {/* deco accent ring inset at each draw's wide end */}
+        <path
+          d="M35.8 46.5 L35.8 53.5 M54.8 44.9 L54.8 55.1 M75.6 43.1 L75.6 56.9"
+          stroke="var(--at-ground, #fff)"
+          strokeWidth="1.1"
+        />
+        {/* dashed sight-line */}
+        <path d="M81 50 L89 50" strokeWidth="1.6" strokeDasharray="3.2 3" strokeLinecap="round" />
       </g>
     </svg>
   )
