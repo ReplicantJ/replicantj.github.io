@@ -42,12 +42,16 @@
 
 .hero-name {
   font-family: var(--at-font-display);
-  font-size: clamp(4rem, 13vw, 8.5rem);
+  /* Floor lowered from 4rem so "Joe Burns" (white-space: pre, never wraps)
+     stays inside narrow phone viewports instead of forcing horizontal scroll;
+     vw drives the size on small screens, the 8.5rem cap holds the desktop look. */
+  font-size: clamp(2.9rem, 12vw, 8.5rem);
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0.02em;
   color: var(--at-ink);
   white-space: pre;
+  max-width: 100%;
 }
 
 .hero-name__ch {
@@ -324,7 +328,9 @@
 
 .cap-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* min(100%, 300px) lets a column shrink below 300px on narrow phones instead
+     of overflowing the viewport, while still pairing up on wider screens. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 1.3rem;
 }
 
@@ -578,6 +584,10 @@
 /* ===== Responsive ===== */
 
 @media (max-width: 600px) {
+  .home-hero {
+    padding: 4.5rem 1.3rem 3.5rem;
+  }
+
   .sec-head {
     gap: 1rem;
   }

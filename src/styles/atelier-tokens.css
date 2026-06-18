@@ -5,10 +5,11 @@
    ============================================================ */
 
 :root {
-  /* Ground */
-  --at-ground: #f4f0e6;
-  --at-surface: #ece6d7;
-  --at-surface-high: #e4dcc9;
+  /* Ground — warm aged paper, dimmed from the original bright cream so the
+     light "Daylight study" theme reads calm rather than glaring. */
+  --at-ground: #e7dfca;
+  --at-surface: #ddd4bd;
+  --at-surface-high: #d3c8ae;
 
   /* Ink */
   --at-ink: #211d15;
