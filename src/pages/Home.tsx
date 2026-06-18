@@ -17,11 +17,11 @@ const SKILL_GROUPS = [
   },
   {
     title: 'Investigation & Threat Analysis',
-    skills: ['Adversarial investigations', 'OSINT', 'Network attribution', 'Threat actor attribution', 'Vendor signal evaluation', 'Cross-language pattern recognition', 'Workflow automation'],
+    skills: ['Adversarial investigations', 'OSINT', 'Network attribution', 'Threat actor attribution', 'Vendor signal evaluation', 'Workflow automation'],
   },
   {
     title: 'Software Engineering',
-    skills: ['Python (pandas)', 'SQL', 'SQLite', 'TypeScript', 'JavaScript', 'Node.js', 'Electron', 'React', 'Vue', 'Tailwind', 'Data pipelines', 'Claude Code', 'Cursor'],
+    skills: ['Python (pandas)', 'SQL', 'SQLite', 'TypeScript', 'JavaScript', 'Node.js', 'Electron', 'React', 'Vue', 'Tailwind', 'Data pipelines', 'Agentic engineering', 'Claude Code', 'Cursor'],
   },
   {
     title: 'Systems & Operations',
