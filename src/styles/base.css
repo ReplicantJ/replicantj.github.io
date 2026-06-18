@@ -81,6 +81,38 @@ body {
   --sf-seam: var(--at-line-soft);
 }
 
+/* ===== Responsive type & spacing scale =====
+   The whole system is rem-based and tuned at 150% root for desktop reading.
+   Stepping the root size down on smaller screens proportionally rescales type,
+   padding, and gaps in one move — this is the core of the mobile pass. Ordered
+   largest → smallest so the narrowest match wins the cascade. */
+@media (max-width: 900px) {
+  html {
+    font-size: 138%;
+  }
+}
+
+@media (max-width: 600px) {
+  html {
+    font-size: 118%;
+  }
+}
+
+@media (max-width: 400px) {
+  html {
+    font-size: 108%;
+  }
+}
+
+/* The limewash texture rides background-attachment: fixed, which iOS Safari
+   ignores and other mobile browsers repaint expensively on every scroll frame.
+   Pin it to the viewport on small screens to keep scrolling smooth. */
+@media (max-width: 760px) {
+  [data-theme='dark'] body {
+    background-attachment: scroll;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

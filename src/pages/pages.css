@@ -79,7 +79,7 @@
 
 .study-metrics {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
   gap: 1px;
   background: var(--at-line-soft);
   border: 1px solid var(--at-line-soft);
@@ -190,4 +190,22 @@
 
 .study-pager__link--index {
   color: var(--at-brass);
+}
+
+@media (max-width: 600px) {
+  .at-page {
+    padding: 5.5rem 1.3rem 3.5rem;
+  }
+
+  .study-section__head {
+    gap: 0.8rem;
+  }
+
+  .study-pager {
+    gap: 0.6rem;
+  }
+
+  .study-pager__link {
+    letter-spacing: 0.12em;
+  }
 }
