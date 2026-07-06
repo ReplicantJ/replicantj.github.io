@@ -128,6 +128,38 @@ function PipelineFigure() {
   )
 }
 
+/* ----- FIG 02 · shared detector core, one source of truth across surfaces ----- */
+
+function StackFigure() {
+  return (
+    <svg
+      viewBox="0 0 720 340"
+      className="study-fig"
+      role="img"
+      aria-label="Shared detector core architecture: a rule engine, behavioral scoring, and graph clustering feed one detector core, which drives a triage cockpit and a command-line pipeline, with analyst review on every output"
+    >
+      <defs>
+        <marker id="fig-arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0 0 L7 3.5 L0 7 Z" className="fig-arrowhead" />
+        </marker>
+      </defs>
+      <Box x={20} y={40} w={190} h={44} label="RULE ENGINE" />
+      <Box x={20} y={150} w={190} h={44} label="BEHAVIORAL SCORING" />
+      <Box x={20} y={256} w={190} h={44} label="GRAPH CLUSTERING" />
+      <Box x={290} y={150} w={200} h={44} label="SHARED DETECTOR CORE" />
+      <Box x={550} y={90} w={150} h={44} label="TRIAGE COCKPIT" />
+      <Box x={550} y={210} w={150} h={44} label="CLI PIPELINE" />
+      <Arrow d="M210 62 L286 158" />
+      <Arrow d="M210 172 L286 172" />
+      <Arrow d="M210 278 L286 186" />
+      <Arrow d="M494 160 L546 112" />
+      <Arrow d="M494 184 L546 228" />
+      <path d="M550 100 C 470 40 330 40 320 146" className="fig-arrow fig-arrow--return" markerEnd="url(#fig-arrowhead)" />
+      <text x="430" y="28" className="fig-label">ANALYST REVIEW ON EVERY OUTPUT </text>
+    </svg>
+  )
+}
+
 /* ----- FIG 03 · benchmark placeholder ----- */
 
 function BenchmarkFigure() {
@@ -164,8 +196,9 @@ function BenchmarkFigure() {
   )
 }
 
-export default function StudyFigure({ kind }: { kind: 'cluster' | 'pipeline' | 'benchmark' }) {
+export default function StudyFigure({ kind }: { kind: 'cluster' | 'pipeline' | 'benchmark' | 'stack' }) {
   if (kind === 'cluster') return <ClusterFigure />
   if (kind === 'pipeline') return <PipelineFigure />
+  if (kind === 'stack') return <StackFigure />
   return <BenchmarkFigure />
 }

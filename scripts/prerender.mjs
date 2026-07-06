@@ -51,6 +51,17 @@ const ROUTES = [
     ogType: 'article',
   },
   {
+    path: '/work/abuse-investigation-platform',
+    outFile: 'work/abuse-investigation-platform/index.html',
+    aliasFile: 'work/abuse-investigation-platform.html',
+    canonical: `${SITE_ORIGIN}/work/abuse-investigation-platform`,
+    description:
+      'Case study: a solo-authored abuse investigation platform running in production, sharing one detector core (rule engine, behavioral scoring, graph-based clustering) across every analyst surface with a human reviewer on every output.',
+    readyHeading: 'Abuse Investigation Platform',
+    ogTitle: 'Abuse Investigation Platform · Joe Burns',
+    ogType: 'article',
+  },
+  {
     path: '/work/enforcement-app',
     outFile: 'work/enforcement-app/index.html',
     aliasFile: 'work/enforcement-app.html',

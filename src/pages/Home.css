@@ -324,6 +324,19 @@
   margin-top: 1.6rem;
 }
 
+.stat-foot a {
+  color: var(--at-jade);
+  text-decoration: underline;
+  text-decoration-color: var(--at-line);
+  text-underline-offset: 0.18em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.stat-foot a:hover {
+  color: var(--at-ink);
+  text-decoration-color: var(--at-brass);
+}
+
 /* ===== Capabilities ===== */
 
 .cap-grid {
