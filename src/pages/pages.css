@@ -90,14 +90,17 @@
   background: var(--at-ground);
   padding: 1.4rem 1.2rem;
   text-align: center;
+  min-width: 0;
+  container-type: inline-size;
 }
 
 .study-metric__value {
   display: block;
   font-family: var(--at-font-display);
-  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-size: clamp(1.1rem, 10cqi, 2.4rem);
   color: var(--at-jade);
   line-height: 1.1;
+  max-width: 100%;
 }
 
 .study-metric__label {
@@ -107,6 +110,8 @@
   letter-spacing: 0.2em;
   color: var(--at-ink-3);
   margin-top: 0.55rem;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .study-section {
