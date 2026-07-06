@@ -65,9 +65,21 @@
 
 /* ===== Case-study plates ===== */
 
+.study-metrics-label {
+  font-family: var(--at-font-data);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: var(--at-ink-3);
+  margin-top: 2.8rem;
+}
+
+.study-metrics-label + .study-metrics {
+  margin-top: 0.6rem;
+}
+
 .study-metrics {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
   gap: 1px;
   background: var(--at-line-soft);
   border: 1px solid var(--at-line-soft);
@@ -78,14 +90,17 @@
   background: var(--at-ground);
   padding: 1.4rem 1.2rem;
   text-align: center;
+  min-width: 0;
+  container-type: inline-size;
 }
 
 .study-metric__value {
   display: block;
   font-family: var(--at-font-display);
-  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-size: clamp(1.1rem, 10cqi, 2.4rem);
   color: var(--at-jade);
   line-height: 1.1;
+  max-width: 100%;
 }
 
 .study-metric__label {
@@ -95,6 +110,8 @@
   letter-spacing: 0.2em;
   color: var(--at-ink-3);
   margin-top: 0.55rem;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .study-section {
@@ -178,4 +195,22 @@
 
 .study-pager__link--index {
   color: var(--at-brass);
+}
+
+@media (max-width: 600px) {
+  .at-page {
+    padding: 5.5rem 1.3rem 3.5rem;
+  }
+
+  .study-section__head {
+    gap: 0.8rem;
+  }
+
+  .study-pager {
+    gap: 0.6rem;
+  }
+
+  .study-pager__link {
+    letter-spacing: 0.12em;
+  }
 }

@@ -11,9 +11,9 @@ export default function CaseStudy() {
   const study = findStudy(slug)
 
   useEffect(() => {
-    if (study) document.title = `${study.title} — Joe Burns`
+    if (study) document.title = `${study.title} · Joe Burns`
     return () => {
-      document.title = 'Joe Burns — Trust & Safety · Safeguards · Abuse Infrastructure Disruption'
+      document.title = 'Joe Burns · Trust & Safety · Safeguards · Abuse Infrastructure Disruption'
     }
   }, [study])
 
@@ -32,6 +32,7 @@ export default function CaseStudy() {
         <p className="at-page__status">{study.status}</p>
         <p className="at-page__abstract">{study.abstract}</p>
 
+        {study.metricsLabel && <p className="study-metrics-label">{study.metricsLabel}</p>}
         <div className="study-metrics">
           {study.metrics.map(m => (
             <div className="study-metric" key={m.label}>

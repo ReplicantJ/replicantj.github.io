@@ -42,12 +42,16 @@
 
 .hero-name {
   font-family: var(--at-font-display);
-  font-size: clamp(4rem, 13vw, 8.5rem);
+  /* Floor lowered from 4rem so "Joe Burns" (white-space: pre, never wraps)
+     stays inside narrow phone viewports instead of forcing horizontal scroll;
+     vw drives the size on small screens, the 8.5rem cap holds the desktop look. */
+  font-size: clamp(2.9rem, 12vw, 8.5rem);
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0.02em;
   color: var(--at-ink);
   white-space: pre;
+  max-width: 100%;
 }
 
 .hero-name__ch {
@@ -162,6 +166,13 @@
   flex-shrink: 0;
 }
 
+/* Semantic heading wrapper; the visual style lives on .sec-title inside. */
+.sec-heading {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
 .sec-title {
   display: block;
   font-size: clamp(1.18rem, 2.6vw, 1.55rem);
@@ -189,6 +200,52 @@
 
 .body-text + .body-text {
   margin-top: 1.2rem;
+}
+
+.lede + .body-text {
+  margin-top: 1.4rem;
+}
+
+/* About card: heading-level Italiana statement, first-person body prose, and a
+   precision coda below the hairline — strongest ink at the top, muted at the note. */
+.about-headline {
+  font-family: var(--at-font-display);
+  font-size: 1rem;
+  line-height: 1.24;
+  letter-spacing: 0.01em;
+  color: var(--at-ink);
+}
+
+/* Body + note step down from the headline so the Italiana statement still leads,
+   even though the clause break caps the headline at the card's column width. */
+.about-body {
+  max-width: none;
+  margin-top: 1.2rem;
+  font-size: 0.94rem;
+}
+
+.about-rule {
+  margin: 1.9rem 0;
+}
+
+.about-note {
+  max-width: none;
+  font-size: 0.86rem;
+  line-height: 1.75;
+  color: var(--at-ink-3);
+}
+
+.about-note__em {
+  font-weight: 600;
+  color: var(--at-ink-2);
+}
+
+/* Desktop forces the clause break ("…capability," / "not just runs it"); below the
+   mobile breakpoint the headline wraps naturally so it doesn't orphan a single word. */
+@media (max-width: 760px) {
+  .about-headline__break {
+    display: none;
+  }
 }
 
 .body-text a {
@@ -240,6 +297,25 @@
   color: var(--at-jade);
 }
 
+/* Three-stage arc: each stage on its own centered line, ink climbing from the
+   muted "nothing" through plain ink to the jade outcome. */
+.stat-line--arc {
+  flex-direction: column;
+  align-items: center;
+  gap: 0.22em;
+  font-size: clamp(1.6rem, 5.2vw, 2.6rem);
+}
+
+.stat-zero {
+  color: var(--at-ink-3);
+}
+
+@media (max-width: 760px) {
+  .stat-line--arc {
+    font-size: clamp(0.95rem, 5.6vw, 1.6rem);
+  }
+}
+
 .stat-foot {
   font-family: var(--at-font-data);
   font-size: 0.74rem;
@@ -248,11 +324,26 @@
   margin-top: 1.6rem;
 }
 
+.stat-foot a {
+  color: var(--at-jade);
+  text-decoration: underline;
+  text-decoration-color: var(--at-line);
+  text-underline-offset: 0.18em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.stat-foot a:hover {
+  color: var(--at-ink);
+  text-decoration-color: var(--at-brass);
+}
+
 /* ===== Capabilities ===== */
 
 .cap-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* min(100%, 300px) lets a column shrink below 300px on narrow phones instead
+     of overflowing the viewport, while still pairing up on wider screens. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 1.3rem;
 }
 
@@ -385,6 +476,14 @@
   color: var(--at-ink);
 }
 
+/* animated dhow beside the company name; waterline rides the text baseline */
+.exp-boat {
+  height: 1.12em;
+  width: auto;
+  margin-left: 0.45em;
+  vertical-align: -0.09em;
+}
+
 .exp-period {
   font-family: var(--at-font-data);
   font-size: 0.76rem;
@@ -498,6 +597,10 @@
 /* ===== Responsive ===== */
 
 @media (max-width: 600px) {
+  .home-hero {
+    padding: 4.5rem 1.3rem 3.5rem;
+  }
+
   .sec-head {
     gap: 1rem;
   }

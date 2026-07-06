@@ -25,15 +25,9 @@ type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
-function systemTheme(): ThemeName {
-  if (
-    typeof window !== 'undefined' &&
-    window.matchMedia?.('(prefers-color-scheme: dark)').matches
-  ) {
-    return 'dark'
-  }
-  return 'light'
-}
+/** Dark ("Evening study") is the default; the OS preference is ignored so the
+ *  site opens dark for everyone until they explicitly toggle to light. */
+const DEFAULT_THEME: ThemeName = 'dark'
 
 function readStoredTheme(): ThemeName {
   try {
@@ -42,14 +36,14 @@ function readStoredTheme(): ThemeName {
   } catch {
     /* ignore */
   }
-  return systemTheme()
+  return DEFAULT_THEME
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [configLoaded, setConfigLoaded] = useState(false)
   const [darkModeAllowed, setDarkModeAllowed] = useState(true)
   const [preference, setPreference] = useState<ThemeName>(() =>
-    typeof window !== 'undefined' ? readStoredTheme() : 'light'
+    typeof window !== 'undefined' ? readStoredTheme() : DEFAULT_THEME
   )
 
   useEffect(() => {

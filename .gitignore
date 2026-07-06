@@ -14,6 +14,7 @@
 !/tsconfig.json
 !/vite.config.ts
 !/.env.example
+!/scripts/
 
 # --- Site source ---
 !/index.html

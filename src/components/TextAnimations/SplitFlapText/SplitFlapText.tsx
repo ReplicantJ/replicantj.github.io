@@ -102,13 +102,16 @@ function SplitFlapCell({
     )
   }
 
+  /* Glyphs render via CSS content: attr(data-char) so the duplicated tile
+     halves never enter the DOM text layer; the sr-only span in the parent is
+     the only extractable copy of the heading. */
   return (
     <span className="sf-cell">
       <span className="sf-half sf-top">
-        <span className="sf-char">{next ?? curr}</span>
+        <span className="sf-char" data-char={next ?? curr} />
       </span>
       <span className="sf-half sf-bottom">
-        <span className="sf-char">{curr}</span>
+        <span className="sf-char" data-char={curr} />
       </span>
       {next !== null && (
         <span
@@ -118,10 +121,10 @@ function SplitFlapCell({
           onAnimationEnd={advance}
         >
           <span className="sf-flap-face sf-flap-front">
-            <span className="sf-char">{curr}</span>
+            <span className="sf-char" data-char={curr} />
           </span>
           <span className="sf-flap-face sf-flap-back">
-            <span className="sf-char">{next}</span>
+            <span className="sf-char" data-char={next} />
           </span>
         </span>
       )}

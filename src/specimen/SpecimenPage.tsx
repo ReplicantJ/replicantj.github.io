@@ -5,7 +5,7 @@ import './specimen.css'
 /* ===== Sample content (real site copy, operational voice) ===== */
 
 const SAMPLE_BODY =
-  'Safeguards specialist focused on detecting, investigating, and mitigating coordinated misuse across large-scale AI systems — linking accounts across disparate systems and converting emerging threats into mitigation strategies.'
+  'Safeguards specialist with experience detecting and disrupting coordinated misuse across large-scale AI systems — linking accounts across fragmented signals, attributing adversarial behavior, and turning findings into enforcement action.'
 
 const PAIRINGS = [
   {
