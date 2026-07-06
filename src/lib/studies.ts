@@ -18,7 +18,7 @@ export type Study = {
   metricsLabel?: string
   metrics: StudyMetric[]
   sections: StudySection[]
-  figure?: 'cluster' | 'pipeline' | 'benchmark'
+  figure?: 'cluster' | 'pipeline' | 'benchmark' | 'stack'
   figureCaption?: string
 }
 
@@ -63,43 +63,43 @@ export const STUDIES: Study[] = [
     figureCaption: 'FIG. 01 · ACCOUNT CLUSTER TOPOLOGY · SYNTHETIC RENDERING',
   },
   {
-    slug: 'enforcement-app',
+    slug: 'abuse-investigation-platform',
     plate: '02',
-    title: 'Enforcement Workflow Application',
-    status: 'IN DEVELOPMENT · BLUEPRINT',
+    title: 'Abuse Investigation Platform',
+    status: 'SHIPPED · IN PRODUCTION USE',
     abstract:
-      'Greenfield desktop application automating an end-to-end abuse-enforcement workflow: moderation-signal ingestion, a pattern engine surfacing coordinated behavior, and verdict routing into automated enforcement with a human decision on every consequential action.',
-    metricsLabel: 'SPECIFICATIONS',
+      'A solo-authored suite of analyst tools sharing one detector core across every surface: a rule engine, behavioral time-series scoring, and graph-based clustering that turn scattered signals into ranked, human-reviewed leads.',
     metrics: [
-      { value: 'E2E', label: 'SIGNAL → VERDICT → ACTION' },
-      { value: 'LOCAL', label: 'ANALYST-OWNED DATASTORE' },
-      { value: 'HITL', label: 'EVERY CONSEQUENTIAL ACTION' },
+      { value: '8', label: 'INTEGRATED ANALYST MODULES' },
+      { value: '12', label: 'BEHAVIORAL DETECTION KERNELS' },
+      { value: '60K+', label: 'REGRESSION CHECKS ON CORE MATH' },
     ],
     sections: [
       {
         label: 'I',
-        heading: 'Intent',
+        heading: 'Problem',
         paragraphs: [
-          'Enforcement teams burn analyst hours on repetitive triage: pulling signals from platform surfaces, recognizing the same coordinated patterns, and routing the same verdicts. The application removes the repetition while keeping a human decision on every consequential action.',
+          'Coordinated adversarial behavior surfaced only after damage was visible, because no shared system existed to detect it. Analysts correlated signals by hand across disconnected surfaces, and every investigation rebuilt the same pattern-matching logic from memory instead of a tested, shared system.',
         ],
       },
       {
         label: 'II',
-        heading: 'Architecture',
+        heading: 'Approach',
         paragraphs: [
-          'Moderation signals ingest from platform APIs into a local datastore. A pattern engine and classifier surface coordinated behavior and propose verdicts. Verdicts route to automated enforcement only where confidence is absolute and the action is reversible; everything else lands in a human review queue. The analyst owns every consequential decision.',
+          'Designed and built the investigative tooling layer solo, anchored on one detector core so every surface reasons from the same math: a rule engine flags known-bad configurations, sliding-window behavioral scoring surfaces coordinated timing across accounts, and graph-based similarity (cosine, Jaccard, k-core cohesion) clusters fragmented identities into ranked candidate networks.',
+          'Every surface, from a lightweight analyst tool to a coordinated command-line pipeline, calls the same core rather than reimplementing its own logic, and every output lands with a human reviewer. The system proposes; it does not enforce.',
         ],
       },
       {
         label: 'III',
-        heading: 'Status',
+        heading: 'Outcome',
         paragraphs: [
-          'In active development. This plate is drawn as a blueprint deliberately: architecture is settled, implementation is underway, and screenshots will replace schematics as surfaces land.',
+          'The detector core now runs the daily investigative workflow in production, checked against more than 60,000 regression tests on its own math, and is the tooling layer behind the detection-time result on Plate 01: coordinated-network detection cut from roughly 30 days of manual correlation to under two hours.',
         ],
       },
     ],
-    figure: 'pipeline',
-    figureCaption: 'FIG. 02 · ENFORCEMENT PIPELINE · BLUEPRINT SCHEMATIC',
+    figure: 'stack',
+    figureCaption: 'FIG. 02 · SHARED DETECTOR CORE · ONE SOURCE OF TRUTH ACROSS SURFACES',
   },
   {
     slug: 'gnn-detection',
@@ -138,6 +138,45 @@ export const STUDIES: Study[] = [
     ],
     figure: 'benchmark',
     figureCaption: 'FIG. 03 · MODEL COMPARISON · PLACEHOLDER, RESULTS PENDING',
+  },
+  {
+    slug: 'enforcement-app',
+    plate: '04',
+    title: 'Enforcement Workflow Application',
+    status: 'IN DEVELOPMENT · BLUEPRINT',
+    abstract:
+      'A next-generation desktop application extending the shared detector core (Plate 02) end to end: moderation-signal ingestion, a pattern engine surfacing coordinated behavior, and verdict routing into automated enforcement with a human decision on every consequential action.',
+    metricsLabel: 'SPECIFICATIONS',
+    metrics: [
+      { value: 'E2E', label: 'SIGNAL → VERDICT → ACTION' },
+      { value: 'LOCAL', label: 'ANALYST-OWNED DATASTORE' },
+      { value: 'HITL', label: 'EVERY CONSEQUENTIAL ACTION' },
+    ],
+    sections: [
+      {
+        label: 'I',
+        heading: 'Intent',
+        paragraphs: [
+          'Enforcement teams burn analyst hours on repetitive triage: pulling signals from platform surfaces, recognizing the same coordinated patterns, and routing the same verdicts. The application extends the detector core already running in production (Plate 02) into that workflow, removing the repetition while keeping a human decision on every consequential action.',
+        ],
+      },
+      {
+        label: 'II',
+        heading: 'Architecture',
+        paragraphs: [
+          'Moderation signals ingest from platform APIs into a local datastore. A pattern engine and classifier surface coordinated behavior and propose verdicts. Verdicts route to automated enforcement only where confidence is absolute and the action is reversible; everything else lands in a human review queue. The analyst owns every consequential decision.',
+        ],
+      },
+      {
+        label: 'III',
+        heading: 'Status',
+        paragraphs: [
+          'In active development. This plate is drawn as a blueprint deliberately: architecture is settled, implementation is underway, and screenshots will replace schematics as surfaces land.',
+        ],
+      },
+    ],
+    figure: 'pipeline',
+    figureCaption: 'FIG. 04 · ENFORCEMENT PIPELINE · BLUEPRINT SCHEMATIC',
   },
 ]
 
