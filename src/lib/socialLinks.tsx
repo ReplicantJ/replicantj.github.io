@@ -3,18 +3,13 @@ import type { ReactNode } from 'react'
 const discordSnowflake =
   import.meta.env.VITE_DISCORD_USER_ID?.trim() || '190942242070855680'
 
-/** Mobile: https profile (custom protocol is flaky). Desktop: discord:// targets the installed client so it focuses one instance instead of spawning via a new browser tab + https handoff. */
-function discordProfileHrefForClient(snowflake: string): string {
-  if (!/^\d{17,20}$/.test(snowflake)) return 'https://discord.com/app'
-  const httpsProfile = `https://discord.com/users/${snowflake}`
-  if (typeof navigator === 'undefined') return httpsProfile
-  if (/Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    return httpsProfile
-  }
-  return `discord://-/users/${snowflake}`
-}
-
-const discordProfileHref = discordProfileHrefForClient(discordSnowflake)
+/** Always the https profile URL: it resolves in every browser and for agents
+ *  reading static HTML, and Discord hands off to the installed client itself.
+ *  A discord:// protocol href would get baked into prerendered HTML where it
+ *  is dead for anything without the handler registered. */
+const discordProfileHref = /^\d{17,20}$/.test(discordSnowflake)
+  ? `https://discord.com/users/${discordSnowflake}`
+  : 'https://discord.com/app'
 
 export type SocialLink = {
   label: string

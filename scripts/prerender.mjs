@@ -36,6 +36,8 @@ const ROUTES = [
       'Joe Burns is a Trust & Safety and platform safeguards specialist who builds detection systems for coordinated abuse, reducing detection time from 30 days to under 2 hours. Investigations, detection engineering, and enforcement strategy.',
     /* Hero h1 carries the plain name as aria-label. */
     readySelector: 'h1.hero-name[aria-label="Joe Burns"]',
+    ogTitle: 'Joe Burns',
+    ogType: 'profile',
   },
   {
     path: '/work/reseller-disruption',
@@ -45,6 +47,19 @@ const ROUTES = [
     description:
       'Case study: disruption of third-party automation and reseller ecosystems behind hundreds of thousands of abusive accounts, through behavioral fingerprinting, graph-based clustering, and operator attribution.',
     readyHeading: 'Reseller Ecosystem Disruption',
+    ogTitle: 'Reseller Ecosystem Disruption · Joe Burns',
+    ogType: 'article',
+  },
+  {
+    path: '/work/abuse-investigation-platform',
+    outFile: 'work/abuse-investigation-platform/index.html',
+    aliasFile: 'work/abuse-investigation-platform.html',
+    canonical: `${SITE_ORIGIN}/work/abuse-investigation-platform`,
+    description:
+      'Case study: a solo-authored abuse investigation platform running in production, sharing one detector core (rule engine, behavioral scoring, graph-based clustering) across every analyst surface with a human reviewer on every output.',
+    readyHeading: 'Abuse Investigation Platform',
+    ogTitle: 'Abuse Investigation Platform · Joe Burns',
+    ogType: 'article',
   },
   {
     path: '/work/enforcement-app',
@@ -54,6 +69,8 @@ const ROUTES = [
     description:
       'Blueprint: a desktop enforcement workflow application with signal ingestion, pattern detection, and verdict routing, with a human decision on every consequential action.',
     readyHeading: 'Enforcement Workflow Application',
+    ogTitle: 'Enforcement Workflow Application · Joe Burns',
+    ogType: 'article',
   },
   {
     path: '/work/gnn-detection',
@@ -63,6 +80,8 @@ const ROUTES = [
     description:
       'Research: benchmarking graph-neural-network detection models against production-shaped abuse topologies to test structure-aware detection against adaptive adversaries.',
     readyHeading: 'Graph-Based Detection Research',
+    ogTitle: 'Graph-Based Detection Research · Joe Burns',
+    ogType: 'article',
   },
   {
     /* Router '*' route; becomes the GitHub Pages fallback document. */
@@ -124,17 +143,28 @@ async function capture(page, baseUrl, route) {
   }
   await page.waitForTimeout(SETTLE_MS)
 
-  await page.evaluate(({ canonical, description }) => {
-    if (description) {
-      let meta = document.querySelector('meta[name="description"]')
+  await page.evaluate(({ canonical, description, ogTitle, ogType }) => {
+    const setMeta = (attr, key, content) => {
+      let meta = document.querySelector(`meta[${attr}="${key}"]`)
       if (!meta) {
         meta = document.createElement('meta')
-        meta.setAttribute('name', 'description')
+        meta.setAttribute(attr, key)
         document.head.appendChild(meta)
       }
-      meta.setAttribute('content', description)
+      meta.setAttribute('content', content)
     }
+    if (description) {
+      setMeta('name', 'description', description)
+      setMeta('property', 'og:description', description)
+      setMeta('name', 'twitter:description', description)
+    }
+    if (ogTitle) {
+      setMeta('property', 'og:title', ogTitle)
+      setMeta('name', 'twitter:title', ogTitle)
+    }
+    if (ogType) setMeta('property', 'og:type', ogType)
     if (canonical) {
+      setMeta('property', 'og:url', canonical)
       let link = document.querySelector('link[rel="canonical"]')
       if (!link) {
         link = document.createElement('link')
@@ -143,7 +173,7 @@ async function capture(page, baseUrl, route) {
       }
       link.setAttribute('href', canonical)
     }
-  }, { canonical: route.canonical, description: route.description })
+  }, { canonical: route.canonical, description: route.description, ogTitle: route.ogTitle, ogType: route.ogType })
 
   const html = await page.content()
   for (const phrase of FORBIDDEN) {

@@ -160,6 +160,26 @@
   color: var(--at-ink-3);
 }
 
+@media (max-width: 600px) {
+  .site-nav {
+    padding: 0.6rem 0.9rem;
+    gap: 0.5rem;
+  }
+
+  .site-nav__links {
+    gap: 0.1rem;
+  }
+
+  .site-nav__link {
+    padding: 0.5rem 0.5rem;
+    letter-spacing: 0.13em;
+  }
+
+  .atelier-footer {
+    padding: 2.4rem 1.3rem 2rem;
+  }
+}
+
 @media (max-width: 540px) {
   .site-nav__wordmark {
     display: none;

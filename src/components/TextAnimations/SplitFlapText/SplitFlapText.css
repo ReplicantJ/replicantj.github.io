@@ -45,7 +45,9 @@
   border-radius: 0 0 0.14em 0.14em;
 }
 
-/* Full-height glyph box clipped by its half. */
+/* Full-height glyph box clipped by its half. The glyph itself is generated
+   content (attr(data-char)) so duplicated tile halves stay out of the DOM
+   text layer that scrapers and text extraction read. */
 .sf-char {
   position: absolute;
   left: 0;
@@ -55,6 +57,10 @@
   align-items: center;
   justify-content: center;
   font-size: 0.84em;
+}
+
+.sf-char::before {
+  content: attr(data-char);
 }
 
 .sf-top .sf-char,

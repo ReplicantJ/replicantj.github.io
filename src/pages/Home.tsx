@@ -17,11 +17,11 @@ const SKILL_GROUPS = [
   },
   {
     title: 'Investigation & Threat Analysis',
-    skills: ['Adversarial investigations', 'OSINT', 'Network attribution', 'Threat actor attribution', 'Vendor signal evaluation', 'Cross-language pattern recognition', 'Workflow automation'],
+    skills: ['Adversarial investigations', 'OSINT', 'Network attribution', 'Threat actor attribution', 'Vendor signal evaluation', 'Workflow automation'],
   },
   {
     title: 'Software Engineering',
-    skills: ['Python (pandas)', 'SQL', 'SQLite', 'TypeScript', 'JavaScript', 'Node.js', 'Electron', 'React', 'Vue', 'Tailwind', 'Data pipelines', 'Claude Code', 'Cursor'],
+    skills: ['Python (pandas)', 'SQL', 'SQLite', 'TypeScript', 'JavaScript', 'Node.js', 'Electron', 'React', 'Vue', 'Tailwind', 'Data pipelines', 'Agentic engineering', 'Claude Code', 'Cursor'],
   },
   {
     title: 'Systems & Operations',
@@ -168,7 +168,11 @@ export default function Home() {
                     UNDER 2 HOURS
                   </span>
                 </p>
-                <p className="stat-foot">BEHAVIORAL ANALYSIS + CUSTOM INVESTIGATIVE TOOLING · BUILT FROM ZERO · NETWORKS NOW IDENTIFIED BEFORE THEIR FIRST BILLING CYCLE COMPLETES</p>
+                <p className="stat-foot">
+                  RULE ENGINE + BEHAVIORAL SCORING + GRAPH CLUSTERING · ONE{' '}
+                  <Link to="/work/abuse-investigation-platform">DETECTOR CORE, BUILT FROM ZERO</Link> · NETWORKS NOW
+                  IDENTIFIED BEFORE THEIR FIRST BILLING CYCLE COMPLETES
+                </p>
               </div>
             </Plate>
           </div>
@@ -254,10 +258,11 @@ export default function Home() {
           <SectionHead num="06" title="NOW" />
           <div className="sec-body">
             <p className="body-text">
-              Two projects run in parallel. An{' '}
-              <Link to="/work/enforcement-app">enforcement workflow application</Link> (Plate
-              02) is in active development: signal ingestion, pattern detection, and verdict
-              routing with a human decision on every consequential action. A{' '}
+              The <Link to="/work/abuse-investigation-platform">abuse investigation platform</Link> (Plate
+              02) runs the daily investigative workflow in production. Two projects extend it. A{' '}
+              <Link to="/work/enforcement-app">next-generation enforcement workflow application</Link> (Plate
+              04) carries its detector core into automated verdict routing, with a human decision on every
+              consequential action. A{' '}
               <Link to="/work/gnn-detection">graph-detection research program</Link> (Plate
               03) benchmarks structure-aware models against coordinated-abuse topologies,
               backed by a knowledge-graph index of{' '}
