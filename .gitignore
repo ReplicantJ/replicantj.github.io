@@ -11,6 +11,7 @@
 # --- Build / tooling config ---
 !/package.json
 !/package-lock.json
+!/.npmrc
 !/tsconfig.json
 !/vite.config.ts
 !/.env.example
