@@ -2,9 +2,16 @@
 
 .home {
   position: relative;
+  /* Drafting-grid ground. Tiled single 112px cells (not one page-sized
+     repeating-linear-gradient) so each hairline snaps to a tile edge and stays
+     even across fractional display scaling. Centered on X so the grid locks to
+     the same axis as the centered content column instead of sliding under it as
+     the window resizes. */
   background-image:
-    repeating-linear-gradient(0deg, var(--at-line-soft) 0, var(--at-line-soft) 1px, transparent 1px, transparent 112px),
-    repeating-linear-gradient(90deg, var(--at-line-soft) 0, var(--at-line-soft) 1px, transparent 1px, transparent 112px);
+    linear-gradient(to right, var(--at-line-soft) 0, var(--at-line-soft) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--at-line-soft) 0, var(--at-line-soft) 1px, transparent 1px);
+  background-size: 112px 112px;
+  background-position: center top;
 }
 
 /* ===== Hero ===== */
