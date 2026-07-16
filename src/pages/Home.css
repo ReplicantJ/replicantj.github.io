@@ -12,6 +12,18 @@
     linear-gradient(to bottom, var(--at-line-soft) 0, var(--at-line-soft) 1px, transparent 1px);
   background-size: 112px 112px;
   background-position: center top;
+  /* Locked to the viewport so content scrolls over a stationary grid instead
+     of the grid scrolling with the page. */
+  background-attachment: fixed;
+}
+
+/* iOS Safari ignores background-attachment: fixed, and other mobile browsers
+   repaint it expensively on every scroll frame (same tradeoff as the body
+   limewash texture in base.css) — pin to scroll below the mobile breakpoint. */
+@media (max-width: 760px) {
+  .home {
+    background-attachment: scroll;
+  }
 }
 
 /* ===== Hero ===== */
