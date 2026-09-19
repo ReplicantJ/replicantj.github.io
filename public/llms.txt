@@ -20,6 +20,7 @@ benchmarking GNN models against production-shaped abuse topologies.
 ## Pages
 - https://joeburns.ai/ : profile, capabilities, experience
 - https://joeburns.ai/work/reseller-disruption : case study, reseller ecosystem disruption
+- https://joeburns.ai/work/abuse-investigation-platform : case study, abuse investigation platform
 - https://joeburns.ai/work/enforcement-app : blueprint, enforcement workflow application
 - https://joeburns.ai/work/gnn-detection : research, graph-based detection
 

@@ -79,7 +79,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="home">
+    <main className="home">
       {/* Hero */}
       <header className="home-hero">
         <Constellation />
@@ -292,6 +292,6 @@ export default function Home() {
           </div>
         </AnimatedContent>
       </section>
-    </div>
+    </main>
   )
 }
