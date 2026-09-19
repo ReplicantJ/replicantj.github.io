@@ -1,0 +1,115 @@
+<!doctype html>
+<!-- Source for public/og-card.png (1200x630 share card). Render with: node scripts/og-card.mjs -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Italiana&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Evening study tokens (src/styles/atelier-tokens.css) */
+      :root {
+        --at-ground: #050806;
+        --at-ink: #ece5d3;
+        --at-ink-2: #b9b29f;
+        --at-brass: #c2a14e;
+        --at-brass-bright: #dcbf72;
+        --at-jade-bright: #5cc4a3;
+      }
+      * { box-sizing: border-box; margin: 0; }
+      html, body { width: 1200px; height: 630px; }
+      body {
+        position: relative;
+        overflow: hidden;
+        background: var(--at-ground);
+        color: var(--at-ink);
+
+
+      }
+      /* Drafting-grid ground, faded toward the edges */
+      .grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(194, 161, 78, 0.17) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(194, 161, 78, 0.17) 1px, transparent 1px);
+        background-size: 42px 42px;
+        background-position: center;
+        -webkit-mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, #000 0%, transparent 100%);
+        mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, #000 0%, transparent 100%);
+      }
+      .frame { position: absolute; inset: 0; }
+      .mono {
+        font-family: 'JetBrains Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.26em;
+        font-size: 17px;
+        color: var(--at-brass-bright);
+      }
+      .content {
+        position: absolute;
+        inset: 78px 96px 70px;
+        display: flex;
+        flex-direction: column;
+      }
+      .eyebrow { display: flex; align-items: center; gap: 18px; }
+      .name {
+        font-family: 'Italiana', serif;
+        font-size: 168px;
+        line-height: 1;
+        letter-spacing: 0.02em;
+        margin-top: 34px;
+        margin-left: -6px;
+      }
+      .rule {
+        flex-shrink: 0;
+        height: 1px;
+        margin-top: 38px;
+        background: linear-gradient(90deg, var(--at-brass) 0%, rgba(194, 161, 78, 0.15) 100%);
+      }
+      .lede {
+        margin-top: 36px;
+        font-family: 'Italiana', serif;
+        font-size: 44px;
+        line-height: 1.28;
+        letter-spacing: 0.02em;
+        color: var(--at-ink-2);
+      }
+      .lede .accent { color: var(--at-jade-bright); }
+      .foot {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .foot .url { color: var(--at-ink); font-weight: 500; }
+    </style>
+  </head>
+  <body>
+    <div class="grid"></div>
+    <svg class="frame" viewBox="0 0 1200 630" fill="none">
+      <!-- Chamfered double brass frame, same construction as the favicon plate -->
+      <path d="M58 28 H1142 L1172 58 V572 L1142 602 H58 L28 572 V58 Z" stroke="#c2a14e" stroke-width="2" />
+      <path d="M64 42 H1136 L1158 64 V566 L1136 588 H64 L42 566 V64 Z" stroke="#c2a14e" stroke-width="1" opacity="0.45" />
+    </svg>
+    <div class="content">
+      <div class="eyebrow mono">
+        <svg width="20" height="20" viewBox="0 0 18 18" fill="none" stroke="#c2a14e" stroke-width="1">
+          <circle cx="9" cy="9" r="5.5" />
+          <path d="M9 0v4M9 14v4M0 9h4M14 9h4" />
+        </svg>
+        <span>Trust &amp; Safety · Platform Safeguards</span>
+      </div>
+      <div class="name">Joe Burns</div>
+      <div class="rule"></div>
+      <div class="lede">
+        Safeguards specialist who builds<br /><span class="accent">detection capability,</span> not just runs it
+      </div>
+      <div class="foot mono">
+        <span class="url">joeburns.ai</span>
+        <span>Abuse Infrastructure Disruption · Detection Engineering</span>
+      </div>
+    </div>
+  </body>
+</html>
