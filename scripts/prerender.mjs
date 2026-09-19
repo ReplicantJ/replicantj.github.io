@@ -90,6 +90,7 @@ const ROUTES = [
     canonical: null,
     description: null,
     readySelector: '.at-page__numeral',
+    noindex: true,
   },
 ]
 
@@ -143,7 +144,7 @@ async function capture(page, baseUrl, route) {
   }
   await page.waitForTimeout(SETTLE_MS)
 
-  await page.evaluate(({ canonical, description, ogTitle, ogType }) => {
+  await page.evaluate(({ canonical, description, ogTitle, ogType, headline, noindex, origin }) => {
     const setMeta = (attr, key, content) => {
       let meta = document.querySelector(`meta[${attr}="${key}"]`)
       if (!meta) {
@@ -173,7 +174,32 @@ async function capture(page, baseUrl, route) {
       }
       link.setAttribute('href', canonical)
     }
-  }, { canonical: route.canonical, description: route.description, ogTitle: route.ogTitle, ogType: route.ogType })
+    if (noindex) setMeta('name', 'robots', 'noindex')
+    /* Work pages get an Article node alongside the site-wide Person node. */
+    if (ogType === 'article' && headline && canonical) {
+      const ld = document.createElement('script')
+      ld.type = 'application/ld+json'
+      ld.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline,
+        description,
+        url: canonical,
+        mainEntityOfPage: canonical,
+        inLanguage: 'en',
+        author: { '@type': 'Person', name: 'Joe Burns', url: origin },
+      })
+      document.head.appendChild(ld)
+    }
+  }, {
+    canonical: route.canonical,
+    description: route.description,
+    ogTitle: route.ogTitle,
+    ogType: route.ogType,
+    headline: route.readyHeading,
+    noindex: route.noindex,
+    origin: SITE_ORIGIN,
+  })
 
   const html = await page.content()
   for (const phrase of FORBIDDEN) {
